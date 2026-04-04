@@ -1,10 +1,12 @@
 <?php
 
+use Core\Router\Route;
+
 return [
-    '/home' => function() {
+    Route::get('/home' , function() {
         include_once APP_PATH . '/views/pages/home.php';
-    },
-    '/books' => function() {
+    }),
+    Route::get('/books' , function() {
         include_once APP_PATH . '/views/pages/books.php';
-    }
+    }),
 ];
