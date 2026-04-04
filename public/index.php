@@ -15,7 +15,10 @@ define('URL_ROOT',
     . '//'
     . $_SERVER['HTTP_HOST']);
 // autoloader
-require_once APP_ROOT . '/vendor/autoloader.php';
-// test
-$controller = new HomeController();
-var_dump($controller->index());
+require_once APP_ROOT . '/vendor/autoload.php';
+
+$routes = require_once APP_ROOT . '/config/routes.php';
+
+$uri = $_SERVER['REQUEST_URI'];
+
+$routes[$uri]();
