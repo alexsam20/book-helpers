@@ -2,7 +2,7 @@
 
 namespace Core\Router;
 
-use Core\Router\RouterInterface;
+use JetBrains\PhpStorm\NoReturn;
 
 class Router implements RouterInterface
 {
@@ -16,11 +16,27 @@ class Router implements RouterInterface
         $this->initRoutes();
     }
 
-    public function dispatch(string $uri): void
+    public function dispatch(string $uri, string $method): void
     {
-        $routes = $this->getRoutes();
+        $route = $this->findRoute($uri, $method);
 
-        $routes[$uri]();
+        if (!$route) {
+            $this->notFound();
+        }
+
+        $route->getAction()();
+    }
+
+    #[NoReturn]
+    private function notFound(): void
+    {
+        echo '404 | Not Found';
+        exit();
+    }
+
+    private function findRoute(string $uri, $method): mixed
+    {
+        return $this->routes[$method][$uri] ?? null;
     }
 
     private function initRoutes(): void
