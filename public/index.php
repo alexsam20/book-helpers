@@ -1,23 +1,19 @@
 <?php
 
-use App\Controllers\HomeController;
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 date_default_timezone_set('America/New_York');
 
-// constant ROOT project
-define('APP_ROOT', dirname(__DIR__));
-define('URL_ROOT',
+define('APP_PATH', dirname(__DIR__));
+define('URL_PATH',
     mb_strtolower(
         explode('/', $_SERVER['SERVER_PROTOCOL'])[0]
-    )
-    . '//'
-    . $_SERVER['HTTP_HOST']);
-// autoloader
-require_once APP_ROOT . '/vendor/autoload.php';
+    ) . '//' . $_SERVER['HTTP_HOST']);
 
-$routes = require_once APP_ROOT . '/config/routes.php';
+// autoloader
+require_once APP_PATH . '/vendor/autoload.php';
+
+$routes = require_once APP_PATH . '/config/routes.php';
 
 $uri = $_SERVER['REQUEST_URI'];
 
