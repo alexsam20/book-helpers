@@ -30,7 +30,7 @@ class Route
         return $this->method;
     }
 
-    public function getAction(): mixed
+    public function getAction()
     {
         return $this->action;
     }

@@ -1,12 +1,14 @@
 <?php
 
+use App\Controllers\BookController;
+use App\Controllers\HomeController;
 use Core\Router\Route;
 
 return [
-    Route::get('/home' , function() {
-        include_once APP_PATH . '/views/pages/home.php';
-    }),
-    Route::get('/books' , function() {
-        include_once APP_PATH . '/views/pages/books.php';
+    Route::get('/home' , [HomeController::class , 'index']),
+    Route::get('/books', [BookController::class , 'index']),
+
+    Route::get('/test' , function() {
+        echo 'Test';
     }),
 ];
