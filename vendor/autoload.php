@@ -19,7 +19,7 @@ spl_autoload_register(static function ($class): void {
         // replace the namespace prefix with the base directory, replace namespace
         // separators with directory separators in the relative class name, append
         // with extension .php
-        $file = APP_ROOT . $path.str_replace('\\', '/', $relative_class).'.php';
+        $file = APP_PATH . $path.str_replace('\\', '/', $relative_class).'.php';
         // if the file exists, require it
         if (file_exists($file)) {
             require_once $file;
