@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Controllers;
+
 use Core\Controller\Controller;
 
-class HomeController extends Controller
+class BookController extends Controller
 {
     public function index(): void
     {
-        include_once APP_PATH . '/views/pages/home.php';
+        include_once APP_PATH . '/views/pages/books.php';
     }
 }
