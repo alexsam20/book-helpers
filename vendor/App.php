@@ -1,18 +1,26 @@
 <?php
 
 namespace Core;
+use Core\Container\Container;
 use Core\Http\Request;
 use Core\Router\Router;
 
 class App
 {
+    private Container $container;
+
+    public function __construct()
+    {
+        $this->container = new Container();
+    }
+
     public function run(): void
     {
-        $router = new Router();
-        $request = Request::createFromGlobals();
-
-        $method = $_SERVER['REQUEST_METHOD'];
-
-        $router->dispatch($request->uri(), $request->method());
+        $this->container
+            ->router
+            ->dispatch(
+                $this->container->request->uri(),
+                $this->container->request->method(),
+            );
     }
 }
