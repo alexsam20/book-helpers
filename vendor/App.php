@@ -1,14 +1,14 @@
 <?php
 
 namespace Core;
+use Core\Router\Router;
+
 class App
 {
     public function run(): void
     {
-        $routes = require APP_PATH . '/config/routes.php';
-
+        $router = new Router();
         $uri = $_SERVER['REQUEST_URI'];
-
-        $routes[$uri]();
+        $router->dispatch($uri);
     }
 }
