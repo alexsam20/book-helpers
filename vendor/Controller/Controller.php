@@ -2,10 +2,19 @@
 
 namespace Core\Controller;
 
-class Controller
+use Core\View\ViewInterface;
+
+abstract class Controller
 {
-    public function getTime(): float
+    private ViewInterface $view;
+
+    public function view(string $name): void
     {
-        return microtime(true);
+        $this->view->page($name);
+    }
+
+    public function setView(ViewInterface $view): void
+    {
+        $this->view = $view;
     }
 }

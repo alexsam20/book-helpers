@@ -9,8 +9,6 @@ class BookController extends Controller
 {
     public function index(): void
     {
-        $view = new View();
-
-        $view->page('books');
+        $this->view('books');
     }
 }
