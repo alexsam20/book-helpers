@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\Controller\Controller;
+use Core\Http\Redirect;
 
 class BookController extends Controller
 {
@@ -23,7 +24,8 @@ class BookController extends Controller
         ]);
 
         if (! $validation) {
-            var_dump('Validation failed', $this->request()->errors());
+            new Redirect()->to('/admin/books/add');
+            //var_dump('Validation failed', $this->request()->errors());
         }
 
         var_dump("Valid book");
