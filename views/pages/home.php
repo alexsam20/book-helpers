@@ -1,7 +1,8 @@
-<?php include __DIR__ . '/../components/start.php'; ?>
+<?php /** @var \Core\View\ViewInterface $view */  ?>
+<?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
-    <?php include __DIR__ . '/../components/header.php'; ?>
+    <?php $view->component('header') ?>
     <main class="main grow my-2">
         <div class="container flex flex-col border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">
             <!-- Breadcrumbs -->
@@ -28,6 +29,6 @@
 
         </div>
     </main>
-    <?php include __DIR__ . '/../components/footer.php'; ?>
+    <?php $view->component('footer') ?>
 </div>
-<?php include __DIR__ . '/../components/end.php'; ?>
+<?php $view->component('end') ?>
