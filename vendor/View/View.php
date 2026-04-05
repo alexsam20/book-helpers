@@ -2,31 +2,42 @@
 
 namespace Core\View;
 
-use Core\View\ViewInterface;
+use Core\Exception\ViewNotFoundException;
 
 class View implements ViewInterface
 {
 
+    /**
+     * @throws ViewNotFoundException
+     */
     public function page(string $name): void
     {
+        $viewPath = APP_PATH."/views/pages/{$name}.php";
+
+        if (! file_exists($viewPath)) {
+            throw new ViewNotFoundException("View {$name} Not Found");
+        }
+
         extract([
             'view' => $this,
         ]);
 
-        include_once APP_PATH . "/views/pages/{$name}.php";
+        include_once $viewPath;
     }
 
     public function component(string $name): void
     {
-        include_once APP_PATH . "/views/components/$name.php";
+        $componentPath = APP_PATH . "/views/components/$name.php";
 
-        /*if (! file_exists($componentPath)) {
-            echo "View $name does not exist";
+        if (! file_exists($componentPath)) {
+            echo "Component $name Not Found";
             return;
         }
 
-        extract(array_merge($this->defaultData(), $data));
+        extract([
+            'view' => $this,
+        ]);
 
-        include $componentPath;*/
+        include $componentPath;
     }
 }
