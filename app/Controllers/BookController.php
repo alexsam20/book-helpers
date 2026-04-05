@@ -12,8 +12,14 @@ class BookController extends Controller
         $this->view('books');
     }
 
-    public function add()
+    public function add(): void
     {
         $this->view('admin/books/add');
+    }
+
+    public function store()
+    {
+        var_dump($_POST);
+        var_dump($_FILES);
     }
 }

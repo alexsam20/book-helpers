@@ -31,7 +31,7 @@
                             </div>
                             <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                                 <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                                    <form method="post" action="" enctype="multipart/form-data">
+                                    <form method="post" action="/admin/books/add" enctype="multipart/form-data">
                                         <div class="mb-4 relative">
                                             <input type="text" id="book" name="book"
                                                    class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
@@ -46,7 +46,7 @@
                                             </ul>
                                         </div>
                                         <div class="mb-4 relative">
-                                            <input type="text" id="author"
+                                            <input type="text" id="author" name="author"
                                                    class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
                                                    placeholder="Author" required/>
                                             <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
@@ -61,7 +61,7 @@
                                         <div class="mb-4">
                                             <input type="file" name="image"
                                                    class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"
-                                                   id="file_input">
+                                                   aria-describedby="file_input_help" id="file_input" />
                                         </div>
                                         <ul>
                                             <li class="mt-2 text-sm text-pink-600">Error</li>
