@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Core\Controller\Controller;
-use Core\View\View;
+use Core\Validator\Validator;
 
 class BookController extends Controller
 {
@@ -19,6 +19,12 @@ class BookController extends Controller
 
     public function store()
     {
+        $data = ['name' => ''];
+        $rules = ['name' => ['required', 'min:3', 'max:100']];
+
+        $validator = new Validator();
+        var_dump($validator->validate($data, $rules), $validator->errors());
+
         var_dump($this->request()->input('book'));
         var_dump($this->request()->input('author'));
         var_dump($this->request()->input('image'));
