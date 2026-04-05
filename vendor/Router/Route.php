@@ -5,8 +5,16 @@ namespace Core\Router;
 class Route
 {
     public function __construct(
-        private string $uri,
-        private string $method,
+        public string $uri {
+            get {
+                return $this->uri;
+            }
+        },
+        public string $method {
+            get {
+                return $this->method;
+            }
+        },
         private $action
     ) {}
 
@@ -18,16 +26,6 @@ class Route
     public static function post(string $uri, $action): static
     {
         return new static($uri, 'POST', $action);
-    }
-
-    public function getUri(): string
-    {
-        return $this->uri;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->method;
     }
 
     public function getAction()
