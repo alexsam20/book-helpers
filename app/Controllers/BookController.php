@@ -19,6 +19,8 @@ class BookController extends Controller
 
     public function store()
     {
-        var_dump($this->request());
+        var_dump($this->request()->input('book'));
+        var_dump($this->request()->input('author'));
+        var_dump($this->request()->input('image'));
     }
 }
