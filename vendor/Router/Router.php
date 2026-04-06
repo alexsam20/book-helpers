@@ -3,9 +3,9 @@
 namespace Core\Router;
 
 use Core\Controller\Controller;
+use Core\Http\RedirectInterface;
 use Core\Http\RequestInterface;
 use Core\View\ViewInterface;
-use JetBrains\PhpStorm\NoReturn;
 
 class Router implements RouterInterface
 {
@@ -15,8 +15,9 @@ class Router implements RouterInterface
     ];
 
     public function __construct(
-        private ViewInterface $view,
-        private RequestInterface $request,
+        private readonly ViewInterface    $view,
+        private readonly RequestInterface $request,
+        private readonly RedirectInterface $redirect
     )
     {
         $this->initRoutes();
@@ -37,6 +38,7 @@ class Router implements RouterInterface
 
             call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, 'setRequest'], $this->request);
+            call_user_func([$controller, 'setRedirect'], $this->redirect);
 
 
             call_user_func([$controller, $action]);

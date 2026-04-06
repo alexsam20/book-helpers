@@ -24,7 +24,7 @@ class BookController extends Controller
         ]);
 
         if (! $validation) {
-            new Redirect()->to('/admin/books/add');
+            $this->redirect('/admin/books/add');
             //var_dump('Validation failed', $this->request()->errors());
         }
 
