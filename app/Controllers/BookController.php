@@ -28,6 +28,6 @@ class BookController extends Controller
             //var_dump('Validation failed', $this->request()->errors());
         }
 
-        var_dump("Valid book");
+        var_dump("Validation passed");
     }
 }
