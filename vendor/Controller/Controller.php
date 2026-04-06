@@ -4,6 +4,7 @@ namespace Core\Controller;
 
 use Core\Http\RedirectInterface;
 use Core\Http\RequestInterface;
+use Core\Session\SessionInterface;
 use Core\View\ViewInterface;
 
 abstract class Controller
@@ -11,6 +12,7 @@ abstract class Controller
     private ViewInterface $view;
     private RequestInterface $request;
     private RedirectInterface $redirect;
+    private SessionInterface $session;
 
     public function view(string $name): void
     {
@@ -40,5 +42,15 @@ abstract class Controller
     public function redirect(string $url): void
     {
         $this->redirect->to($url);
+    }
+
+    public function session(): SessionInterface
+    {
+        return $this->session;
+    }
+
+    public function setSession(SessionInterface $session): void
+    {
+        $this->session = $session;
     }
 }

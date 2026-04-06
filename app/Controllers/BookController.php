@@ -19,6 +19,7 @@ class BookController extends Controller
 
     public function store()
     {
+        var_dump($this->session());
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
         ]);
