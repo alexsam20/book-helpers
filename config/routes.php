@@ -11,6 +11,7 @@ return [
     Route::get('/admin/books/add', [BookController::class , 'add']),
     Route::post('/admin/books/add', [BookController::class , 'store']),
     Route::get('/register', [RegisterController::class , 'index']),
+    Route::post('/register', [RegisterController::class , 'register']),
 
     Route::get('/test' , function() {
         echo 'Test';
