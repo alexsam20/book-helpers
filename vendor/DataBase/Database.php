@@ -3,7 +3,6 @@
 namespace Core\DataBase;
 
 use Core\Config\ConfigInterface;
-use Core\DataBase\DatabaseInterface;
 
 class Database implements DatabaseInterface
 {
