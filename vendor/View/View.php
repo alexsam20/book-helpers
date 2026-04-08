@@ -8,7 +8,7 @@ use Core\Session\SessionInterface;
 class View implements ViewInterface
 {
     public function __construct(
-        private SessionInterface $session,
+        private readonly SessionInterface $session,
     )
     {
     }
@@ -18,10 +18,10 @@ class View implements ViewInterface
      */
     public function page(string $name): void
     {
-        $viewPath = APP_PATH."/views/pages/{$name}.php";
+        $viewPath = APP_PATH."/views/pages/$name.php";
 
         if (! file_exists($viewPath)) {
-            throw new ViewNotFoundException("View {$name} Not Found");
+            throw new ViewNotFoundException("View $name Not Found");
         }
 
         extract($this->defaultData());

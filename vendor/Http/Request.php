@@ -2,12 +2,11 @@
 
 namespace Core\Http;
 
-use Core\Validator\Validator;
 use Core\Validator\ValidatorInterface;
 
 class Request implements RequestInterface
 {
-    private Validator $validator;
+    private ValidatorInterface $validator;
 
     public function __construct(
         public readonly array $get,
@@ -35,7 +34,9 @@ class Request implements RequestInterface
 
     public function input(string $key, $default = null): mixed
     {
-        return $this->post[$key] ?? $this->get[$key] ?? $this->files[$key] ?? $default;
+        return $this->post[$key] ??
+                    $this->get[$key] ??
+                        $this->files[$key] ?? $default;
     }
 
     public function setValidator(ValidatorInterface $validator): void

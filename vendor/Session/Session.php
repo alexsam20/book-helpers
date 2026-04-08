@@ -2,8 +2,6 @@
 
 namespace Core\Session;
 
-use Core\Session\SessionInterface;
-
 class Session implements SessionInterface
 {
     public function __construct()
