@@ -2,6 +2,7 @@
 
 use App\Controllers\BookController;
 use App\Controllers\HomeController;
+use App\Controllers\LoginController;
 use App\Controllers\RegisterController;
 use Core\Router\Route;
 
@@ -12,8 +13,10 @@ return [
     Route::post('/admin/books/add', [BookController::class , 'store']),
     Route::get('/register', [RegisterController::class , 'index']),
     Route::post('/register', [RegisterController::class , 'register']),
+    Route::get('/login', [LoginController::class , 'index']),
+    Route::post('/login', [LoginController::class , 'login']),
 
-    Route::get('/test' , function() {
+    Route::get('/test' , static function() {
         echo 'Test';
     }),
 ];

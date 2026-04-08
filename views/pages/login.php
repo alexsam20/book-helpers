@@ -1,12 +1,13 @@
 <?php /** @var \Core\View\ViewInterface $view */ ?>
+<?php /** @var \Core\Session\SessionInterface $session */  ?>
 <?php $view->component('start_blank') ?>
     <!-- Content -->
     <div class="flex flex-col h-full dark:bg-gray-950">
         <main class="main grow my-2">
             <!-- Login form -->
             <div class="flex justify-center items-center h-full">
-                <div class="max-w-sm bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs">
-                    <form method="post" action="/register">
+                <div class="max-w-sm bg-neutral-primary-soft p-6 border border-default dark:bg-gray-950/50 rounded-base shadow-xs">
+                    <form method="post" action="/login">
                         <div class="flex flex-wrap justify-between items-center mb-4">
                             <h5 class="text-xl font-semibold text-cyan-600">Sign in</h5>
                             <!--Button Dark/Light -->
@@ -30,17 +31,19 @@
                                 <span class="self-center text-xl font-semibold whitespace-nowrap text-indigo-800 dark:text-indigo-300" style="font-family: 'NautilusPompiliusRegular'">My Books</span>
                             </a>
                         </div>
-                        <!--<div class="flex items-start sm:items-center px-2 py-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
-                             role="alert">
-                            <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                            </svg>
-                            <p><span class="font-medium me-1">Email or Password don't correct.</span></p>
-                        </div>-->
+                        <?php if ($session->has('error')) : ?>
+                            <div class="flex items-start sm:items-center px-2 py-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
+                                 role="alert">
+                                <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <p><span class="font-medium me-1">Email or Password don't correct.</span></p>
+                            </div>
+                        <?php endif; ?>
                         <div class="relative mb-4">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/></svg>

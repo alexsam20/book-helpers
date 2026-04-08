@@ -6,8 +6,8 @@
         <main class="main grow my-2">
             <!-- Login form -->
             <div class="flex justify-center items-center h-full">
-                <div class="bg-neutral-primary-soft flex justify-center items-center p-6 border border-default rounded-base shadow-xs">
-                    <form class="" method="post" action="#">
+                <div class="bg-neutral-primary-soft flex justify-center items-center p-6 dark:bg-gray-950/50 border border-default rounded-base shadow-xs">
+                    <form class="" method="post" action="/register">
                         <div class="flex flex-wrap justify-between items-center mb-4">
                             <h5 class="text-xl font-semibold text-cyan-600">Create account</h5>
                             <!--Button Dark/Light -->
@@ -48,7 +48,7 @@
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
-                        <div class="relative mb-2 mt-2">
+                        <div class="relative mb-2 mt-4">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/></svg>
                             </div>
@@ -63,7 +63,7 @@
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
-                        <div class="mb-2 mt-2 flex gap-4">
+                        <div class="mb-2 mt-4 flex gap-4">
                             <div class="relative inline-flex mb-2 w-1/2">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -96,10 +96,10 @@
                         <div class="flex justify justify-between items-center">
                             <div class="text-sm font-medium text-body">
                                 Registered?
-                                <a href="#" class="text-fg-brand hover:underline">Login to your account</a>
+                                <a href="/login" class="text-fg-brand hover:underline">Login to your account</a>
                             </div>
                             <button type="submit"
-                                    class="text-gray-100 justify-end text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-base text-sm px-2 py-1 text-center leading-5 cursor-pointer">
+                                    class="text-gray-100 justify-end text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-base text-sm px-2 py-0.5 text-center leading-5 cursor-pointer">
                                     <span class="inline-flex items-center justify-center gap-1 pt-0.5">
                                         <svg class="animate-pulse w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                           <path fill-rule="evenodd" d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
