@@ -27,7 +27,13 @@ class RegisterController extends Controller
             $this->redirect('/register');
         }
 
-        var_dump('OK');
+        $userId = $this->db()->insert('users', [
+            'name' => $this->request()->input('name'),
+            'email' => $this->request()->input('email'),
+            'password' => password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
+        ]);
+
+        var_dump($userId);
     }
 
 }
