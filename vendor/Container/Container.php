@@ -34,7 +34,7 @@ class Container
         $this->request = Request::createFromGlobals();
         $this->redirect = new Redirect();
         $this->session = new Session();
-        $this->view = new View();
+        $this->view = new View($this->session);
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
         $this->router = new Router(

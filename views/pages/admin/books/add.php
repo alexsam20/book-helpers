@@ -1,4 +1,5 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
+<?php /** @var \Core\Session\SessionInterface $session */  ?>
 <?php $view->component('start') ?>
     <!-- Content -->
     <div class="flex flex-col h-full">
@@ -41,9 +42,13 @@
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
                                                 </svg>
                                             </div>
+                                            <?php if ($session->has('book')) : ?>
                                             <ul>
-                                                <li class="mt-2 text-sm text-pink-600">Error</li>
+                                                <?php foreach ($session->getFlash('book') as $error) : ?>
+                                                    <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
+                                                <?php endforeach; ?>
                                             </ul>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="mb-4 relative">
                                             <input type="text" id="author" name="author"
@@ -54,9 +59,13 @@
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4.988 19.012 5.41-5.41m2.366-6.424 4.058 4.058-2.03 5.41L5.3 20 4 18.701l3.355-9.494 5.41-2.029Zm4.626 4.625L12.197 6.61 14.807 4 20 9.194l-2.61 2.61Z"/>
                                                 </svg>
                                             </div>
-                                            <ul>
-                                                <li class="mt-2 text-sm text-pink-600">Error</li>
-                                            </ul>
+                                            <?php if ($session->has('author')) : ?>
+                                                <ul>
+                                                    <?php foreach ($session->getFlash('author') as $error) : ?>
+                                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="mb-4">
                                             <input type="file" name="image"

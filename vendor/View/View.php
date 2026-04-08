@@ -3,9 +3,15 @@
 namespace Core\View;
 
 use Core\Exception\ViewNotFoundException;
+use Core\Session\SessionInterface;
 
 class View implements ViewInterface
 {
+    public function __construct(
+        private SessionInterface $session,
+    )
+    {
+    }
 
     /**
      * @throws ViewNotFoundException
@@ -18,9 +24,7 @@ class View implements ViewInterface
             throw new ViewNotFoundException("View {$name} Not Found");
         }
 
-        extract([
-            'view' => $this,
-        ]);
+        extract($this->defaultData());
 
         include_once $viewPath;
     }
@@ -39,5 +43,13 @@ class View implements ViewInterface
         ]);
 
         include $componentPath;
+    }
+
+    private function defaultData(): array
+    {
+        return [
+            'view' => $this,
+            'session' => $this->session,
+        ];
     }
 }

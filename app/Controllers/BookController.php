@@ -19,14 +19,16 @@ class BookController extends Controller
 
     public function store()
     {
-        var_dump($this->session());
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
+            'author' => ['required', 'min:3', 'max:100'],
         ]);
 
         if (! $validation) {
+            foreach ($this->request()->errors() as $field => $value) {
+                $this->session()->set($field, $value);
+            }
             $this->redirect('/admin/books/add');
-            //var_dump('Validation failed', $this->request()->errors());
         }
 
         var_dump("Validation passed");
