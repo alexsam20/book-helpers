@@ -49,7 +49,8 @@ class Container
             $this->view,
             $this->request,
             $this->redirect,
-            $this->session
+            $this->session,
+            $this->database,
         );
     }
 }
