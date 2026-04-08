@@ -22,6 +22,7 @@ class BookController extends Controller
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
+            'description' => ['required', 'min:10', 'max:5000'],
         ]);
 
         if (! $validation) {
@@ -31,6 +32,12 @@ class BookController extends Controller
             $this->redirect('/admin/books/add');
         }
 
-        var_dump("Validation passed");
+        $id = $this->db()->insert('books', [
+            'name' => $this->request()->input('book'),
+            'author' => $this->request()->input('author'),
+            'description' => $this->request()->input('description'),
+        ]);
+
+        var_dump($id);
     }
 }

@@ -67,6 +67,19 @@
                                                 </ul>
                                             <?php endif; ?>
                                         </div>
+                                        <!--Description-->
+                                        <div class="mb-4">
+                                            <textarea id="description" name="description" rows="4"
+                                                      class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
+                                                      placeholder="Write description"></textarea>
+                                            <?php if ($session->has('description')) : ?>
+                                                <ul>
+                                                    <?php foreach ($session->getFlash('description') as $error) : ?>
+                                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
+                                        </div>
                                         <div class="mb-4">
                                             <input type="file" name="image"
                                                    class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"
