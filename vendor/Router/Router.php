@@ -2,6 +2,7 @@
 
 namespace Core\Router;
 
+use Core\Auth\AuthInterface;
 use Core\Controller\Controller;
 use Core\DataBase\DatabaseInterface;
 use Core\Http\RedirectInterface;
@@ -22,6 +23,7 @@ class Router implements RouterInterface
         private readonly RedirectInterface $redirect,
         private readonly SessionInterface $session,
         private readonly DatabaseInterface $database,
+        private readonly AuthInterface $auth,
     )
     {
         $this->initRoutes();
@@ -45,6 +47,7 @@ class Router implements RouterInterface
             call_user_func([$controller, 'setRedirect'], $this->redirect);
             call_user_func([$controller, 'setSession'], $this->session);
             call_user_func([$controller, 'setDatabase'], $this->database);
+            call_user_func([$controller, 'setAuth'], $this->auth);
 
 
             call_user_func([$controller, $action]);

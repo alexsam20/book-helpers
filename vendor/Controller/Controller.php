@@ -2,6 +2,7 @@
 
 namespace Core\Controller;
 
+use Core\Auth\AuthInterface;
 use Core\DataBase\DatabaseInterface;
 use Core\Http\RedirectInterface;
 use Core\Http\RequestInterface;
@@ -15,6 +16,7 @@ abstract class Controller
     private RedirectInterface $redirect;
     private SessionInterface $session;
     private DatabaseInterface $database;
+    private AuthInterface $auth;
 
     public function view(string $name): void
     {
@@ -64,5 +66,15 @@ abstract class Controller
     public function setDatabase(DatabaseInterface $database): void
     {
         $this->database = $database;
+    }
+
+    public function auth(): AuthInterface
+    {
+        return $this->auth;
+    }
+
+    public function setAuth(AuthInterface $auth): void
+    {
+        $this->auth = $auth;
     }
 }
