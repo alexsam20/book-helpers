@@ -24,7 +24,7 @@
                     </li>
                 </ul>
                 <!--Button Logout-->
-                <a type="button" href="./index.html"
+                <a type="button" href="/index.html"
                    class="inline-flex items-center text-warning hover:text-white border border-warning hover:bg-warning focus:ring-4 focus:outline-none focus:ring-neutral-tertiary font-medium rounded-sm text-sm px-2 py-1 text-center me-2 dark:border-warning dark:text-warning dark:hover:text-white dark:hover:bg-warning dark:focus:ring-warning mt-1.5 mb-1.5 cursor-pointer">
                     <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -34,7 +34,7 @@
                     Logout
                 </a>
                 <!--Button Login-->
-                <a type="button" href="./index.html"
+                <a type="button" href="/register"
                    class="inline-flex items-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-2 py-1 text-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 mt-1.5 mb-1.5 cursor-pointer">
                     <svg class="w-5 h-5 me-1.5 -ms-0.5" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"

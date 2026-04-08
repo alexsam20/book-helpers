@@ -9,7 +9,6 @@
                 </svg>
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-indigo-800 dark:text-indigo-300" style="font-family: 'NautilusPompiliusRegular'">My Books</span>
             </a>
-            <!--<ul class="flex flex-wrap justify-center items-center mb-3 text-gray-900 dark:text-white mt-3 gap-3">-->
             <ul class="flex flex-col justify-center md:p-0 my-4 text-sm font-medium rounded-lg md:space-x-6 md:flex-row md:mt-0">
                 <li>
                     <a href="#" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
