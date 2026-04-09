@@ -13,6 +13,8 @@ class LoginController extends Controller
 
     public function login()
     {
-        var_dump($this->auth());
+        $email = $this->request()->input( 'email' );
+        $password = $this->request()->input( 'password' );
+        var_dump($this->auth()->attempt($email, $password), $_SESSION);
     }
 }
