@@ -10,4 +10,9 @@ class LoginController extends Controller
     {
         $this->view(name: 'login' );
     }
+
+    public function login()
+    {
+        var_dump($this->auth());
+    }
 }

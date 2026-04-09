@@ -34,6 +34,22 @@ class Database implements DatabaseInterface
         return (int) $this->pdo->lastInsertId();
     }
 
+    public function first(string $table, array $conditions = []): ?array
+    {
+        $where = '';
+
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = sprintf("SELECT * FROM %s %s LIMIT 1", $table, $where);
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
+    }
+
     private function connect(): void
     {
         $driver = $this->config->get('database.driver');

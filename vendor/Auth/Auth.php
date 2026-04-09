@@ -9,7 +9,7 @@ use Core\Session\SessionInterface;
 class Auth implements AuthInterface
 {
     public function __construct(
-        private DatabaseInterface $database,
+        private DatabaseInterface $db,
         private SessionInterface $session
     )
     {
