@@ -7,6 +7,7 @@ use Core\Controller\Controller;
 use Core\DataBase\DatabaseInterface;
 use Core\Http\RedirectInterface;
 use Core\Http\RequestInterface;
+use Core\Middleware\AbstractMiddleware;
 use Core\Session\SessionInterface;
 use Core\View\ViewInterface;
 
@@ -35,6 +36,14 @@ class Router implements RouterInterface
 
         if (!$route) {
             $this->notFound();
+        }
+
+        if ($route->hasMiddlewares()) {
+            foreach ($route->getMiddlewares() as $middleware) {
+                /** @var AbstractMiddleware $middleware */
+                $middleware = new $middleware($this->request, $this->auth, $this->redirect);
+                $middleware->handle();
+            }
         }
 
         if (is_array($route->getAction())) {
