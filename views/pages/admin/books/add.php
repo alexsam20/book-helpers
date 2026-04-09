@@ -82,8 +82,8 @@
                                         </div>
                                         <div class="mb-4">
                                             <input type="file" name="image"
-                                                   class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"
-                                                   aria-describedby="file_input_help" id="file_input" />
+                                               class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"
+                                               aria-describedby="file_input_help" id="file_input" />
                                         </div>
                                         <ul>
                                             <li class="mt-2 text-sm text-pink-600">Error</li>
