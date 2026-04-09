@@ -17,5 +17,6 @@ interface AuthInterface
     public function username(): string;
 
     public function password(): string;
+
     public function sessionField(): string;
 }
