@@ -5,31 +5,47 @@ namespace Core\Router;
 class Route
 {
     public function __construct(
-        public string $uri {
-            get {
-                return $this->uri;
-            }
-        },
-        public string $method {
-            get {
-                return $this->method;
-            }
-        },
-        private $action
-    ) {}
-
-    public static function get(string $uri, $action): static
-    {
-        return new static($uri, 'GET', $action, );
+        private string $uri,
+        private string $method,
+        private $action,
+        private array $middlewares = [],
+    ) {
+        $this->method = $method;
+        $this->uri = $uri;
     }
 
-    public static function post(string $uri, $action): static
+    public static function get(string $uri, $action, array $middlewares = []): static
     {
-        return new static($uri, 'POST', $action);
+        return new static($uri, 'GET', $action, $middlewares);
+    }
+
+    public static function post(string $uri, $action, array $middlewares = []): static
+    {
+        return new static($uri, 'POST', $action, $middlewares);
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function getMethod(): string
+    {
+        return $this->method;
     }
 
     public function getAction()
     {
         return $this->action;
+    }
+
+    public function hasMiddlewares(): bool
+    {
+        return !empty($this->middlewares);
+    }
+
+    public function getMiddlewares(): array
+    {
+        return $this->middlewares;
     }
 }

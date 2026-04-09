@@ -75,7 +75,7 @@ class Router implements RouterInterface
         $routes = $this->getRoutes();
 
         foreach ($routes as $route) {
-            $this->routes[$route->method][$route->uri] = $route;
+            $this->routes[$route->getMethod()][$route->getUri()] = $route;
         }
     }
 
