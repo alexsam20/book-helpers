@@ -19,7 +19,9 @@ class BookController extends Controller
 
     public function store()
     {
-        var_dump($this->request()->file('image')); die;
+        $file = $this->request()->file('image');
+
+        var_dump($file->move('books')); die;
 
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
