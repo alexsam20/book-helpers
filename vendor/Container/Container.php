@@ -45,10 +45,10 @@ class Container
         $this->session = new Session();
         $this->config = new Config();
         $this->database = new Database($this->config);
-        $this->view = new View($this->session);
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
         $this->auth = new Auth($this->database, $this->session, $this->config);
+        $this->view = new View($this->session, $this->auth);
         $this->router = new Router(
             $this->view,
             $this->request,

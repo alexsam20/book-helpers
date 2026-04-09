@@ -1,3 +1,7 @@
+<?php
+/** @var \Core\Auth\AuthInterface $auth */
+$user = $auth->user();
+?>
 <header class="header">
     <nav class="bg-neutral-primary container w-full z-20 top-0 start-0 border-b border-default">
         <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -10,21 +14,22 @@
             </a>
             <!--  Button Block -->
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <!--User NAME-->
+                <?php if ($auth->check()): ?>
+                <!--User name-->
                 <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
                     <li>
                         <a href="#">
-                                    <span class="inline-flex items-center border border-success-subtle bg-success-soft text-fg-success-strong rounded px-2 my-2">
-                                        <svg class="w-5 h-5 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                        </svg>
-                                        John Doe
-                                    </span>
+                            <span class="inline-flex items-center border border-success-subtle bg-success-soft text-fg-success-strong rounded px-2 my-2">
+                                <svg class="w-5 h-5 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                                <?php echo $user['name']; ?>
+                            </span>
                         </a>
                     </li>
                 </ul>
                 <!--Button Logout-->
-                <a type="button" href="/index.html"
+                <a type="button" href="/logout"
                    class="inline-flex items-center text-warning hover:text-white border border-warning hover:bg-warning focus:ring-4 focus:outline-none focus:ring-neutral-tertiary font-medium rounded-sm text-sm px-2 py-1 text-center me-2 dark:border-warning dark:text-warning dark:hover:text-white dark:hover:bg-warning dark:focus:ring-warning mt-1.5 mb-1.5 cursor-pointer">
                     <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -33,6 +38,7 @@
                     </svg>
                     Logout
                 </a>
+                <?php else: ?>
                 <!--Button Login-->
                 <a type="button" href="/register"
                    class="inline-flex items-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-2 py-1 text-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 mt-1.5 mb-1.5 cursor-pointer">
@@ -43,6 +49,7 @@
                     </svg>
                     Login
                 </a>
+                <?php endif; ?>
                 <!--Button Dark/Light -->
                 <button id="theme-toggle" type="button"
                         class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">

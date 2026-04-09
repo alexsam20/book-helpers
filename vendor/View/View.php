@@ -2,6 +2,7 @@
 
 namespace Core\View;
 
+use Core\Auth\AuthInterface;
 use Core\Exception\ViewNotFoundException;
 use Core\Session\SessionInterface;
 
@@ -9,6 +10,7 @@ class View implements ViewInterface
 {
     public function __construct(
         private readonly SessionInterface $session,
+        private readonly AuthInterface $auth,
     )
     {
     }
@@ -38,9 +40,7 @@ class View implements ViewInterface
             return;
         }
 
-        extract([
-            'view' => $this,
-        ]);
+        extract($this->defaultData());
 
         include $componentPath;
     }
@@ -50,6 +50,7 @@ class View implements ViewInterface
         return [
             'view' => $this,
             'session' => $this->session,
+            'auth' => $this->auth,
         ];
     }
 }
