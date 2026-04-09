@@ -2,7 +2,6 @@
 
 namespace Core\Auth;
 
-use Core\Auth\AuthInterface;
 use Core\Config\ConfigInterface;
 use Core\DataBase\DatabaseInterface;
 use Core\Session\SessionInterface;
@@ -10,9 +9,9 @@ use Core\Session\SessionInterface;
 class Auth implements AuthInterface
 {
     public function __construct(
-        private DatabaseInterface $db,
-        private SessionInterface $session,
-        private ConfigInterface $config,
+        private readonly DatabaseInterface $db,
+        private readonly SessionInterface  $session,
+        private readonly ConfigInterface   $config,
     )
     {
     }
