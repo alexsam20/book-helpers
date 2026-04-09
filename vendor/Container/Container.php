@@ -16,6 +16,8 @@ use Core\Router\Router;
 use Core\Router\RouterInterface;
 use Core\Session\Session;
 use Core\Session\SessionInterface;
+use Core\Storage\Storage;
+use Core\Storage\StorageInterface;
 use Core\Validator\Validator;
 use Core\Validator\ValidatorInterface;
 use Core\View\View;
@@ -32,6 +34,7 @@ class Container
     public readonly ConfigInterface $config;
     public readonly DatabaseInterface $database;
     public readonly AuthInterface $auth;
+    public readonly StorageInterface $storage;
 
     public function __construct()
     {
@@ -48,6 +51,7 @@ class Container
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
         $this->auth = new Auth($this->database, $this->session, $this->config);
+        $this->storage = new Storage();
         $this->view = new View($this->session, $this->auth);
         $this->router = new Router(
             $this->view,
@@ -55,7 +59,8 @@ class Container
             $this->redirect,
             $this->session,
             $this->database,
-            $this->auth
+            $this->auth,
+            $this->storage,
         );
     }
 }

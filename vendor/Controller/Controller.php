@@ -7,6 +7,7 @@ use Core\DataBase\DatabaseInterface;
 use Core\Http\RedirectInterface;
 use Core\Http\RequestInterface;
 use Core\Session\SessionInterface;
+use Core\Storage\StorageInterface;
 use Core\View\ViewInterface;
 
 abstract class Controller
@@ -17,6 +18,7 @@ abstract class Controller
     private SessionInterface $session;
     private DatabaseInterface $database;
     private AuthInterface $auth;
+    private StorageInterface $storage;
 
     public function view(string $name): void
     {
@@ -76,5 +78,15 @@ abstract class Controller
     public function setAuth(AuthInterface $auth): void
     {
         $this->auth = $auth;
+    }
+
+    public function storage(): StorageInterface
+    {
+        return $this->storage;
+    }
+
+    public function setStorage(StorageInterface $storage): void
+    {
+        $this->storage = $storage;
     }
 }

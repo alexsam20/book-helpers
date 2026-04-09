@@ -21,7 +21,8 @@ class BookController extends Controller
     {
         $file = $this->request()->file('image');
 
-        var_dump($file->move('books')); die;
+        $filePath = $file->move('books');
+        var_dump($this->storage()->url($filePath)); die;
 
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],

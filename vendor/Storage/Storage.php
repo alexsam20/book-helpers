@@ -4,10 +4,9 @@ namespace Core\Storage;
 
 class Storage implements StorageInterface
 {
-
     public function url(string $path): string
     {
-        return $this->storagePath($path);
+        return URL_PATH . "/storage/$path";
     }
 
     public function get(string $path): string
