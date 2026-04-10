@@ -7,7 +7,7 @@
             <!-- Login form -->
             <div class="flex justify-center items-center h-full">
                 <div class="bg-neutral-primary-soft flex justify-center items-center p-6 dark:bg-gray-950/50 border border-default rounded-base shadow-xs">
-                    <form class="" method="post" action="/register">
+                    <form method="post" action="/register">
                         <div class="flex flex-wrap justify-between items-center mb-4">
                             <h5 class="text-xl font-semibold text-cyan-600">Create account</h5>
                             <!--Button Dark/Light -->
@@ -37,16 +37,14 @@
                                     <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                 </svg>
                             </div>
-                            <input type="text" id="name" name="name"
+                            <input type="text" id="name" name="name" <!--value="--><?php /*if ($session->has('name_val')) {$session->getFlash('name_val');} */?>"
                                    class="block ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
                                    placeholder="Name">
                         </div>
                         <?php if ($session->has('name')) : ?>
-                            <ul>
-                                <?php foreach ($session->getFlash('name') as $error) : ?>
-                                    <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                        <ul>
+                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('name')[0]; ?></li>
+                        </ul>
                         <?php endif; ?>
                         <div class="relative mb-2 mt-4">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -57,11 +55,9 @@
                                    placeholder="name@mail.com">
                         </div>
                         <?php if ($session->has('email')) : ?>
-                            <ul>
-                                <?php foreach ($session->getFlash('email') as $error) : ?>
-                                    <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                        <ul>
+                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('email')[0]; ?></li>
+                        </ul>
                         <?php endif; ?>
                         <div class="mb-2 mt-4 flex gap-4">
                             <div class="relative inline-flex mb-2 w-1/2">
@@ -80,18 +76,16 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14v3m4-6V7a3 3 0 1 1 6 0v4M5 11h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/>
                                     </svg>
                                 </div>
-                                <input type="password" name="password-confirm" id="password-confirm"
+                                <input type="password" name="password_confirmation" id="password_confirmation"
                                        class="block w-full ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
                                        placeholder="Confirm password">
                             </div>
 
                         </div>
                         <?php if ($session->has('password')) : ?>
-                            <ul>
-                                <?php foreach ($session->getFlash('password') as $error) : ?>
-                                    <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                        <ul>
+                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('password')[0]; ?></li>
+                        </ul>
                         <?php endif; ?>
                         <div class="flex justify justify-between items-center">
                             <div class="text-sm font-medium text-body">
