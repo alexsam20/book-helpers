@@ -41,7 +41,7 @@
                                           stroke-width="2"
                                           d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
-                                <p><span class="font-medium me-1">Email or Password don't correct.</span></p>
+                                <p><span class="font-medium me-1"><?php echo $session->getFlash('error'); ?></span></p>
                             </div>
                         <?php endif; ?>
                         <div class="relative mb-4">
@@ -85,3 +85,4 @@
         </main>
     </div>
 <?php $view->component('end_blank') ?>
+

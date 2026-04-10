@@ -16,9 +16,13 @@ class LoginController extends Controller
         $email = $this->request()->input('email');
         $password = $this->request()->input('password');
 
-        $this->auth()->attempt($email, $password);
+        if ($this->auth()->attempt($email, $password)) {
+            $this->redirect('/');
+        }
 
-        $this->redirect('/');
+        $this->session()->set('error', 'Incorrect password or login');
+
+        $this->redirect('/login');
     }
 
     public function logout(): void
