@@ -43,6 +43,6 @@ class BookController extends Controller
             'description' => $this->request()->input('description'),
         ]);
 
-        var_dump($id);
+        $this->redirect('/admin/books/add');
     }
 }

@@ -9,7 +9,7 @@ use App\Middleware\GuestMiddleware;
 use Core\Router\Route;
 
 return [
-    Route::get('/home' , [HomeController::class , 'index']),
+    Route::get('/' , [HomeController::class , 'index']),
     Route::get('/books', [BookController::class , 'index']),
     Route::get('/admin/books/add', [BookController::class , 'add'], [AuthMiddleware::class]),
     Route::post('/admin/books/add', [BookController::class , 'store']),
