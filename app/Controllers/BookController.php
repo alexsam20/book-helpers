@@ -12,6 +12,11 @@ class BookController extends Controller
         $this->view('books');
     }
 
+    public function list(): void
+    {
+        $this->view('/admin/books/list');
+    }
+
     public function add(): void
     {
         $this->view('admin/books/add');
