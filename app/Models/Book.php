@@ -10,9 +10,9 @@ class Book
         private readonly string    $name,
         private readonly string    $author,
         private readonly string    $description,
-        private readonly string    $image,
+        private readonly ?string   $image,
         private readonly int       $is_visible,
-        private readonly string    $deletedAt,
+        private readonly ?string   $deletedAt,
         private readonly string    $createdAt,
         private readonly string    $updatedAt,
     ) {}
