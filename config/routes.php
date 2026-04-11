@@ -16,8 +16,9 @@ return [
     Route::post('/login', [LoginController::class , 'login']),
     Route::post('/logout', [LoginController::class , 'logout']),
     Route::get('/books', [BookController::class , 'index']),
-    Route::get('/admin/books/list', [BookController::class , 'list'], [AuthMiddleware::class]),
-    Route::get('/admin/books/add', [BookController::class , 'add'], [AuthMiddleware::class]),
+    Route::get('/admin', [BookController::class , 'list']),
+    Route::get('/admin/books/list', [BookController::class , 'list']),
+    Route::get('/admin/books/add', [BookController::class , 'create']),
     Route::post('/admin/books/add', [BookController::class , 'store']),
 
     Route::get('/test' , static function() {

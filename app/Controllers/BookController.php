@@ -17,18 +17,13 @@ class BookController extends Controller
         $this->view('/admin/books/list');
     }
 
-    public function add(): void
+    public function create(): void
     {
         $this->view('admin/books/add');
     }
 
     public function store()
     {
-        $file = $this->request()->file('image');
-
-        $filePath = $file->move('books');
-        var_dump($this->storage()->url($filePath)); die;
-
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
@@ -47,6 +42,11 @@ class BookController extends Controller
             'author' => $this->request()->input('author'),
             'description' => $this->request()->input('description'),
         ]);
+
+        $file = $this->request()->file('image');
+
+        $filePath = $file->move('books');
+        var_dump($this->storage()->url($filePath)); die;
 
         $this->redirect('/admin/books/add');
     }
