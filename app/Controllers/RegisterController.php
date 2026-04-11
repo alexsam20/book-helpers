@@ -15,14 +15,20 @@ class RegisterController extends Controller
     {
         $validation = $this->request()->validate([
             'name' => ['required', 'min:3', 'max:100'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:6', 'confirmed'],
-            'password_confirmation' => ['required', 'min:6'],
+            'password_confirmation' => ['required', 'min:6', 'match:password'],
         ]);
+
+        //var_dump($this->request()->post); die;
 
         if (!$validation) {
             foreach ($this->request()->errors() as $field => $errors) {
                 $this->session()->set($field, $errors);
+            }
+
+            foreach ($this->request()->post as $old_field => $value) {
+                $this->session()->set("{$old_field}_val", $value);
             }
 
             $this->redirect('/register');

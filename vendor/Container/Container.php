@@ -48,7 +48,7 @@ class Container
         $this->session = new Session();
         $this->config = new Config();
         $this->database = new Database($this->config);
-        $this->validator = new Validator();
+        $this->validator = new Validator($this->database);
         $this->request->setValidator($this->validator);
         $this->auth = new Auth($this->database, $this->session, $this->config);
         $this->storage = new Storage();

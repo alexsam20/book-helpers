@@ -1,5 +1,5 @@
 <?php /** @var \Core\View\ViewInterface $view */ ?>
-<?php /** @var \Core\Session\SessionInterface $session */  ?>
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php $view->component('start_blank') ?>
     <!-- Content -->
     <div class="flex flex-col h-full dark:bg-gray-950">
@@ -37,7 +37,7 @@
                                     <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                 </svg>
                             </div>
-                            <input type="text" id="name" name="name" <!--value="--><?php /*if ($session->has('name_val')) {$session->getFlash('name_val');} */?>"
+                            <input type="text" id="name" name="name" value="<?php echo $session->getFlash('name_val'); ?>"
                                    class="block ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
                                    placeholder="Name">
                         </div>
@@ -50,7 +50,7 @@
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/></svg>
                             </div>
-                            <input type="email" id="email" name="email"
+                            <input type="text" id="email" name="email" value="<?php echo $session->getFlash('email_val'); ?>"
                                    class="block ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
                                    placeholder="name@mail.com">
                         </div>
@@ -60,33 +60,37 @@
                         </ul>
                         <?php endif; ?>
                         <div class="mb-2 mt-4 flex gap-4">
-                            <div class="relative inline-flex mb-2 w-1/2">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-5 h-5 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v3m-3-6V7a3 3 0 1 1 6 0v4m-8 0h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/>
-                                    </svg>
+                            <div class="w-full">
+                                <div class="relative inline-flex mb-2">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg class="w-5 h-5 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v3m-3-6V7a3 3 0 1 1 6 0v4m-8 0h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="text" name="password" id="password" value="<?php echo $session->getFlash('password_val'); ?>"
+                                           class="block w-full ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
+                                           placeholder="Password">
                                 </div>
-                                <input type="password" name="password" id="password"
-                                       class="block w-full ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
-                                       placeholder="Password">
+                                <?php if ($session->has('password')) : ?>
+                                    <div class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('password')[0]; ?></div>
+                                <?php endif; ?>
                             </div>
-                            <div class="relative inline-flex mb-2 w-1/2">
+                            <div class="w-full">
+                                <div class="relative inline-flex mb-2">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-body" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14v3m4-6V7a3 3 0 1 1 6 0v4M5 11h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/>
                                     </svg>
                                 </div>
-                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                <input type="text" name="password_confirmation" id="password_confirmation" value="<?php echo $session->getFlash('password_confirmation_val'); ?>"
                                        class="block w-full ps-9 pe-3 py-2 px-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full placeholder:text-body"
                                        placeholder="Confirm password">
                             </div>
-
+                                <?php if ($session->has('password_confirmation')) : ?>
+                                    <div class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('password_confirmation')[0]; ?></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <?php if ($session->has('password')) : ?>
-                        <ul>
-                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('password')[0]; ?></li>
-                        </ul>
-                        <?php endif; ?>
                         <div class="flex justify justify-between items-center">
                             <div class="text-sm font-medium text-body">
                                 Registered?
