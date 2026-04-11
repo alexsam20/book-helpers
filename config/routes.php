@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\AdminController;
 use App\Controllers\BookController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
@@ -16,7 +17,7 @@ return [
     Route::post('/login', [LoginController::class , 'login']),
     Route::post('/logout', [LoginController::class , 'logout']),
     Route::get('/books', [BookController::class , 'index']),
-    Route::get('/admin', [BookController::class , 'list']),
+    Route::get('/admin', [AdminController::class , 'index']),
     Route::get('/admin/books/list', [BookController::class , 'list']),
     Route::get('/admin/books/add', [BookController::class , 'create']),
     Route::post('/admin/books/add', [BookController::class , 'store']),
