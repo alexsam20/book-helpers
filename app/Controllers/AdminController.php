@@ -2,13 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Services\BookService;
 use Core\Controller\Controller;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        $books = $this->db()->get('books', ['is_visible' => 1]);
+        $books = new BookService($this->db());
+
+        $books = $books->all();
+        var_dump($books); die();
 
         $this->view('/admin/index');
     }
