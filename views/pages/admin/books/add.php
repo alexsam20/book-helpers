@@ -32,7 +32,7 @@
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
                             <form method="post" action="/admin/books/add" enctype="multipart/form-data">
                                 <div class="mb-4 relative">
-                                    <input type="text" id="book" name="book"
+                                    <input type="text" id="book" name="book" value="<?php echo $session->getFlash('book_val'); ?>"
                                            class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
                                            placeholder="Book Name" />
                                     <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
@@ -42,14 +42,12 @@
                                     </div>
                                     <?php if ($session->has('book')) : ?>
                                     <ul>
-                                        <?php foreach ($session->getFlash('book') as $error) : ?>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                        <?php endforeach; ?>
+                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('book')[0]; ?></li>
                                     </ul>
                                     <?php endif; ?>
                                 </div>
                                 <div class="mb-4 relative">
-                                    <input type="text" id="author" name="author"
+                                    <input type="text" id="author" name="author" value="<?php echo $session->getFlash('author_val'); ?>"
                                            class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
                                            placeholder="Author" />
                                     <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
@@ -59,9 +57,7 @@
                                     </div>
                                     <?php if ($session->has('author')) : ?>
                                         <ul>
-                                            <?php foreach ($session->getFlash('author') as $error) : ?>
-                                                <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                            <?php endforeach; ?>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('author')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
@@ -69,12 +65,10 @@
                                 <div class="mb-4">
                                     <textarea id="description" name="description" rows="4"
                                               class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
-                                              placeholder="Write description"></textarea>
+                                              placeholder="Write description"><?php echo $session->getFlash('description_val'); ?></textarea>
                                     <?php if ($session->has('description')) : ?>
                                         <ul>
-                                            <?php foreach ($session->getFlash('description') as $error) : ?>
-                                                <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $error; ?></li>
-                                            <?php endforeach; ?>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
@@ -83,9 +77,9 @@
                                        class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"
                                        aria-describedby="file_input_help" id="file_input" />
                                 </div>
-                                <ul>
+                                <!--<ul>
                                     <li class="mt-2 text-sm text-pink-600">Error</li>
-                                </ul>
+                                </ul>-->
                                 <p class="mt-1 text-[10px] text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                                 <div class="flex items-end justify-end gap-2">
                                     <!-- Create -->
