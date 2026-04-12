@@ -29,7 +29,7 @@ class View implements ViewInterface
         include_once $viewPath;
     }
 
-    public function component(string $name): void
+    public function component(string $name, array $data = []): void
     {
         $componentPath = APP_PATH . "/views/components/$name.php";
 
@@ -38,7 +38,7 @@ class View implements ViewInterface
             return;
         }
 
-        extract($this->defaultData());
+        extract(array_merge($this->defaultData(), $data));
 
         include $componentPath;
     }
