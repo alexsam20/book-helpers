@@ -79,6 +79,23 @@ class Database implements DatabaseInterface
         $stmt->execute($conditions);
     }
 
+    public function update(string $table, array $data, array $conditions = []): void
+    {
+        $fields = array_keys($data);
+        $set = implode(', ', array_map(static fn(string $field) => "$field = :$field", $fields));
+        $where = '';
+
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = sprintf("UPDATE %s SET %s %s", $table, $set, $where);
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute(array_merge($data, $conditions));
+    }
+
     private function connect(): void
     {
         $driver = $this->config->get('database.driver');

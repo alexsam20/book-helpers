@@ -99,6 +99,8 @@ class BookController extends Controller
             $this->request()->input('author'),
             $this->request()->input('description')
         );
+
+        $this->redirect('/admin');
     }
 
     private function service(): BookService

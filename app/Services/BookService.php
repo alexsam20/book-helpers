@@ -76,12 +76,11 @@ class BookService
     public function update(int $id, string $name, string $author, string $description): void
     {
         $data = [
-            'id' => $id,
             'name' => $name,
             'author' => $author,
             'description' => $description,
         ];
 
-        $this->db->update('movies', $data);
+        $this->db->update('books', $data, ['id' => $id]);
     }
 }
