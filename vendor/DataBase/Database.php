@@ -63,9 +63,20 @@ class Database implements DatabaseInterface
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);
 
-//        var_dump($stmt->fetchAll($this->pdo::FETCH_ASSOC)); die();
-
         return $stmt->fetchAll($this->pdo::FETCH_ASSOC);
+    }
+
+    public function delete(string $table, array $conditions = []): void
+    {
+        $where = '';
+
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = sprintf("DELETE FROM %s %s", $table, $where);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
     }
 
     private function connect(): void

@@ -55,4 +55,13 @@ class BookController extends Controller
 
         $this->redirect('/admin/books/add');
     }
+
+    public function destroy(): void
+    {
+        $this->db()->delete('books', [
+            'id' => $this->request()->input('id'),
+        ]);
+
+        $this->redirect('/admin');
+    }
 }

@@ -42,7 +42,7 @@ class Book
         return $this->description;
     }
 
-    public function image(): string
+    public function image(): ?string
     {
         return $this->image;
     }
