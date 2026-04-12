@@ -33,4 +33,21 @@ class BookService
             );
         }, $books);
     }
+
+    public function delete(int $id): void
+    {
+        $this->db->delete('books', [
+            'id' => $id,
+        ]);
+    }
+
+    public function store(int $id, string $name, string $author, string $description): false|int
+    {
+        return $this->db->insert('books', [
+            'user_id' => $id,
+            'name' => $name,
+            'author' => $author,
+            'description' => $description,
+        ]);
+    }
 }

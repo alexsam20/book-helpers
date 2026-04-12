@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Services\BookService;
 use Core\Controller\Controller;
 
 class BookController extends Controller
 {
+    private BookService $service;
+
     public function index(): void
     {
         $this->view('books');
@@ -41,27 +44,34 @@ class BookController extends Controller
             $this->redirect('/admin/books/add');
         }
 
-        $id = $this->db()->insert('books', [
-            'user_id' => 1,
-            'name' => $this->request()->input('book'),
-            'author' => $this->request()->input('author'),
-            'description' => $this->request()->input('description'),
-        ]);
+        $this->service()->store(
+            $this->session()->get("user_id"),
+            $this->request()->input('book'),
+            $this->request()->input('author'),
+            $this->request()->input('description')
+        );
 
         /*$file = $this->request()->file('image');
 
         $filePath = $file->move('books');
         var_dump($this->storage()->url($filePath)); die;*/
 
-        $this->redirect('/admin/books/add');
+        $this->redirect('/admin');
     }
 
     public function destroy(): void
     {
-        $this->db()->delete('books', [
-            'id' => $this->request()->input('id'),
-        ]);
+        $this->service()->delete($this->request()->input('id'));
 
         $this->redirect('/admin');
+    }
+
+    private function service(): BookService
+    {
+        if (! isset($this->service)) {
+            $this->service = new BookService($this->db());
+        }
+
+        return $this->service;
     }
 }
