@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
-<?php /** @var \Core\Session\SessionInterface $session */  ?>
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
+<?php /** @var array<\App\Models\Book> $books */ ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
@@ -47,25 +48,30 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($books as $book):  ?>
+                    <?php $i = 1; ?>
                     <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                         <td class="px-6 py-2 text-center">
-                            1
+                            <?php echo $i; ?>
                         </td>
                         <td class="px-6 py-2 text-center">
-                            <img src="/storage/books/stashchuk-bogdan.jpg" class="w-10" alt="">
+                            <img src="/storage/books/<?php echo $book->image() ?>" class="w-10" alt="">
                         </td>
                         <td class="px-6 py-2 font-medium text-heading">
-                            Создаем динамические веб-сайты с помощью PHP, MySQL, JаvaScript, CSS и HTML5
+                            <?php echo $book->name() ?>
                         </td>
                         <td class="px-6 py-2 text-left">
-                            Shmocik
+                            <?php echo $book->author() ?>
                         </td>
                         <td class="px-6 py-2 text-right">
-                            Saturday, Mar 14, 2026 19:47
+                            <?php echo $view->formatDate($book->createdAt());  ?>
                         </td>
                         <td class="px-6 py-2 text-center">
-                            <span class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded">Invisible</span>
-                            <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded">Visible</span>
+                            <?php if (1 === $book->isVisible()): ?>
+                                <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded">Visible</span>
+                            <?php else: ?>
+                                <span class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded">Invisible</span>
+                            <?php endif; ?>
                         </td>
                         <td class="px-6 py-2 text-right">
                             <div class="inline-flex items-center">
@@ -92,7 +98,10 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                    <?php $i++; ?>
+                    <?php endforeach; ?>
+
+                    <!--<tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                         <th scope="row" class="px-6 py-2 font-medium text-heading text-center whitespace-nowrap">
                             2
                         </th>
@@ -223,7 +232,7 @@
                                 </a>
                             </div>
                         </td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
                 <!-- Pagination -->

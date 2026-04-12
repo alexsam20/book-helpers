@@ -11,9 +11,8 @@ class AdminController extends Controller
     {
         $books = new BookService($this->db());
 
-        $books = $books->all();
-        var_dump($books); die();
-
-        $this->view('/admin/index');
+        $this->view('/admin/index', [
+            'books' => $books->all(),
+        ]);
     }
 }

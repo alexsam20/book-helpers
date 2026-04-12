@@ -11,14 +11,12 @@ class View implements ViewInterface
     public function __construct(
         private readonly SessionInterface $session,
         private readonly AuthInterface $auth,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @throws ViewNotFoundException
      */
-    public function page(string $name): void
+    public function page(string $name, array $data = []): void
     {
         $viewPath = APP_PATH."/views/pages/$name.php";
 
@@ -26,7 +24,7 @@ class View implements ViewInterface
             throw new ViewNotFoundException("View $name Not Found");
         }
 
-        extract($this->defaultData());
+        extract(array_merge($this->defaultData(), $data));
 
         include_once $viewPath;
     }
@@ -43,6 +41,11 @@ class View implements ViewInterface
         extract($this->defaultData());
 
         include $componentPath;
+    }
+
+    public function formatDate($date): string
+    {
+        return date('F j, Y H:i', strtotime($date));
     }
 
     private function defaultData(): array
