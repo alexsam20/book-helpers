@@ -66,6 +66,41 @@ class BookController extends Controller
         $this->redirect('/admin');
     }
 
+    public function edit(): void
+    {
+        $book = $this->service()->find($this->request()->input('id'));
+
+        $this->view('/admin/books/update', ['book' => $book]);
+    }
+
+    public function update()
+    {
+        $validation = $this->request()->validate([
+            'book' => ['required', 'min:3', 'max:100'],
+            'author' => ['required', 'min:3', 'max:100'],
+            'description' => ['required', 'min:10', 'max:5000'],
+        ]);
+
+        if (! $validation) {
+            foreach ($this->request()->errors() as $field => $value) {
+                $this->session()->set($field, $value);
+            }
+
+            foreach ($this->request()->post as $old_field => $value) {
+                $this->session()->set("{$old_field}_val", $value);
+            }
+
+            $this->redirect('/admin/books/update?id=' . $this->request()->input('id'));
+        }
+
+        $this->service()->update(
+            $this->request()->input('id'),
+            $this->request()->input('book'),
+            $this->request()->input('author'),
+            $this->request()->input('description')
+        );
+    }
+
     private function service(): BookService
     {
         if (! isset($this->service)) {

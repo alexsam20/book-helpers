@@ -22,6 +22,8 @@ return [
     Route::get('/admin/books/add', [BookController::class , 'create']),
     Route::post('/admin/books/add', [BookController::class , 'store']),
     Route::post('/admin/books/destroy', [BookController::class , 'destroy']),
+    Route::get('/admin/books/update', [BookController::class , 'edit']),
+    Route::post('/admin/books/update', [BookController::class , 'update']),
 
     Route::get('/test' , static function() {
         echo 'Test';

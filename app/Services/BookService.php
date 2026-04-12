@@ -50,4 +50,38 @@ class BookService
             'description' => $description,
         ]);
     }
+
+    public function find(int $id): ?Book
+    {
+        $book = $this->db->first('books', ['id' => $id]);
+
+        if (!$book) {
+            return null;
+        }
+
+        return new Book(
+            $book['id'],
+            $book['user_id'],
+            $book['name'],
+            $book['author'],
+            $book['description'],
+            $book['image'],
+            $book['is_visible'],
+            $book['deleted_at'],
+            $book['created_at'],
+            $book['updated_at'],
+        );
+    }
+
+    public function update(int $id, string $name, string $author, string $description): void
+    {
+        $data = [
+            'id' => $id,
+            'name' => $name,
+            'author' => $author,
+            'description' => $description,
+        ];
+
+        $this->db->update('movies', $data);
+    }
 }
