@@ -27,6 +27,7 @@ class UploadedFile implements UploadedFileInterface
         $filePath = $storagePath . "/{$fileName}";
 
         if (move_uploaded_file($this->tmpName, $filePath)) {
+            // TODO variable $path - path save to database???
             return "$path/$fileName";
         }
 

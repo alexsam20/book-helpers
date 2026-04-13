@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Book;
 use Core\DataBase\DatabaseInterface;
+use Core\Upload\UploadedFileInterface;
 
 class BookService
 {
@@ -41,13 +42,16 @@ class BookService
         ]);
     }
 
-    public function store(int $id, string $name, string $author, string $description): false|int
+    public function store(int $id, string $name, string $author, string $description, UploadedFileInterface $image): false|int
     {
+        $filePath = $image->move('books');
+
         return $this->db->insert('books', [
             'user_id' => $id,
             'name' => $name,
             'author' => $author,
             'description' => $description,
+            'image' => $filePath,
         ]);
     }
 

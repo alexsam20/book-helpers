@@ -26,7 +26,7 @@ return [
     Route::get('/admin/books/update', [BookController::class , 'edit']),
     Route::post('/admin/books/update', [BookController::class , 'update']),
     Route::get('/admin/parts/add', [PartController::class , 'create']),
-    Route::post('/admin/parts/add', [PartController::class , 'update']),
+    Route::post('/admin/parts/add', [PartController::class , 'store']),
 
     Route::get('/test' , static function() {
         echo 'Test';

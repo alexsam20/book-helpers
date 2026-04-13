@@ -58,17 +58,17 @@ class Validator implements ValidatorInterface
         if ($ruleValue === 'numeric' && !is_numeric($value)) {
             $this->addErrorForRule($key, 'numeric');
         }
-        if ($ruleName === 'min' && strlen($value) < $ruleValue) {
+        if ($ruleName === 'min' && mb_strlen($value) < $ruleValue) {
             $this->addErrorForRule($key, 'min', $ruleValue);
         }
-        if ($ruleName === 'max' && strlen($value) > $ruleValue) {
+        if ($ruleName === 'max' && mb_strlen($value) > $ruleValue) {
             $this->addErrorForRule($key, 'max', $ruleValue);
         }
         if ($ruleName === 'match' && $value !== $this->data[$ruleValue]) {
             $this->addErrorForRule($key, 'match', $ruleValue);
         }
         if ($ruleName === 'unique') {
-            if ($ruleValue[strlen($ruleValue) - 1] !== '?') {
+            if ($ruleValue[mb_strlen($ruleValue) - 1] !== '?') {
                 $record = $this->db->first(rtrim($ruleValue, '?'), [$key => $value]);
                 if ($record) {
                     $this->addErrorForRule($key, 'unique', $key);

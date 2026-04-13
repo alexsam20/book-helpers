@@ -1,6 +1,7 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */  ?>
 <?php /** @var array<\App\Models\Book> $books */ ?>
+<?php /** @var \App\Models\Book $id */ ?>
 <?php $view->component('start') ?>
     <!-- Content -->
     <div class="flex flex-col h-full">
@@ -31,11 +32,11 @@
                     </div>
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <form method="post" action="/admin/books/create">
+                            <form method="post" action="/admin/parts/add">
                                 <div class="mb-4 relative">
-                                    <select id="genre" name="genre" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full  shadow-xs placeholder:text-body">
+                                    <select id="book" name="book" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full  shadow-xs placeholder:text-body">
                                         <?php foreach ($books as $book) : ?>
-                                            <option value="<?php echo $book->id(); ?>"><?php echo $book->name(); ?></option>
+                                            <option value="<?php echo $book->id(); ?>" <?php if ($book->id() === $id) { echo 'selected';} ?>><?php echo $book->name(); ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?php if ($session->has('title')) : ?>
@@ -59,14 +60,14 @@
                                         </ul>
                                     <?php endif; ?>
                                 </div>
-                                <!--Description-->
+                                <!--Body-->
                                 <div class="mb-4">
-                                    <textarea id="description" name="description" rows="8"
+                                    <textarea id="body" name="body" rows="8"
                                               class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
-                                              placeholder="Write description"><?php echo $session->getFlash('description_val'); ?></textarea>
-                                    <?php if ($session->has('description')) : ?>
+                                              placeholder="Write description"><?php echo $session->getFlash('body_val'); ?></textarea>
+                                    <?php if ($session->has('body')) : ?>
                                         <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('body')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
