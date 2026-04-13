@@ -8,9 +8,7 @@ class Database implements DatabaseInterface
 {
     private \PDO $pdo;
 
-    public function __construct(
-        private readonly ConfigInterface $config,
-    )
+    public function __construct(private readonly ConfigInterface $config)
     {
         $this->connect();
     }

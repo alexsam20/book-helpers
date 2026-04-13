@@ -4,6 +4,7 @@ use App\Controllers\AdminController;
 use App\Controllers\BookController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
+use App\Controllers\PartController;
 use App\Controllers\RegisterController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
@@ -24,6 +25,8 @@ return [
     Route::post('/admin/books/destroy', [BookController::class , 'destroy']),
     Route::get('/admin/books/update', [BookController::class , 'edit']),
     Route::post('/admin/books/update', [BookController::class , 'update']),
+    Route::get('/admin/parts/add', [PartController::class , 'create']),
+    Route::post('/admin/parts/add', [PartController::class , 'update']),
 
     Route::get('/test' , static function() {
         echo 'Test';

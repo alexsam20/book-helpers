@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */  ?>
+<?php /** @var array<\App\Models\Book> $books */ ?>
 <?php $view->component('start') ?>
     <!-- Content -->
     <div class="flex flex-col h-full">
@@ -25,45 +26,42 @@
                 <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
                     <div class="p-4 dark:bg-gray-950/50 rounded-t-2xl">
                         <h1 class="text-xl font-semibold tracking-tight text-cyan-600">
-                            Add Book page
+                            Add Book part
                         </h1>
                     </div>
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <form method="post" action="/admin/books/add" enctype="multipart/form-data">
+                            <form method="post" action="/admin/books/create">
                                 <div class="mb-4 relative">
-                                    <input type="text" id="book" name="book" value="<?php echo $session->getFlash('book_val'); ?>"
+                                    <select id="genre" name="genre" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full  shadow-xs placeholder:text-body">
+                                        <?php foreach ($books as $book) : ?>
+                                            <option value="<?php echo $book->id(); ?>"><?php echo $book->name(); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php if ($session->has('title')) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('title')[0]; ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="mb-4 relative">
+                                    <input type="text" id="title" name="title" value="<?php echo $session->getFlash('title_val'); ?>"
                                            class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
-                                           placeholder="Book Name" />
+                                           placeholder="Title" />
                                     <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
                                         <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
                                         </svg>
                                     </div>
-                                    <?php if ($session->has('book')) : ?>
-                                    <ul>
-                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('book')[0]; ?></li>
-                                    </ul>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="mb-4 relative">
-                                    <input type="text" id="author" name="author" value="<?php echo $session->getFlash('author_val'); ?>"
-                                           class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
-                                           placeholder="Author" />
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
-                                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4.988 19.012 5.41-5.41m2.366-6.424 4.058 4.058-2.03 5.41L5.3 20 4 18.701l3.355-9.494 5.41-2.029Zm4.626 4.625L12.197 6.61 14.807 4 20 9.194l-2.61 2.61Z"/>
-                                        </svg>
-                                    </div>
-                                    <?php if ($session->has('author')) : ?>
+                                    <?php if ($session->has('title')) : ?>
                                         <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('author')[0]; ?></li>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('title')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
                                 <!--Description-->
                                 <div class="mb-4">
-                                    <textarea id="description" name="description" rows="4"
+                                    <textarea id="description" name="description" rows="8"
                                               class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
                                               placeholder="Write description"><?php echo $session->getFlash('description_val'); ?></textarea>
                                     <?php if ($session->has('description')) : ?>
@@ -72,14 +70,6 @@
                                         </ul>
                                     <?php endif; ?>
                                 </div>
-                                <div class="mb-4">
-                                    <input type="file" name="image" id="image"
-                                       class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body" />
-                                </div>
-                                <!--<ul>
-                                    <li class="mt-2 text-sm text-pink-600">Error</li>
-                                </ul>-->
-                                <p class="mt-1 text-[10px] text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                                 <div class="flex items-end justify-end gap-2">
                                     <!-- Add -->
                                     <button type="submit" class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
