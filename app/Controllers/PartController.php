@@ -10,6 +10,14 @@ class PartController extends Controller
 {
     private PartService $service;
 
+    public function index()
+    {
+        $books = new BookService($this->db());
+        $parts = new PartService($this->db());
+
+        $this->view('/admin/parts/index');
+    }
+
     public function create()
     {
         $books = new BookService($this->db());
@@ -28,8 +36,8 @@ class PartController extends Controller
         ]);
 
         if (! $validation) {
-            foreach ($this->request()->errors() as $field => $value) {
-                $this->session()->set($field, $value);
+            foreach ($this->request()->errors() as $error_field => $value) {
+                $this->session()->set($error_field, $value);
             }
 
             foreach ($this->request()->post as $old_field => $value) {

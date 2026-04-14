@@ -17,7 +17,7 @@ class BookService
      */
     public function all(): array
     {
-        $books = $this->db->get('books', ['is_visible' => 1]);
+        $books = $this->db->get('books');
 
         return array_map(static function ($book) {
             return new Book(

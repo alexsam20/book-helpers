@@ -56,7 +56,9 @@ class Database implements DatabaseInterface
             $where = 'WHERE ' . implode(' AND ', array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
         }
 
-        $sql = sprintf("SELECT * FROM %s %s AND deleted_at IS NULL", $table, $where);
+        //  AND deleted_at IS NULL
+
+        $sql = sprintf("SELECT * FROM %s %s", $table, $where);
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);

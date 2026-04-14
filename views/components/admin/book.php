@@ -32,9 +32,17 @@
                     class="flex gap-1 py-2 px-3 rounded-sm text-right text-green-600 hover:text-green-800 dark:text-green-500 dark:hover:text-green-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700 cursor-pointer">
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"/>
                 </svg>
                 <span>Add Part</span>
+            </a>
+            <a href="/admin/parts?id=<?php echo $book->id(); ?>"
+                    class="flex gap-1 py-2 px-3 rounded-sm text-right text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700 cursor-pointer">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+                </svg>
+                <span>Show Parts</span>
             </a>
             <a href="/admin/books/update?id=<?php echo $book->id();  ?>"
                     class="flex gap-1 py-2 px-3 rounded-sm text-right text-teal-600 hover:text-teal-800 dark:text-teal-500 dark:hover:text-teal-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700 cursor-pointer">
