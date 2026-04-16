@@ -36,7 +36,7 @@ class PartService
 
     public function find(int $id, string $field = 'id'): ?Part
     {
-        $part = $this->db->first('parts', ['id' => $id]);
+        $part = $this->db->first('parts', [$field => $id]);
 
         if (!$part) {
             return null;

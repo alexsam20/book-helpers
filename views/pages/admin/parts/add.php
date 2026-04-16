@@ -27,14 +27,19 @@
                 <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
                     <div class="p-4 dark:bg-gray-950/50 rounded-t-2xl">
                         <h1 class="text-xl font-semibold tracking-tight text-cyan-600">
-                            Add Book part
+                            Add Book Part
                         </h1>
                     </div>
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
                             <form method="post" action="/admin/parts/add">
                                 <div class="mb-4 relative">
-                                    <select id="book" name="book" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full  shadow-xs placeholder:text-body">
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
+                                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
+                                        </svg>
+                                    </div>
+                                    <select id="book" name="book" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
                                         <?php foreach ($books as $book) : ?>
                                             <option value="<?php echo $book->id(); ?>" <?php if ($book->id() === $id) { echo 'selected';} ?>><?php echo $book->name(); ?></option>
                                         <?php endforeach; ?>

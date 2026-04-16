@@ -63,6 +63,24 @@
                                         </ul>
                                     <?php endif; ?>
                                 </div>
+                                <!-- Year -->
+                                <div class="mb-4 relative">
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
+                                        <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
+                                        </svg>
+                                    </div>
+                                    <select id="year" name="year" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <?php for($i = date('Y'); $i >= 1990; $i--) : ?>
+                                            <option value="<?php echo $i; ?>" <?php if ($book->year() === $i) { echo 'selected';} ?>><?php echo $i; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                    <?php if ($session->has('year')) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php //echo $session->getFlash('year')[0]; ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
                                 <!--Description-->
                                 <div class="mb-4">
                                     <textarea id="description" name="description" rows="4"
@@ -84,17 +102,19 @@
                                 </ul>-->
                                 <p class="mt-1 text-[10px] text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                                 <div class="flex items-end justify-end gap-2">
-                                    <!-- Create -->
-                                    <button type="submit" class="inline-flex text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
+                                    <!-- Update -->
+                                    <button type="submit" class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
                                         <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6"/>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01"/>
                                         </svg>
                                         Update
                                     </button>
                                 </div>
                             </form>
                         </div>
-                        <div class="lg:w-1/3 rounded-2xl"></div>
+                        <div class="w-full lg:w-1/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
+                            <img class="mx-auto" src="/storage/books/<?php echo $book->image(); ?>" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
