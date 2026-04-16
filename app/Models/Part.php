@@ -16,7 +16,7 @@ class Part
         private readonly string    $updatedAt,
     ) {}
 
-    public function getId(): int
+    public function id(): int
     {
         return $this->id;
     }

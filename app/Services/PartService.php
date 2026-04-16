@@ -14,9 +14,9 @@ class PartService
     /**
      * @return array<Part>
      */
-    public function all(): array
+    public function all(int $id, string $field = 'id'): array
     {
-        $parts = $this->db->get('parts');
+        $parts = $this->db->get('parts', [$field => $id]);
 
         return array_map(static function ($part) {
             return new Part(
@@ -32,6 +32,27 @@ class PartService
 
             );
         }, $parts);
+    }
+
+    public function find(int $id, string $field = 'id'): ?Part
+    {
+        $part = $this->db->first('parts', ['id' => $id]);
+
+        if (!$part) {
+            return null;
+        }
+
+        return new Part(
+            $part['id'],
+            $part['user_id'],
+            $part['book_id'],
+            $part['title'],
+            $part['body'],
+            $part['is_visible'],
+            $part['deleted_at'],
+            $part['created_at'],
+            $part['updated_at'],
+        );
     }
 
     public function store(int $id, int $book, string $title, string $body): false|int

@@ -12,10 +12,16 @@ class PartController extends Controller
 
     public function index()
     {
-        $books = new BookService($this->db());
+        $id = $this->request()->input('id');
+
+        $book = new BookService($this->db());
         $parts = new PartService($this->db());
 
-        $this->view('/admin/parts/index');
+        $this->view('/admin/parts/index', [
+            'id' => $id,
+            'book' => $book->find($id),
+            'parts' => $parts->all($id, 'book_id'),
+        ]);
     }
 
     public function create()
