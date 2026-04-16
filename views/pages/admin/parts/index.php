@@ -53,7 +53,7 @@
                     <div class="grid grid-cols-1 p-4 dark:bg-gray-950/50 rounded-2xl">
                         <!-- Card -->
                         <div class="flex flex-col p-2 items-center text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row md:max-w-xl">
-                            <img class="object-cover rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="/storage/books/a3ef78f94fe2fe9938870d0b85fe4714.jpg" alt="">
+                            <img class="object-cover rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="/storage/books/<?php echo $book->image() ?>" alt="">
                             <div class="flex flex-col text-right md:p-4 leading-normal w-full">
                                 <div class="text-center sm:text-left">
                                     <h5 class="mt-3 p-4 text-xl font-semibold tracking-tight text-heading"><?php echo $book->name() ?></h5>

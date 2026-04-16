@@ -11,6 +11,7 @@ class Book
         private readonly string    $author,
         private readonly string    $description,
         private readonly ?string   $image,
+        private readonly int       $year,
         private readonly int       $is_visible,
         private readonly ?string   $deletedAt,
         private readonly string    $createdAt,
@@ -45,6 +46,11 @@ class Book
     public function image(): ?string
     {
         return $this->image;
+    }
+
+    public function year(): int
+    {
+        return $this->year;
     }
 
     public function isVisible(): int

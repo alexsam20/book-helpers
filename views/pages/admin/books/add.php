@@ -61,6 +61,19 @@
                                         </ul>
                                     <?php endif; ?>
                                 </div>
+                                <!-- Year -->
+                                <div class="mb-4 relative">
+                                    <select id="year" name="year" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full  shadow-xs placeholder:text-body">
+                                        <?php for($i = 1990; $i <= date('Y'); $i++) : ?>
+                                            <option value="<?php echo $i; ?>" <?php //if ($year->id() === $id) { echo 'selected';} ?>><?php echo $i; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                    <?php if ($session->has('year')) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('title')[0]; ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
                                 <!--Description-->
                                 <div class="mb-4">
                                     <textarea id="description" name="description" rows="4"

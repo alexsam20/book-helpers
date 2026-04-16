@@ -32,6 +32,7 @@ class BookController extends Controller
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
             'description' => ['required', 'min:10', 'max:5000'],
+            "year" => ['required', 'min:4', 'max:4'],
         ]);
 
         if (! $validation) {
@@ -51,7 +52,8 @@ class BookController extends Controller
             $this->request()->input('book'),
             $this->request()->input('author'),
             $this->request()->input('description'),
-            $this->request()->file('image')
+            $this->request()->file('image'),
+            $this->request()->input('year')
         );
 
         $this->redirect('/admin');
@@ -77,6 +79,7 @@ class BookController extends Controller
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
             'description' => ['required', 'min:10', 'max:5000'],
+            "year" => ['required', 'min:4', 'max:4'],
         ]);
 
         if (! $validation) {
@@ -95,7 +98,8 @@ class BookController extends Controller
             $this->request()->input('id'),
             $this->request()->input('book'),
             $this->request()->input('author'),
-            $this->request()->input('description')
+            $this->request()->input('description'),
+            $this->request()->input('year')
         );
 
         $this->redirect('/admin');

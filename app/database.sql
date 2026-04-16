@@ -17,6 +17,7 @@ CREATE TABLE `books` (
     `author` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `description` TEXT DEFAULT NULL,
     `image` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `year` YEAR NOT NULL,
     `is_visible` TINYINT(1) NOT NULL DEFAULT 1,
     `deleted_at` TIMESTAMP DEFAULT NULL,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
