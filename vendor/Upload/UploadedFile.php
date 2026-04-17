@@ -2,8 +2,6 @@
 
 namespace Core\Upload;
 
-use Core\Upload\UploadedFileInterface;
-
 class UploadedFile implements UploadedFileInterface
 {
     public function __construct(
@@ -21,6 +19,13 @@ class UploadedFile implements UploadedFileInterface
 
         is_dir($storagePath) || mkdir($storagePath, 0777, true);
         is_dir($trashPath) || mkdir($trashPath, 0777, true);
+
+        $file = $this->path('storage', '.gitignore');
+        $content = "*\n!.gitignore";
+
+        if (!file_exists($file)) {
+            file_put_contents($file, $content);
+        }
 
         $fileName = $fileName ?? $this->randomFileName();
 
