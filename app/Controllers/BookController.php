@@ -26,7 +26,7 @@ class BookController extends Controller
 
     public function store(): void
     {
-        $file = $this->request()->file('image');
+        $this->saveFile();
 
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
@@ -73,8 +73,10 @@ class BookController extends Controller
         $this->view('/admin/books/update', ['book' => $book]);
     }
 
-    public function update()
+    public function update(): void
     {
+        $this->saveFile();
+
         $validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
@@ -99,10 +101,18 @@ class BookController extends Controller
             $this->request()->input('book'),
             $this->request()->input('author'),
             $this->request()->input('description'),
+            $this->request()->file('image'),
             $this->request()->input('year')
         );
 
         $this->redirect('/admin');
+    }
+
+    private function saveFile(): void
+    {
+        if ($this->request()->files['image']['error'] !== 4) {
+            $this->request()->file('image');
+        }
     }
 
     private function service(): BookService

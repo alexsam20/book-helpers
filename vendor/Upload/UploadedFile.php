@@ -16,11 +16,11 @@ class UploadedFile implements UploadedFileInterface
 
     public function move(string $path, ?string $fileName = null): string|false
     {
-        $storagePath = APP_PATH . "/storage/$path";
+        $storagePath = $this->path('storage', $path);
+        $trashPath = $this->path('storage/trash', $path);
 
-        if (!is_dir($storagePath)) {
-            mkdir($storagePath, 0777, true);
-        }
+        is_dir($storagePath) || mkdir($storagePath, 0777, true);
+        is_dir($trashPath) || mkdir($trashPath, 0777, true);
 
         $fileName = $fileName ?? $this->randomFileName();
 
@@ -33,13 +33,18 @@ class UploadedFile implements UploadedFileInterface
         return false;
     }
 
+    public function getExtension(): string
+    {
+        return pathinfo($this->name, PATHINFO_EXTENSION);
+    }
+
     private function randomFileName(): string
     {
         return md5(uniqid(mt_rand(), true)) . '.' . $this->getExtension();
     }
 
-    public function getExtension(): string
+    private function path(string $folder,string $path): string
     {
-        return pathinfo($this->name, PATHINFO_EXTENSION);
+        return APP_PATH . sprintf("/%s/%s", $folder, $path);
     }
 }

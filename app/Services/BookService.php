@@ -4,12 +4,13 @@ namespace App\Services;
 
 use App\Models\Book;
 use Core\DataBase\DatabaseInterface;
+use Core\Storage\Storage;
 use Core\Upload\UploadedFileInterface;
 
 class BookService
 {
     public function __construct(
-        private readonly DatabaseInterface $db
+        private readonly DatabaseInterface $db,
     ) { }
 
     /**
@@ -38,6 +39,13 @@ class BookService
 
     public function delete(int $id): void
     {
+        $oldFile = ($this->find($id))->image();
+
+        if (!empty($oldFile)) {
+            $storage = new Storage();
+            $storage->trash('books/'. $oldFile);
+        }
+
         $this->db->delete('books', [
             'id' => $id,
         ]);
@@ -80,12 +88,22 @@ class BookService
         );
     }
 
-    public function update(int $id, string $name, string $author, string $description, $year): void
+    public function update(int $id, string $name, string $author, string $description, UploadedFileInterface $image, int $year): void
     {
+        $oldFile = ($this->find($id))->image();
+
+        if (!empty($oldFile)) {
+            $storage = new Storage();
+            $storage->trash('books/'. $oldFile);
+        }
+
+        $filePath = $image->move('books');
+
         $data = [
             'name' => $name,
             'author' => $author,
             'description' => $description,
+            'image' => $filePath,
             'year' => $year,
         ];
 

@@ -4,9 +4,12 @@ namespace Core\Storage;
 
 class Storage implements StorageInterface
 {
+    private const string STORAGE = 'storage';
+    private const string TRASH = self::STORAGE . '/trash';
+
     public function url(string $path): string
     {
-        return URL_PATH . "/storage/$path";
+        return URL_PATH . "/" . self::STORAGE . "/" .$path;
     }
 
     public function get(string $path): string
@@ -14,8 +17,19 @@ class Storage implements StorageInterface
         return file_get_contents($this->storagePath($path));
     }
 
-    private function storagePath(string $path): string
+    public function storagePath(string $path, string $file = self::STORAGE): string
     {
-        return APP_PATH . "/storage/$path";
+        return APP_PATH . "/" . $file . "/" .$path;
+    }
+
+    public function trash(string $file): bool
+    {
+        $oldFile = $this->storagePath($file);
+        $trash = $this->storagePath($file, self::TRASH);
+        if (rename($oldFile, $trash)) {
+            return true;
+        }
+
+        return false;
     }
 }

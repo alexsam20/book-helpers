@@ -36,6 +36,9 @@
                             Author
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
+                            Year
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">
                             Date Created
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">

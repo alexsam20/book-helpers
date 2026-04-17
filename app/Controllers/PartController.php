@@ -79,7 +79,7 @@ class PartController extends Controller
 
     public function update()
     {
-        $validation = $this->request()->validate([
+        /*$validation = $this->request()->validate([
             'book' => ['required', 'min:3', 'max:100'],
             'author' => ['required', 'min:3', 'max:100'],
             'description' => ['required', 'min:10', 'max:5000'],
@@ -106,7 +106,7 @@ class PartController extends Controller
             $this->request()->input('year')
         );
 
-        $this->redirect('/admin');
+        $this->redirect('/admin');*/
     }
 
     private function service(): PartService
