@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Part;
 use App\Services\BookService;
 use App\Services\PartService;
 use Core\Controller\Controller;
@@ -66,10 +67,13 @@ class PartController extends Controller
     public function edit(): void
     {
         $book = new BookService($this->db());
+        /** @var Part $part */
+        $part = $this->service()->find($this->request()->input('id'));
+        $book = $book->find($part->bookId());
 
         $this->view('/admin/parts/update', [
-            'book' => $book->find($this->request()->input('id')),
-            'part' => $this->service()->find($this->request()->input('id'), 'book_id'),
+            'part' => $part,
+            'book' => $book,
         ]);
     }
 
