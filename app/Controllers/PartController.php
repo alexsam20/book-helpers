@@ -50,7 +50,7 @@ class PartController extends Controller
                 $this->session()->set("{$old_field}_val", $value);
             }
 
-            $this->redirect('/admin/books/add');
+            $this->redirect('/admin/parts/add?id=' . $this->request()->input('book'));
         }
 
         $this->service()->store(
@@ -60,16 +60,12 @@ class PartController extends Controller
             $this->request()->input('body')
         );
 
-        $this->redirect('/admin');
+        $this->redirect('/admin/parts?id=' . $this->request()->input('book'));
     }
 
     public function edit(): void
     {
         $book = new BookService($this->db());
-
-        /*$book = $book->find($this->request()->input('id'));
-        $part = $this->service()->find($this->request()->input('id'), 'book_id');
-        var_dump($book, $part); die();*/
 
         $this->view('/admin/parts/update', [
             'book' => $book->find($this->request()->input('id')),
