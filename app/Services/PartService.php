@@ -7,6 +7,8 @@ use Core\DataBase\DatabaseInterface;
 
 class PartService
 {
+    private string $table = 'parts';
+
     public function __construct(
         private readonly DatabaseInterface $db
     ) { }
@@ -16,7 +18,7 @@ class PartService
      */
     public function all(int $id, string $field = 'id'): array
     {
-        $parts = $this->db->get('parts', [$field => $id]);
+        $parts = $this->db->get($this->table, [$field => $id]);
 
         return array_map(static function ($part) {
             return new Part(
@@ -36,7 +38,7 @@ class PartService
 
     public function find(int $id, string $field = 'id'): ?Part
     {
-        $part = $this->db->first('parts', [$field => $id]);
+        $part = $this->db->first($this->table, [$field => $id]);
 
         if (!$part) {
             return null;
@@ -57,11 +59,23 @@ class PartService
 
     public function store(int $id, int $book, string $title, string $body): false|int
     {
-        return $this->db->insert('parts', [
+        return $this->db->insert($this->table, [
             'user_id' => $id,
             'book_id' => $book,
             'title' => $title,
             'body' => $body,
         ]);
+    }
+
+
+
+    public function update(int $id, string $title, string $body): void
+    {
+        $data = [
+            'title' => $title,
+            'body' => $body,
+        ];
+
+        $this->db->update($this->table, $data, ['id' => $id]);
     }
 }

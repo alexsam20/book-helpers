@@ -79,11 +79,11 @@ class PartController extends Controller
 
     public function update()
     {
-        /*$validation = $this->request()->validate([
-            'book' => ['required', 'min:3', 'max:100'],
-            'author' => ['required', 'min:3', 'max:100'],
-            'description' => ['required', 'min:10', 'max:5000'],
-            "year" => ['required', 'min:4', 'max:4'],
+        $id = $this->request()->input('id');
+
+        $validation = $this->request()->validate([
+            'title' => ['required', 'min:3', 'max:100'],
+            'body' => ['required', 'min:10', 'max:50000'],
         ]);
 
         if (! $validation) {
@@ -95,18 +95,16 @@ class PartController extends Controller
                 $this->session()->set("{$old_field}_val", $value);
             }
 
-            $this->redirect('/admin/books/update?id=' . $this->request()->input('id'));
+            $this->redirect('/admin/parts/update?id=' . $id);
         }
 
         $this->service()->update(
-            $this->request()->input('id'),
-            $this->request()->input('book'),
-            $this->request()->input('author'),
-            $this->request()->input('description'),
-            $this->request()->input('year')
+            (int) $id,
+            $this->request()->input('title'),
+            $this->request()->input('body')
         );
 
-        $this->redirect('/admin');*/
+        $this->redirect('/admin/parts?id=1');
     }
 
     private function service(): PartService

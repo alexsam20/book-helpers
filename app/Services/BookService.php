@@ -9,6 +9,8 @@ use Core\Upload\UploadedFileInterface;
 
 class BookService
 {
+    private string $table = 'books';
+
     public function __construct(
         private readonly DatabaseInterface $db,
     ) { }
@@ -18,7 +20,7 @@ class BookService
      */
     public function all(): array
     {
-        $books = $this->db->get('books');
+        $books = $this->db->get($this->table);
 
         return array_map(static function ($book) {
             return new Book(
@@ -46,7 +48,7 @@ class BookService
             $storage->trash('books/'. $oldFile);
         }
 
-        $this->db->delete('books', [
+        $this->db->delete($this->table, [
             'id' => $id,
         ]);
     }
@@ -55,7 +57,7 @@ class BookService
     {
         $filePath = $image->move('books');
 
-        return $this->db->insert('books', [
+        return $this->db->insert($this->table, [
             'user_id' => $id,
             'name' => $name,
             'author' => $author,
@@ -67,7 +69,7 @@ class BookService
 
     public function find(int $id): ?Book
     {
-        $book = $this->db->first('books', ['id' => $id]);
+        $book = $this->db->first($this->table, ['id' => $id]);
 
         if (!$book) {
             return null;
@@ -92,7 +94,12 @@ class BookService
     {
         $oldFile = ($this->find($id))->image();
 
-        if (!empty($oldFile)) {
+        /*var_dump($oldFile);
+        var_dump($image); die();*/
+
+
+
+        if ($image->error !== 4) {
             $storage = new Storage();
             $storage->trash('books/'. $oldFile);
         }
@@ -107,6 +114,6 @@ class BookService
             'year' => $year,
         ];
 
-        $this->db->update('books', $data, ['id' => $id]);
+        $this->db->update($this->table, $data, ['id' => $id]);
     }
 }

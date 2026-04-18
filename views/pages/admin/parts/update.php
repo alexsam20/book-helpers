@@ -71,7 +71,8 @@
                     </div>
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <form method="post" action="/admin/parts/add">
+                            <form method="post" action="/admin/parts/update">
+                                <input type="hidden" name="id" value="<?php echo $part->id(); ?>" />
                                 <div class="mb-4 relative">
                                     <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
                                         <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
