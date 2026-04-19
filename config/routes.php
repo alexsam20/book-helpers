@@ -30,6 +30,7 @@ return [
     Route::post('/admin/parts/add', [PartController::class , 'store']),
     Route::get('/admin/parts/update', [PartController::class , 'edit']),
     Route::post('/admin/parts/update', [PartController::class , 'update']),
+    Route::get('/admin/parts/list', [PartController::class , 'list']),
     Route::post('/admin/parts/destroy', [PartController::class , 'destroy']),
 
     Route::get('/test' , static function() {

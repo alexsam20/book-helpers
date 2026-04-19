@@ -16,12 +16,18 @@ class PartController extends Controller
         $id = $this->request()->input('id');
 
         $book = new BookService($this->db());
-        $parts = new PartService($this->db());
 
         $this->view('/admin/parts/index', [
             'id' => $id,
             'book' => $book->find($id),
-            'parts' => $parts->all($id, 'book_id'),
+            'parts' => $this->service()->all($id, 'book_id'),
+        ]);
+    }
+
+    public function list(): void
+    {
+        $this->view('/admin/parts/list', [
+            'parts' => $this->service()->all($this->request()->input('id'), 'book_id'),
         ]);
     }
 
