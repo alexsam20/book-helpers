@@ -14,6 +14,7 @@ class BookController extends Controller
         $this->view('books');
     }
 
+    // TODO No Need
     public function list(): void
     {
         $this->view('/admin/books/list');

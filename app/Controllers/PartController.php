@@ -64,6 +64,13 @@ class PartController extends Controller
         $this->redirect('/admin/parts?id=' . $this->request()->input('book'));
     }
 
+    public function destroy(): void
+    {
+        $this->service()->destroy($this->request()->input('id'));
+
+        $this->redirect('/admin/parts?id=' . $this->request()->input('book'));
+    }
+
     public function edit(): void
     {
         $book = new BookService($this->db());
@@ -77,7 +84,7 @@ class PartController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(): void
     {
         $id = $this->request()->input('id');
 

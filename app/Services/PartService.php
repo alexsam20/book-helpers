@@ -36,6 +36,13 @@ class PartService
         }, $parts);
     }
 
+    public function destroy(int $id): void
+    {
+        $this->db->delete($this->table, [
+            'id' => $id,
+        ]);
+    }
+
     public function find(int $id, string $field = 'id'): ?Part
     {
         $part = $this->db->first($this->table, [$field => $id]);
@@ -66,8 +73,6 @@ class PartService
             'body' => $body,
         ]);
     }
-
-
 
     public function update(int $id, string $title, string $body): void
     {

@@ -111,8 +111,6 @@ class BookService
             $data['image'] = $filePath;
         }
 
-
-
         $this->db->update($this->table, $data, ['id' => $id]);
     }
 }
