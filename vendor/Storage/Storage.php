@@ -7,9 +7,9 @@ class Storage implements StorageInterface
     private const string STORAGE = 'storage';
     private const string TRASH = self::STORAGE . '/trash';
 
-    public function url(string $path): string
+    public function url(string $path, $folder = 'books'): string
     {
-        return URL_PATH . "/" . self::STORAGE . "/" .$path;
+        return URL_PATH . "/" . self::STORAGE . "/" . $folder . "/" . $path;
     }
 
     public function get(string $path): string

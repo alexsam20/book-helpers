@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */  ?>
+<?php /** @var \Core\Storage\StorageInterface $storage */  ?>
 <?php /** @var \App\Models\Book $book */  ?>
 <?php $view->component('start') ?>
     <!-- Content -->
@@ -158,7 +159,7 @@
                             </form>
                         </div>
                         <div class="w-full lg:w-1/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <img class="mx-auto" src="/storage/books/<?php echo $book->image(); ?>" alt="">
+                            <img class="mx-auto" src="<?php echo $storage->url($book->image()); ?>" alt="">
                         </div>
                     </div>
                 </div>

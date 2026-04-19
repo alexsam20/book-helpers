@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */ ?>
+<?php /** @var \Core\Storage\StorageInterface $storage */ ?>
 <?php /** @var \App\Models\Book $book  */ ?>
 <?php /** @var array<\App\Models\Part> $parts */ ?>
 <?php $view->component('start') ?>
@@ -64,7 +65,7 @@
                 <!-- Book Card -->
                 <div class="grid grid-cols-1 p-4 dark:bg-neutral-primary-soft rounded-2xl">
                     <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row md:max-w-xl">
-                        <img class="object-cover rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="/storage/books/<?php echo $book->image() ?>" alt="">
+                        <img class="object-cover rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="<?php echo $storage->url($book->image()); ?>" alt="">
                         <div class="flex flex-col text-right md:p-4 leading-normal w-full">
                             <!-- Book Name -->
                             <div class="text-center sm:text-left">

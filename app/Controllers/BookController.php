@@ -61,16 +61,16 @@ class BookController extends Controller
 
     public function destroy(): void
     {
-        $this->service()->delete($this->request()->input('id'));
+        $this->service()->destroy($this->request()->input('id'));
 
         $this->redirect('/admin');
     }
 
     public function edit(): void
     {
-        $book = $this->service()->find($this->request()->input('id'));
-
-        $this->view('/admin/books/update', ['book' => $book]);
+        $this->view('/admin/books/update', [
+            'book' => $this->service()->find($this->request()->input('id'))
+        ]);
     }
 
     public function update(): void

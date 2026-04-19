@@ -39,7 +39,7 @@ class BookService
         }, $books);
     }
 
-    public function delete(int $id): void
+    public function destroy(int $id): void
     {
         $oldFile = ($this->find($id))->image();
 
@@ -94,25 +94,24 @@ class BookService
     {
         $oldFile = ($this->find($id))->image();
 
-        /*var_dump($oldFile);
-        var_dump($image); die();*/
-
-
-
-        if ($image->error !== 4) {
+        if (!empty($oldFile) && $image->error !== 4) {
             $storage = new Storage();
             $storage->trash('books/'. $oldFile);
         }
-
-        $filePath = $image->move('books');
 
         $data = [
             'name' => $name,
             'author' => $author,
             'description' => $description,
-            'image' => $filePath,
             'year' => $year,
         ];
+
+        if ($image->error !== 4) {
+            $filePath = $image->move('books');
+            $data['image'] = $filePath;
+        }
+
+
 
         $this->db->update($this->table, $data, ['id' => $id]);
     }

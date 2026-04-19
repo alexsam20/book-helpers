@@ -5,12 +5,14 @@ namespace Core\View;
 use Core\Auth\AuthInterface;
 use Core\Exception\ViewNotFoundException;
 use Core\Session\SessionInterface;
+use Core\Storage\StorageInterface;
 
 class View implements ViewInterface
 {
     public function __construct(
         private readonly SessionInterface $session,
-        private readonly AuthInterface $auth,
+        private readonly AuthInterface    $auth,
+        private readonly StorageInterface $storage,
     ) {}
 
     /**
@@ -54,6 +56,7 @@ class View implements ViewInterface
             'view' => $this,
             'session' => $this->session,
             'auth' => $this->auth,
+            'storage' => $this->storage,
         ];
     }
 }

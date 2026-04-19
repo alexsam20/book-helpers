@@ -9,7 +9,7 @@ define('APP_PATH', dirname(__DIR__));
 define('URL_PATH',
     mb_strtolower(
         explode('/', $_SERVER['SERVER_PROTOCOL'])[0]
-    ) . '//' . $_SERVER['HTTP_HOST']);
+    ) . '://' . $_SERVER['HTTP_HOST']);
 
 // autoloader
 require_once APP_PATH . '/vendor/autoload.php';
