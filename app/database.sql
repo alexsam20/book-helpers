@@ -41,9 +41,11 @@ CREATE TABLE IF NOT EXISTS `parts` (
 
 CREATE TABLE IF NOT EXISTS `codes` (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `book_id` INT NOT NULL,
     `part_id` INT NOT NULL,
     `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
     `theme` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT 'tomorrow',
+    `description` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `source` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `is_executable` TINYINT(1) DEFAULT 0,
     `is_visible` TINYINT(1) DEFAULT '1',
