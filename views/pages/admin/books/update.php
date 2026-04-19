@@ -5,7 +5,7 @@
 <?php $view->component('start') ?>
     <!-- Content -->
     <div class="flex flex-col h-full">
-        <?php $view->component('header') ?>
+        <?php $view->component('admin/header') ?>
         <main class="main grow my-2">
             <div class="container flex flex-col border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">
                 <!-- Breadcrumbs -->
