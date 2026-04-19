@@ -27,7 +27,7 @@ class PartController extends Controller
     public function list(): void
     {
         $this->view('/admin/parts/list', [
-            'parts' => $this->service()->all($this->request()->input('id'), 'book_id'),
+            'part' => $this->service()->find($this->request()->input('id')),
         ]);
     }
 
@@ -117,7 +117,7 @@ class PartController extends Controller
             $this->request()->input('body')
         );
 
-        $this->redirect('/admin/parts?id=1');
+        $this->redirect('/admin/parts?id=' . $id = $this->request()->input('book'));
     }
 
     private function service(): PartService
