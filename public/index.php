@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 date_default_timezone_set('America/New_York');
 
 /* Constants Directories */
+const ROOT_PATH = __DIR__;
 define('APP_PATH', dirname(__DIR__));
 define('URL_PATH',
     mb_strtolower(

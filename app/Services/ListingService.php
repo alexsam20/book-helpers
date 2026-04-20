@@ -50,4 +50,20 @@ class ListingService
             'is_executable' => $run,
         ]);
     }
+
+
+    public function getThemeCode(): array
+    {
+        $files = scandir(ROOT_PATH . '/themes/');
+        $theme = [];
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                if (preg_match('#^prism-(.*)\.min\.css$#m', $file)) {
+                    $theme[] = rtrim(substr($file, 6), 'min.css');
+                }
+            }
+        }
+
+        return $theme;
+    }
 }

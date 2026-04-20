@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Part;
 use App\Services\BookService;
+use App\Services\ListingService;
 use App\Services\PartService;
 use Core\Controller\Controller;
 
@@ -26,8 +27,13 @@ class PartController extends Controller
 
     public function list(): void
     {
+        $listing = new ListingService($this->db());
+
+        $themes = $listing->getThemeCode();
+
         $this->view('/admin/parts/list', [
             'part' => $this->service()->find($this->request()->input('id')),
+            'themes' => $themes,
         ]);
     }
 
