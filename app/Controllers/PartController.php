@@ -25,17 +25,19 @@ class PartController extends Controller
         ]);
     }
 
-    public function list(): void
+    /*public function list(): void
     {
+        $id = $this->request()->input('id');
         $listing = new ListingService($this->db());
-
+        $codeListings = $listing->all($id, 'part_id');
         $themes = $listing->getThemeCode();
 
         $this->view('/admin/parts/list', [
-            'part' => $this->service()->find($this->request()->input('id')),
+            'part' => $this->service()->find($id),
+            'codeListings' => $codeListings,
             'themes' => $themes,
         ]);
-    }
+    }*/
 
     public function create(): void
     {

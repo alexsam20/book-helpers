@@ -3,6 +3,7 @@
 use App\Controllers\AdminController;
 use App\Controllers\BookController;
 use App\Controllers\HomeController;
+use App\Controllers\ListingController;
 use App\Controllers\LoginController;
 use App\Controllers\PartController;
 use App\Controllers\RegisterController;
@@ -18,6 +19,7 @@ return [
     Route::post('/login', [LoginController::class , 'login']),
     Route::post('/logout', [LoginController::class , 'logout']),
     Route::get('/books', [BookController::class , 'index']),
+
     Route::get('/admin', [AdminController::class , 'index']),
     Route::get('/admin/books/list', [BookController::class , 'list']),
     Route::get('/admin/books/add', [BookController::class , 'create']),
@@ -25,13 +27,15 @@ return [
     Route::get('/admin/books/update', [BookController::class , 'edit']),
     Route::post('/admin/books/update', [BookController::class , 'update']),
     Route::post('/admin/books/destroy', [BookController::class , 'destroy']),
+
     Route::get('/admin/parts', [PartController::class , 'index']),
     Route::get('/admin/parts/add', [PartController::class , 'create']),
     Route::post('/admin/parts/add', [PartController::class , 'store']),
     Route::get('/admin/parts/update', [PartController::class , 'edit']),
     Route::post('/admin/parts/update', [PartController::class , 'update']),
-    Route::get('/admin/parts/list', [PartController::class , 'list']),
     Route::post('/admin/parts/destroy', [PartController::class , 'destroy']),
+
+    Route::get('/admin/listing', [ListingController::class , 'index']),
 
     Route::get('/test' , static function() {
         echo 'Test';

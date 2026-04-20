@@ -16,9 +16,9 @@ class ListingService
     /**
      * @return array<Listing>
      */
-    public function all(): array
+    public function all(int $id, string $field = 'id'): array
     {
-        $books = $this->db->get($this->table);
+        $books = $this->db->get($this->table, [$field => $id]);
 
         return array_map(static function ($book) {
             return new Listing(
