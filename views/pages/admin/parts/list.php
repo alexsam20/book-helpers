@@ -203,12 +203,11 @@
                             </svg>
                             Back
                         </a>
-
                     </div>
                 </div>
                 <!-- Part Card -->
                 <div class="grid grid-cols-1 p-4 dark:bg-neutral-primary-soft rounded-2xl">
-                    <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row md:max-w-xl">
+                    <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row">
                         <div class="flex flex-col text-right md:p-4 leading-normal w-full">
                             <!-- Title -->
                             <div class="inline-flex items-center justify-between w-full">
@@ -246,7 +245,7 @@
                 </div>
                 <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                     <div class="w-full bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                        <form method="post" action="/admin/books/add">
+                        <form method="post" action="">
                             <!-- Language and Theme Button -->
                             <div class="md:flex w-full items-center gap-2">
                                 <!-- Language Select -->
@@ -277,6 +276,7 @@
                                         </svg>
                                     </div>
                                     <select id="theme" name="theme" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <option value="">Select Theme</option>
                                         <?php foreach($themes as $theme) : ?>
                                             <option value="<?php echo $theme; ?>"><?php echo ucfirst($theme); ?></option>
                                         <?php endforeach; ?>
@@ -290,19 +290,41 @@
                             </div>
                             <!-- Checkbox Block -->
                             <div class="mb-4 relative">
-                                <input type="text" id="author" name="author" value="<?php echo $session->getFlash('author_val'); ?>"
-                                       class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
-                                       placeholder="Author" />
-                                <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
-                                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4.988 19.012 5.41-5.41m2.366-6.424 4.058 4.058-2.03 5.41L5.3 20 4 18.701l3.355-9.494 5.41-2.029Zm4.626 4.625L12.197 6.61 14.807 4 20 9.194l-2.61 2.61Z"/>
-                                    </svg>
+                                <div class="flex w-full items-center justify-end gap-2 bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base py-2 px-2">
+                                    <!--<label class="inline-flex items-center cursor-pointer">
+                                        <span class="select-none text-sm font-medium text-heading">Monthly</span>
+                                        <input type="checkbox" value="" class="sr-only peer">
+                                        <div class="relative mx-3 w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"></div>
+                                        <span class="select-none text-sm font-medium text-heading">Yearly</span>
+                                    </label>
+                                    <label class="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600 dark:peer-checked:bg-green-600"></div>
+                                        <span class="select-none ms-3 text-sm font-medium text-heading">Green</span>
+                                    </label>-->
+                                    <label class="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" name="executable" value="" class="sr-only peer">
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600"></div>
+                                        <span class="select-none ms-3 text-sm font-medium text-heading">Is Executable?</span>
+                                    </label>
+
+                                    <label class="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" name="visible" value="" class="sr-only peer" checked>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
+                                        <span class="select-none ms-3 text-sm font-medium text-heading">Is Visible?</span>
+                                    </label>
+                                    <!--<label class="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400 dark:peer-checked:bg-yellow-400"></div>
+                                        <span class="select-none ms-3 text-sm font-medium text-heading">Yellow</span>
+                                    </label>
+
+                                    <label class="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-orange-500 dark:peer-checked:bg-orange-500"></div>
+                                        <span class="select-none ms-3 text-sm font-medium text-heading">Orange</span>
+                                    </label>-->
                                 </div>
-                                <?php if ($session->has('author')) : ?>
-                                    <ul>
-                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('author')[0]; ?></li>
-                                    </ul>
-                                <?php endif; ?>
                             </div>
                             <!-- Description -->
                             <div class="mb-4">

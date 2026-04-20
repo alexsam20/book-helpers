@@ -64,7 +64,7 @@
                 </div>
                 <!-- Book Card -->
                 <div class="grid grid-cols-1 p-4 dark:bg-neutral-primary-soft rounded-2xl">
-                    <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row md:max-w-xl">
+                    <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row">
                         <img class="object-cover rounded-base h-64 md:h-auto md:w-48 mb-4 md:mb-0" src="<?php echo $storage->url($book->image()); ?>" alt="">
                         <div class="flex flex-col text-right md:p-4 leading-normal w-full">
                             <!-- Book Name -->
