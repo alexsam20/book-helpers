@@ -35,7 +35,8 @@ return [
     Route::post('/admin/parts/update', [PartController::class , 'update']),
     Route::post('/admin/parts/destroy', [PartController::class , 'destroy']),
 
-    Route::get('/admin/listing', [ListingController::class , 'index']),
+    Route::get('/admin/listing/add', [ListingController::class , 'create']),
+    Route::post('/admin/listing/add', [ListingController::class , 'store']),
 
     Route::get('/test' , static function() {
         echo 'Test';

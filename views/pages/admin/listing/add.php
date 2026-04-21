@@ -8,6 +8,7 @@
 <div class="flex flex-col h-full">
     <?php $view->component('admin/header') ?>
     <main class="main grow my-2">
+        <!-- Page Content -->
         <div class="container flex flex-col border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">
             <!-- Breadcrumbs -->
             <nav class="flex m-2 pt-2" aria-label="Breadcrumb">
@@ -51,7 +52,7 @@
                     </li>
                 </ol>
             </nav>
-            <!-- Page Content -->
+            <!-- Part Content -->
             <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
                 <div class="flex justify-between p-4 bg-gray-100 dark:bg-gray-950/50 rounded-t-2xl">
                     <h1 class="flex items-center text-xl font-semibold tracking-tight text-cyan-600">
@@ -245,7 +246,9 @@
                 </div>
                 <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                     <div class="w-full bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                        <form method="post" action="">
+                        <form method="post" action="/admin/listing/add">
+                            <input type="hidden" name="part_id" value="<?php echo $part->id(); ?>" />
+                            <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
                             <!-- Language and Theme Button -->
                             <div class="md:flex w-full items-center gap-2">
                                 <!-- Language Select -->
@@ -303,12 +306,12 @@
                                         <span class="select-none ms-3 text-sm font-medium text-heading">Green</span>
                                     </label>-->
                                     <label class="inline-flex items-center me-5 cursor-pointer">
-                                        <input type="checkbox" name="executable" value="" class="sr-only peer">
+                                        <input type="checkbox" name="executable" class="sr-only peer">
                                         <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600"></div>
                                         <span class="select-none ms-3 text-sm font-medium text-heading">Is Executable?</span>
                                     </label>
                                     <label class="inline-flex items-center me-5 cursor-pointer">
-                                        <input type="checkbox" name="visible" value="" class="sr-only peer" checked>
+                                        <input type="checkbox" name="visible" class="sr-only peer" checked>
                                         <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
                                         <span class="select-none ms-3 text-sm font-medium text-heading">Is Visible?</span>
                                     </label>
