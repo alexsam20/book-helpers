@@ -106,7 +106,7 @@ class BookService
             'year' => $year,
         ];
 
-        if ($image->error !== 4) {
+        if ($image->hasError()) {
             $filePath = $image->move('books');
             $data['image'] = $filePath;
         }

@@ -4,8 +4,6 @@
 <?php /** @var \App\Models\Listing $themes */ ?>
 <?php /** @var \App\Models\Listing $languages */ ?>
 <?php /** @var \App\Models\Listing $codeListings */ ?>
-<?php /** @var \App\Models\Part $id */ ?>
-<?php // var_dump($codeListings); ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">

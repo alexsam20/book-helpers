@@ -52,4 +52,9 @@ class UploadedFile implements UploadedFileInterface
     {
         return APP_PATH . sprintf("/%s/%s", $folder, $path);
     }
+
+    public function hasError(): bool
+    {
+        return $this->error === UPLOAD_ERR_OK;
+    }
 }
