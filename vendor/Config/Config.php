@@ -21,4 +21,15 @@ class Config implements ConfigInterface
 
         return $config[$key] ?? $default;
     }
+
+    public function all(string $file, $default = null): array
+    {
+        $configPath = APP_PATH.'/config/'.$file.'.php';
+
+        if (!file_exists($configPath)) {
+            return $default;
+        }
+
+        return require $configPath;
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Listing;
+use Core\Config\Config;
+use Core\Config\ConfigInterface;
 use Core\DataBase\DatabaseInterface;
 
 class ListingService
@@ -65,5 +67,10 @@ class ListingService
         }
 
         return $theme;
+    }
+
+    public function language(): ?array
+    {
+        return new Config()->all('languages');
     }
 }

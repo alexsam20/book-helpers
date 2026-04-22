@@ -23,16 +23,18 @@ class ListingController extends Controller
             'part' => $part->find($id),
             'codeListings' => $this->service()->all($id, 'part_id'),
             'themes' => $this->service()->getThemeCode(),
+            'languages' => $this->service()->language(),
         ]);
     }
 
     public function store(): void
     {
-
-        var_dump($this->request());die();
+        //var_dump(($this->request()));die();
         $validation = $this->request()->validate([
+            'language' => ['required', 'min:3'],
+            'theme' => ['required', 'min:3'],
             'description' => ['required', 'min:10', 'max:10000'],
-            'source' => ['required', 'min:10', 'max:50000'],
+            'code' => ['required', 'min:10', 'max:50000'],
         ]);
 
         if (! $validation) {
@@ -44,17 +46,18 @@ class ListingController extends Controller
                 $this->session()->set("{$old_field}_val", $value);
             }
 
-            $this->redirect('/admin/parts/add?id=' . $this->request()->input('book'));
+            $this->redirect('/admin/listing/add?id=' . $this->request()->input('part_id'));
         }
 
-        $this->service()->store(
+        /*$this->service()->store(
             $this->session()->get("user_id"),
             $this->request()->input('book'),
             $this->request()->input('title'),
             $this->request()->input('body')
-        );
+        );*/
+        echo 'Record....';
 
-        $this->redirect('/admin/parts?id=' . $this->request()->input('book'));
+        $this->redirect('/admin/parts?id=' . $this->request()->input('book_id'));
     }
 
     private function service(): ListingService
