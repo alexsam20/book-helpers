@@ -29,7 +29,6 @@ class ListingController extends Controller
 
     public function store(): void
     {
-        //var_dump(($this->request()));die();
         $validation = $this->request()->validate([
             'language' => ['required', 'min:3'],
             'theme' => ['required', 'min:3'],
@@ -49,13 +48,19 @@ class ListingController extends Controller
             $this->redirect('/admin/listing/add?id=' . $this->request()->input('part_id'));
         }
 
-        /*$this->service()->store(
-            $this->session()->get("user_id"),
-            $this->request()->input('book'),
-            $this->request()->input('title'),
-            $this->request()->input('body')
-        );*/
-        echo 'Record....';
+        $executable = $this->request()->input('executable') ? 1 : 0;
+        $visible = $this->request()->input('visible') ? 1 : 0;
+
+        $this->service()->store(
+            $this->request()->input('book_id'),
+            $this->request()->input('part_id'),
+            $this->request()->input('language'),
+            $this->request()->input('theme'),
+            $this->request()->input('description'),
+            $this->request()->input('code'),
+            $executable,
+            $visible,
+        );
 
         $this->redirect('/admin/parts?id=' . $this->request()->input('book_id'));
     }
