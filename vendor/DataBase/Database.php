@@ -48,17 +48,27 @@ class Database implements DatabaseInterface
         return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
     }
 
-    public function get(string $table, array $conditions = []): array
+    public function get(string $table, array $conditions = [], array $order = [], int $limit = -1): array
     {
         $where = '';
 
         if (count($conditions) > 0) {
-            $where = 'WHERE ' . implode(' AND ', array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
+            $where = "WHERE " . implode(" AND ", array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
         }
 
         //  AND deleted_at IS NULL
 
         $sql = sprintf("SELECT * FROM %s %s", $table, $where);
+
+        if (count($order) > 0) {
+            $sql .= " ORDER BY " . implode(', ', array_map(static fn($field, $direction) => "$field $direction", array_keys($order), $order));
+        }
+
+        if ($limit > 0) {
+            $sql .= sprintf(" LIMIT %s", $limit);
+        }
+
+//        var_dump($sql); die();
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);

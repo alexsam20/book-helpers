@@ -20,7 +20,7 @@ class BookService
      */
     public function all(): array
     {
-        $books = $this->db->get($this->table);
+        $books = $this->db->get($this->table, [], ['id' => 'DESC']);
 
         return array_map(static function ($book) {
             return new Book(
@@ -113,4 +113,6 @@ class BookService
 
         $this->db->update($this->table, $data, ['id' => $id]);
     }
+
+
 }

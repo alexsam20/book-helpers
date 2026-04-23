@@ -1,4 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
+<?php /** @var \App\Models\Book $books */  ?>
+<?php // var_dump($books);  ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
