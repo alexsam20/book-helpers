@@ -3,3 +3,5 @@
 public/storage
 /views/component15.html
 /views/component16.html
+views/pages/admin/listing/added.php
+views/components/admin/modal.php

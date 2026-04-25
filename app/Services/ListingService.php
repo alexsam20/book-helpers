@@ -40,7 +40,7 @@ class ListingService
         }, $books);
     }
 
-    public function store(int $book, int $part, string $type, string $theme, string $source, ?string $description, int $run = 0, int $visible = 1): false|int
+    public function store(int $book, int $part, string $type, string $theme, ?string $description, string $source, int $run = 0, int $visible = 1): false|int
     {
         return $this->db->insert($this->table, [
             'book_id' => $book,
