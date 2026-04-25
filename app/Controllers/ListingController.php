@@ -22,7 +22,6 @@ class ListingController extends Controller
         $this->view('/admin/listing/add', [
             'part' => $part->find($id),
             'codeListings' => $this->service()->all($id, 'part_id'),
-            'themes' => $this->service()->getThemeCode(),
             'languages' => $this->service()->language(),
         ]);
     }
@@ -31,7 +30,6 @@ class ListingController extends Controller
     {
         $validation = $this->request()->validate([
             'language' => ['required', 'min:3'],
-            'theme' => ['required', 'min:3'],
             'description' => ['required', 'min:10', 'max:10000'],
             'code' => ['required', 'min:10', 'max:50000'],
         ]);
@@ -55,7 +53,6 @@ class ListingController extends Controller
             $this->request()->input('book_id'),
             $this->request()->input('part_id'),
             $this->request()->input('language'),
-            $this->request()->input('theme'),
             $this->request()->input('description'),
             $this->request()->input('code'),
             $executable,

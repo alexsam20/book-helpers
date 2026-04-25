@@ -22,7 +22,7 @@ const psm = Prism.plugins.toolbar.registerButton("#edit", {
         source.spellcheck = false;
         source.contentEditable= true;
         source.focus();
-        source.style.borderBottom = "1px solid gray"
+        source.style.borderBottom = "1px solid gray";
         action.hidden = false;
 
         const updateText = () => {

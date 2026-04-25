@@ -28,7 +28,6 @@ class ListingService
                 $book['book_id'],
                 $book['part_id'],
                 $book['type'],
-                $book['theme'],
                 $book['description'],
                 $book['source'],
                 $book['is_executable'],
@@ -40,13 +39,12 @@ class ListingService
         }, $books);
     }
 
-    public function store(int $book, int $part, string $type, string $theme, ?string $description, string $source, int $run = 0, int $visible = 1): false|int
+    public function store(int $book, int $part, string $type, ?string $description, string $source, int $run = 0, int $visible = 1): false|int
     {
         return $this->db->insert($this->table, [
             'book_id' => $book,
             'part_id' => $part,
             'type' => $type,
-            'theme' => $theme,
             'description' => $description,
             'source' => $source,
             'is_executable' => $run,

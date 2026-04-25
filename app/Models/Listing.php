@@ -9,7 +9,6 @@ class Listing
         private readonly int $book_id,
         private readonly int $part_id,
         private readonly string $type,
-        private readonly string $theme,
         private readonly string $description,
         private readonly string $source,
         private readonly int $is_executable,
@@ -37,11 +36,6 @@ class Listing
     public function type(): string
     {
         return $this->type;
-    }
-
-    public function theme(): string
-    {
-        return $this->theme;
     }
 
     public function description(): string
