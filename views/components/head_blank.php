@@ -17,11 +17,11 @@
         }
     </script>
     <style>
-        pre {
+        /*pre {
             overflow: auto;
         }
         code {
             outline: none;
-        }
+        }*/
     </style>
 </head>

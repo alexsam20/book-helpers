@@ -85,7 +85,7 @@
                         <form id="newCode" method="post" action="/admin/listing/add">
                             <input type="hidden" name="part_id" value="<?php echo $part->id(); ?>" />
                             <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
-                            <!-- Language and Theme Button -->
+                            <!-- Language Button and Checkbox -->
                             <div class="md:flex w-full items-center gap-2">
                                 <?php $oldLanguage = $session->getFlash('language_val'); ?>
                                 <!-- Language Select -->
@@ -131,23 +131,6 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <!-- Checkbox Block -->
-                            <!--<div class="mb-4 relative">
-                                <div class="flex w-full items-center justify-end gap-2 bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base py-2 px-2">
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <?php /*$executable = $session->getFlash('executable_val'); */?>
-                                        <input type="checkbox" name="executable" class="sr-only peer" <?php /*echo !empty($executable) ? 'checked' : ''; */?>>
-                                        <span class="select-none text-xs font-medium text-heading px-2">Is Executable?</span>
-                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600"></div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <?php /*$oldVisible = $session->getFlash('visible_val'); */?>
-                                        <input type="checkbox" name="visible" class="sr-only peer" <?php /*echo !empty($oldVisible) ? 'checked' : ''; */?>>
-                                        <span class="select-none text-xs font-medium text-heading px-2">Is Visible?</span>
-                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
-                                    </label>
-                                </div>
-                            </div>-->
                             <!-- Description -->
                             <div class="mb-4">
                                 <textarea id="description" name="description" rows="4"
@@ -209,61 +192,9 @@
             <?php if (count($codeListings) > 0): ?>
             <?php $i = 1; ?>
             <?php foreach ($codeListings as $code): ?>
-            <!-- Block code -->
-            <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-t-2xl mb-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 p-4 dark:bg-gray-950/50 rounded-t-2xl">
-                    <!-- # Block Code -->
-                    <div class="inline-flex items-center gap-1">
-                    <span class="inline-flex items-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-base text-sm px-2 py-1 text-center leading-5">
-                        <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3v4a1 1 0 0 1-1 1H5m5 4-2 2 2 2m4-4 2 2-2 2m5-12v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"/>
-                        </svg>
-                        <span class="text-sm font-medium">Block Code #<?php echo $code->id() ?></span>
-                    </span>
-                    </div>
-                    <!--Calendar beget-->
-                    <div class="inline-flex items-center gap-1 md:ml-auto">
-                        <div class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2 py-1 text-center leading-5">
-                            <svg class="w-5 h-5 mb-0.5 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
-                            </svg>
-                            <span class="text-sm font-medium">Created at: <?php echo $view->formatDate($code->createdAt()); ?></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
-                    <p class="p-3 text-mauve-500"><?php echo nl2br($code->description()); ?></p>
-                </div>
-                <div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
-                    <form action="" method="post">
-                        <div>
-                            <pre class="language-<?php echo $code->type(); ?>"><code id="source"><?php echo $code->source(); ?></code></pre>
-                        </div>
-                        <textarea name="" id="editCode" hidden></textarea>
-                        <div id="action" class="m-2 flex justify-end gap-2">
-                            <button onclick="resetContent()" type="button" id="cancel" class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
-                                <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 8.046H11V6.119c0-.921-.9-1.446-1.524-.894l-5.108 4.49a1.2 1.2 0 0 0 0 1.739l5.108 4.49c.624.556 1.524.027 1.524-.893v-1.928h2a3.023 3.023 0 0 1 3 3.046V19a5.593 5.593 0 0 0-1.5-10.954Z"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="submit" id="save" class="inline-flex text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
-                                <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 1 0-18c1.052 0 2.062.18 3 .512M7 9.577l3.923 3.923 8.5-8.5M17 14v6m-3-3h6"/>
-                                </svg>
-                                Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="border border-gray-200 dark:border-cyan-900  mx-3 my-2 rounded-sm">
-                    <p class="p-3 text-amber-500">
-                        Code running ...
-                    </p>
-                </div>
-            </div>
+                <?php $view->component('admin/code', ['code' => $code, 'i' => $i]); ?>
             <?php $i++; ?>
-            <?php endforeach;  ?>
+            <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </main>
