@@ -1,3 +1,4 @@
+/*
 const prviewButton = document.querySelector("#preview-button");
 const output = document.querySelector(".output");
 
@@ -15,7 +16,7 @@ const toolbarOptions = [
     [{ 'align': [] }]
 ];
 
-const quill = new Quill("#editor-container", {
+const quill = new Quill("#editorDescription", {
     theme: "snow",
     modules: {
         toolbar: toolbarOptions
@@ -28,4 +29,7 @@ prviewButton.addEventListener('click', () => {
     setTimeout(() => {
         output.textContent = content;
     }, 1200);
+});*/
+const quill = new Quill('#editorDescription', {
+    theme: 'snow'
 });

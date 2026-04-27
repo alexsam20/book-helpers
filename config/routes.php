@@ -37,6 +37,7 @@ return [
 
     Route::get('/admin/listing/add', [ListingController::class , 'create']),
     Route::post('/admin/listing/add', [ListingController::class , 'store']),
+    Route::post('/admin/listing/update', [ListingController::class , 'update']),
 
     Route::get('/test' , static function() {
         echo 'Test';

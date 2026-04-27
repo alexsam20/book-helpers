@@ -30,7 +30,7 @@ class ListingController extends Controller
     {
         $validation = $this->request()->validate([
             'language' => ['required', 'min:3'],
-            'description' => ['required', 'min:10', 'max:10000'],
+            'description' => ['required', 'min:10', 'max:100000'],
             'code' => ['required', 'min:10', 'max:50000'],
         ]);
 
@@ -60,6 +60,38 @@ class ListingController extends Controller
         );
 
         $this->redirect('/admin/parts?id=' . $this->request()->input('book_id'));
+    }
+
+    public function update(): void
+    {
+        var_dump($this->request()->input('id')); die();
+        $id = $this->request()->input('id');
+
+        $validation = $this->request()->validate([
+            'language' => ['required', 'min:3'],
+            'description' => ['required', 'min:10', 'max:10000'],
+            'code' => ['required', 'min:10', 'max:50000'],
+        ]);
+
+        if (! $validation) {
+            foreach ($this->request()->errors() as $field => $value) {
+                $this->session()->set($field, $value);
+            }
+
+            foreach ($this->request()->post as $old_field => $value) {
+                $this->session()->set("{$old_field}_val", $value);
+            }
+
+            $this->redirect('/admin/parts/add?id=' . $id);
+        }
+
+        $this->service()->update(
+            (int) $id,
+            $this->request()->input('title'),
+            $this->request()->input('body')
+        );
+
+        $this->redirect('/admin/parts?id=' . $id = $this->request()->input('book'));
     }
 
     private function service(): ListingService

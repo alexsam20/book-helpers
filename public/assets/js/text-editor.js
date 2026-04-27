@@ -1,48 +1,54 @@
-function executeCommand(command, value) {
+function modifyText(command, value) {
     document.execCommand(command,false, value);
 }
 
 document.getElementById("bold").addEventListener("click", function () {
-    executeCommand("bold");
+    modifyText("bold");
 });
 document.getElementById("italic").addEventListener("click", function() {
-    executeCommand("italic");
+    modifyText("italic");
 });
 document.getElementById("underline").addEventListener("click", function() {
-    executeCommand("underline");
+    modifyText("underline");
 });
 document.getElementById("strikethrough").addEventListener("click", function() {
-    executeCommand("strikeThrough");
+    modifyText("strikeThrough");
 });
 document.getElementById("superscript").addEventListener("click", function() {
-    executeCommand("superscript");
+    modifyText("superscript");
 });
 document.getElementById("subscript").addEventListener("click", function() {
-    executeCommand("subscript");
+    modifyText("subscript");
 });
 document.getElementById("code").addEventListener("click", function()  {
-    executeCommand(
-        "inserHtml",
+    modifyText(
+        "insertHTML",
         "<code>" +
         document.getSelection().toString() + "</code>");
 });
+document.getElementById("undo").addEventListener("click", function() {
+    modifyText("undo");
+});
+document.getElementById("redo").addEventListener("click", function() {
+    modifyText("redo");
+});
 document.getElementById("font").addEventListener("change", function() {
-    executeCommand("fontName", this.value);
+    modifyText("fontName", this.value);
 });
 document.getElementById("fontSize").addEventListener("change", function() {
-    executeCommand("fontSize", this.value);
+    modifyText("fontSize", this.value);
 });
 document.getElementById("textColor").addEventListener("click", function()  {
     document.getElementById("textColorPicker").click();
 });
 document.getElementById("textColorPicker").addEventListener("change", function() {
-    executeCommand("foreColor", this.value);
+    modifyText("foreColor", this.value);
 });
 document.getElementById("bgColor").addEventListener("click", function()  {
     document.getElementById("bgColorPicker").click();
 });
 document.getElementById("bgColorPicker").addEventListener("change", function() {
-    executeCommand("hiliteColor", this.value);
+    modifyText("hiliteColor", this.value);
 });
 document.getElementById("alignLeft").addEventListener("click", function() {
     alignImage("left");
@@ -63,13 +69,13 @@ document.getElementById("outdent").addEventListener("click", function() {
     indentImage("outdent");
 });
 document.getElementById("orderedList").addEventListener("click", function() {
-    executeCommand("insertOrderedList");
+    modifyText("insertOrderedList");
 });
 document.getElementById("unorderedList").addEventListener("click", function() {
-    executeCommand("insertUnorderedList");
+    modifyText("insertUnorderedList");
 });
 document.getElementById("textArea").addEventListener("focus", function() {
-    executeCommand("styleWithCSS", false, true)
+    modifyText("styleWithCSS", false, true)
 });
 document.getElementById("insertImageUrl").addEventListener("click", function()  {
     const url = prompt("Enter the image URL:");
@@ -77,19 +83,21 @@ document.getElementById("insertImageUrl").addEventListener("click", function()  
         insertImage(url);
     }
 });
-/*document.getElementById("createLink").addEventListener("click", function()  {
-    const url = prompt("Enter the image URL:");
-    if(/http/i.test(url)) {
-        executeCommand("createLink", false, url);
+document.getElementById("createLink").addEventListener("click", function()  {
+    let userLink = prompt("Enter a URL:");
+    if(/http/i.test(userLink)) {
+        modifyText("createLink", false, userLink);
     } else {
-        url = "http://" + url;
-        executeCommand("createLink", false, url);
-
+        userLink = "http://" + userLink;
+        modifyText("createLink", false, userLink);
     }
-});*/
+});
+
+/* Insert Image */
 document.getElementById("insertImageFile").addEventListener("click", function()  {
     document.getElementById("imageUpload").click();
 });
+
 document.getElementById("imageUpload").addEventListener("change", function(event)  {
     const file = event.target.files[0];
     if(file) {
@@ -223,7 +231,7 @@ function alignImage(alignment) {
         adjustTextAreaHeight();
         updateResizeIconPosition(currentImage, document.getElementById("resize-icon"));
     } else {
-        executeCommand("justify" + alignment.charAt(0).toUpperCase() + alignment.slice(1));
+        modifyText("justify" + alignment.charAt(0).toUpperCase() + alignment.slice(1));
     }
 }
 
@@ -239,7 +247,7 @@ function indentImage(action) {
         adjustTextAreaHeight();
         updateResizeIconPosition(currentImage, document.getElementById("resize-icon"));
     } else {
-        executeCommand(action);
+        modifyText(action);
     }
 }
 

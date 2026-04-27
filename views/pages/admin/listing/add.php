@@ -133,9 +133,154 @@
                             </div>
                             <!-- Description -->
                             <div class="mb-4">
-                                <textarea id="description" name="description" rows="4"
-                                          class="bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
-                                          placeholder="Write description"><?php echo $session->getFlash('description_val'); ?></textarea>
+                                <div class="flex bg-neutral-primary-soft w-full">
+                                    <!--Text Editor-->
+                                    <div class="items-center w-full">
+                                            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                                                <div class="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-600 border-gray-200">
+                                                    <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600">
+                                                        <div class="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
+                                                            <!--Bold-->
+                                                            <button type="button" id="bold" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-bold"></i>
+                                                            </button>
+                                                            <!--Italic-->
+                                                            <button type="button" id="italic" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-italic"></i>
+                                                            </button>
+                                                            <!--Underline-->
+                                                            <button type="button" id="underline" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-underline"></i>
+                                                            </button>
+                                                            <!--Strikethrough-->
+                                                            <button type="button" id="strikethrough" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-strikethrough"></i>
+                                                            </button>
+                                                            <!--Superscript-->
+                                                            <button type="button" id="superscript" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-superscript"></i>
+                                                            </button>
+                                                            <!--Superscript-->
+                                                            <button type="button" id="subscript" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-subscript"></i>
+                                                            </button>
+                                                            <!--Code-->
+                                                            <button type="button" id="code" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-code"></i>
+                                                            </button>
+                                                            <!--RotateLeft-->
+                                                            <button type="button" id="undo" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-rotate-left"></i>
+                                                            </button>
+                                                            <!--RotateRight-->
+                                                            <button type="button" id="redo" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-rotate-right"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4">
+                                                            <!--Font-->
+                                                            <select  id="font" class="px-2.5 py-1.5 border-0 hover:border-0 text-gray-500 text-sm rounded-base cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-400 dark:bg-gray-800/50 dark:hover:bg-gray-800 placeholder:text-body">
+                                                                <option value="Arial">Arial</option>
+                                                                <option value="Verdana">Verdana</option>
+                                                                <option value="Times New Roman">Times New Roman</option>
+                                                                <option value="Garamond">Garamond</option>
+                                                                <option value="Georgia">Georgia</option>
+                                                                <option value="The New Roman">The New Roman</option>
+                                                                <option value="Courier New">Courier New</option>
+                                                                <option value="cursive">Cursive</option>
+                                                            </select>
+                                                            <!--FontSize-->
+                                                            <select  id="fontSize" class="px-2.5 py-1.5 w-12 border-0 hover:border-0 text-gray-500 text-sm rounded-base cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-400 dark:bg-gray-800/50 dark:hover:bg-gray-800 placeholder:text-body">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                            </select>
+                                                            <!--TextColor-->
+                                                            <button type="button" id="textColor" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-font"></i>
+                                                            </button>
+                                                            <!--BgColor-->
+                                                            <button type="button" id="bgColor" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-fill-drip"></i>
+                                                            </button>
+                                                            <!--AlignLeft-->
+                                                            <button type="button" id="alignLeft" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-align-left"></i>
+                                                            </button>
+                                                            <!--AlignCenter-->
+                                                            <button type="button" id="alignCenter" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-align-center"></i>
+                                                            </button>
+                                                            <!--AlignRight-->
+                                                            <button type="button" id="alignRight" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-align-right"></i>
+                                                            </button>
+                                                            <!--AlignJustify-->
+                                                            <button type="button" id="alignJustify" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-align-justify"></i>
+                                                            </button>
+                                                            <!--Indent-->
+                                                            <button type="button" id="indent" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-indent"></i>
+                                                            </button>
+                                                            <!--Outdent-->
+                                                            <button type="button" id="outdent" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-outdent"></i>
+                                                            </button>
+                                                            <!--OrderedList-->
+                                                            <button type="button" id="orderedList" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-list-ol"></i>
+                                                            </button>
+                                                            <!--UnorderedList-->
+                                                            <button type="button" id="unorderedList" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-list-ul"></i>
+                                                            </button>
+                                                            <!--InsertLink-->
+                                                            <button type="button" id="createLink" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-link"></i>
+                                                            </button>
+                                                            <!--RemoveLink-->
+                                                            <button type="button" id="unlink" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-unlink"></i>
+                                                            </button>
+                                                            <!--insertImageUrl-->
+                                                            <button type="button" id="insertImageUrl" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-image"></i>
+                                                            </button>
+                                                            <!--insertImageFile-->
+                                                            <button type="button" id="insertImageFile" class="px-2 py-1 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                <i class="fas fa-upload"></i>
+                                                            </button>
+                                                        </div>
+                                                        <input type="color" id="textColorPicker" style="display: none;">
+                                                        <input type="color" id="bgColorPicker" style="display: none;">
+                                                        <input type="file" id="imageUpload" style="display: none;">
+                                                        <input type="text" id="imageUrl" placeholder="Enter image URL" style="display: none;">
+                                                    </div>
+                                                    <!--Button Full Screen-->
+                                                    <!--<button type="button" data-tooltip-target="tooltip-fullscreen" class="p-2 text-gray-500 rounded-sm cursor-pointer sm:ms-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 19">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 1h5m0 0v5m0-5-5 5M1.979 6V1H7m0 16.042H1.979V12M18 12v5.042h-5M13 12l5 5M2 1l5 5m0 6-5 5"></path>
+                                                        </svg>
+                                                        <span class="sr-only">Full screen</span>
+                                                    </button>
+                                                    <div id="tooltip-fullscreen" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(1441px, 369px);">
+                                                        Show full screen
+                                                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0; transform: translate(63px, 0px);"></div>
+                                                    </div>-->
+                                                </div>
+                                                <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                                                    <div id="textArea" contenteditable="true"></div>
+                                                    <div id="resize-icon"></div>
+                                                    <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
                                 <?php if ($session->has('description')) : ?>
                                     <ul>
                                         <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
@@ -157,15 +302,16 @@
                                         aceEditor.container.style.fontSize = "14px";
 
                                         const form = document.getElementById("newCode");
-                                        const hiddenInput = document.getElementById("hiddenTextarea");
                                         const selectMode = document.getElementById("language");
 
                                         selectMode.addEventListener('change', (e) => {
                                             const value = e.target.value;
                                             aceEditor.session.setMode(`ace/mode/${value}`);
                                         });
+
                                         form.onsubmit = function () {
-                                            hiddenInput.value = aceEditor.getValue();
+                                            document.getElementById("hiddenTextareaDescription").value = document.getElementById("textArea").innerHTML;
+                                            document.getElementById("hiddenTextarea").value = aceEditor.getValue();
                                         }
                                     </script>
                                 </div>
@@ -189,13 +335,15 @@
                 </div>
             </div>
             <!-- Blocks Code -->
+            <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-t-2xl mb-4">
             <?php if (count($codeListings) > 0): ?>
             <?php $i = 1; ?>
             <?php foreach ($codeListings as $code): ?>
-                <?php $view->component('admin/code', ['code' => $code, 'i' => $i]); ?>
+                <?php $view->component('admin/code', ['code' => $code, 'languages' => $languages, 'i' => $i]); ?>
             <?php $i++; ?>
             <?php endforeach; ?>
             <?php endif; ?>
+            </div>
         </div>
     </main>
     <?php $view->component('footer') ?>
