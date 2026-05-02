@@ -135,16 +135,16 @@
                             <div class="mb-4">
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
-                                    <link rel="stylesheet" href="/assets/css/dark.min.css">
                                     <script>
-                                        const isDarkMode = (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches));
+
                                         if (isDarkMode) {
-                                            document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}</style>');
+                                            document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;}</style>');
                                         }
                                     </script>
                                     <div id="froalaEditor"></div>
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
-                                    <script src="/assets/js/froala_editor.pkgd.min.js"></script>
+                                    <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
+                                    <script type="text/javascript"  src="/assets/froala/js/emoticons.min.js"></script>
                                     <script>
                                         let editor = new FroalaEditor("#froalaEditor", {
                                             theme: isDarkMode ? "dark" : "royal"
