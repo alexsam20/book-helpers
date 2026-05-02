@@ -57,7 +57,7 @@
                                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"/>
                                             </svg>
                                         </div>
-                                        <select id="language" name="language" class="text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <select id="language<?php echo $i;?>" name="language" class="text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
                                             <?php foreach($languages as $key => $value) : ?>
                                                 <option value="<?php echo $key; ?>" <?php if ($key === $code->type()) { echo 'selected'; } ?> ><?php echo $value; ?></option>
                                             <?php endforeach; ?>
@@ -98,11 +98,6 @@
                                         <textarea id="editorDescription1" name="description" rows="4"
                                               class="text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
                                               placeholder="Write description"><?php echo $code->description(); ?></textarea>
-                                        <!--<<link rel="stylesheet" href="/assets/js/quill-2.0.3.min.js">
-                                        <link rel="stylesheet" href="/assets/js/quill">
-                                        script>
-                                            const quill = new Quill('#editorDescription');
-                                        </script>-->
                                         <?php if ($session->has('description')) : ?>
                                         <ul>
                                             <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
@@ -112,23 +107,24 @@
                                     <!-- Block Code -->
                                     <div class="sm:col-span-2 border border-gray-200 dark:border-cyan-900 mx-1 my-2 rounded-sm">
                                         <script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-                                        <!--<span class="p-2 text-white" for="ascript">Block code #1</span>-->
-                                        <div id="aeditor<?php echo $i;?>" name="code" style="min-height: 200px"><?php echo $code->source(); ?></div>
+                                        <div id="aceEditor<?php echo $i;?>" name="code"><?php echo $code->source(); ?></div>
                                         <textarea name="code" id="hiddenModalTextarea<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
-                                            let aeditor<?php echo $i;?> = ace.edit("aeditor<?php echo $i;?>", {
+                                            let aceEditor<?php echo $i;?> = ace.edit("aceEditor<?php echo $i;?>", {
                                                 theme: "ace/theme/twilight",
                                                 mode: "ace/mode/<?php echo $code->type(); ?>",
-                                                maxLines: 1000
+                                                maxLines: 15,
+                                                minLines: 15,
+                                                autoScrollEditorIntoView: true
                                             });
-                                            aeditor<?php echo $i;?>.setReadOnly(false);
-                                            document.getElementById('aeditor<?php echo $i;?>').style.fontSize = '14px';
+                                            aceEditor<?php echo $i;?>.setReadOnly(false);
+                                            document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '14px';
 
                                             const formModal<?php echo $i;?> = document.getElementById("editCodeModal<?php echo $i;?>");
                                             const hiddenModalInput<?php echo $i;?> = document.getElementById("hiddenModalTextarea<?php echo $i;?>");
 
                                             formModal<?php echo $i;?>.onsubmit = function () {
-                                                hiddenModalInput<?php echo $i;?>.value = aeditor<?php echo $i;?>.getValue();
+                                                hiddenModalInput<?php echo $i;?>.value = aceEditor<?php echo $i;?>.getValue();
                                             }
                                         </script>
                                     </div
@@ -150,7 +146,7 @@
         </div>
     </div>
 </div>
-<div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
+<div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 p-4 rounded-base">
     <p class="p-3 text-mauve-500"><?php echo nl2br($code->description()); ?></p>
 </div>
 <div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">

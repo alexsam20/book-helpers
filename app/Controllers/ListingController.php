@@ -28,10 +28,11 @@ class ListingController extends Controller
 
     public function store(): void
     {
+//        var_dump($this->request()->post); die();
         $validation = $this->request()->validate([
             'language' => ['required', 'min:3'],
-            'description' => ['required', 'min:10', 'max:100000'],
-            'code' => ['required', 'min:10', 'max:50000'],
+            'description' => ['required', 'min:10', 'max:500000'],
+            'code' => ['required', 'min:10', 'max:100000'],
         ]);
 
         if (! $validation) {
@@ -49,12 +50,14 @@ class ListingController extends Controller
         $executable = $this->request()->input('executable') ? 1 : 0;
         $visible = $this->request()->input('visible') ? 1 : 0;
 
+        $code = trim(ltrim($this->request()->input('code'), '<?php'));
+
         $this->service()->store(
             $this->request()->input('book_id'),
             $this->request()->input('part_id'),
             $this->request()->input('language'),
             $this->request()->input('description'),
-            $this->request()->input('code'),
+            $code,
             $executable,
             $visible,
         );
@@ -64,7 +67,7 @@ class ListingController extends Controller
 
     public function update(): void
     {
-        var_dump($this->request()->input('id')); die();
+        var_dump($this->request()->post); die();
         $id = $this->request()->input('id');
 
         $validation = $this->request()->validate([
@@ -93,6 +96,8 @@ class ListingController extends Controller
 
         $this->redirect('/admin/parts?id=' . $id = $this->request()->input('book'));
     }
+
+
 
     private function service(): ListingService
     {
