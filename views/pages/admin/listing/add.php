@@ -136,18 +136,71 @@
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
                                     <script>
-
                                         if (isDarkMode) {
                                             document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;}</style>');
                                         }
                                     </script>
-                                    <div id="froalaEditor"></div>
+                                    <div id="froalaEditor"><?php echo $session->getFlash('description_val'); ?></div>
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script type="text/javascript"  src="/assets/froala/js/emoticons.min.js"></script>
+                                    <script type="text/javascript"  src="/assets/froala/js/image.min.js"></script>
                                     <script>
                                         let editor = new FroalaEditor("#froalaEditor", {
-                                            theme: isDarkMode ? "dark" : "royal"
+                                            key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
+                                            theme: isDarkMode ? "dark" : "royal",
+                                            // Image upload parameter.
+                                            imageUploadParam: 'image_param',
+                                            // Image upload URL.
+                                            imageUploadURL: "/admin/listing/upload_image",
+                                            // Additional upload params.
+                                            imageUploadParams: {id: 'froalaEditor'},
+                                            // Set request type.
+                                            imageUploadMethod: 'POST',
+                                            // Set max image size to 5MB.
+                                            imageMaxSize: 5 * 1024 * 1024,
+                                            // Allow to upload PNG and JPG.
+                                            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+                                            events: {
+                                                // Return false if you want to stop the image upload.
+                                                'image.beforeUpload': function (images) {
+                                                },
+                                                // Image was uploaded to the server.
+                                                'image.uploaded': function (response) {},
+                                                // Image was inserted in the editor.
+                                                'image.inserted': function ($img, response) {},
+                                                // Image was replaced in the editor.
+                                                'image.replaced': function ($img, response) {},
+                                                'image.error': function (error, response) {
+                                                    // Bad link.
+                                                    if (error.code == 1) { console.log(error.message); }
+                                                    // No link in upload response.
+                                                    else if (error.code == 2) { console.log(error.message); }
+                                                    // Error during image upload.
+                                                    else if (error.code == 3) { console.log(error.message); }
+                                                    // Parsing response failed.
+                                                    else if (error.code == 4) { console.log(error.message); }
+                                                    // Image too text-large.
+                                                    else if (error.code == 5) { console.log(error.message); }
+                                                    // Invalid image type.
+                                                    else if (error.code == 6) { console.log(error.message); }
+                                                    // Image can be uploaded only to same domain in IE 8 and IE 9.
+                                                    else if (error.code == 7) { console.log(error.message); }
+                                                    // Response contains the original server response to the request if available.
+                                                },
+                                                'image.removed': function ($img) {
+                                                    let xhttp = new XMLHttpRequest();
+                                                    xhttp.onreadystatechange = function () {
+                                                        if (this.readyState == 4 && this.status == 200) {
+                                                            console.log('Image was deleted');
+                                                        }
+                                                    };
+                                                    xhttp.open("POST", '/admin/listing/delete_image', true);
+                                                    xhttp.send(JSON.stringify({
+                                                        src: $img.attr('src'),
+                                                    }));
+                                                }
+                                            }
                                         });
                                     </script>
                                 </div>

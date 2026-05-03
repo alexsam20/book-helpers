@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/froala/css/froala_editor.pkgd.min.css">
     <link rel="stylesheet" href="/assets/froala/css/dark.min.css">
     <link rel="stylesheet" href="/assets/froala/css/emoticons.min.css">
+    <link rel="stylesheet" href="/assets/froala/css/image.min.css">
     <link rel="stylesheet" href="/themes/prism-tomorrow.min.css" id="themeStyleSheet" />
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">-->
     <script>

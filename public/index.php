@@ -11,7 +11,12 @@ define('URL_PATH',
     mb_strtolower(
         explode('/', $_SERVER['SERVER_PROTOCOL'])[0]
     ) . '://' . $_SERVER['HTTP_HOST']);
-
+const STORAGE_PATH = ROOT_PATH . '/storage/block/';
+/*var_dump($_SERVER['DOCUMENT_ROOT']);
+var_dump(ROOT_PATH);
+var_dump(APP_PATH);
+var_dump(URL_PATH);
+var_dump(STORAGE_PATH);*/
 // autoloader
 require_once APP_PATH . '/vendor/autoload.php';
 // Run application
