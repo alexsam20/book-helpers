@@ -135,22 +135,79 @@
                             <div class="mb-4">
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
+                                    <style>
+
+                                        /*.fr-code-header {
+                                            background-color: #5f6364;
+                                        }*/
+
+                                        /*#codeSnippetLang-1 span {
+                                            color: #fff;
+                                        }*/
+                                    </style>
                                     <script>
                                         if (isDarkMode) {
-                                            document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;}</style>');
+                                            document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;}</style>');
                                         }
                                     </script>
-                                    <div id="froalaEditor"><?php echo $session->getFlash('description_val'); ?></div>
+                                    <div id="froalaEditor" class="w-full"><?php echo $session->getFlash('description_val'); ?></div>
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script type="text/javascript"  src="/assets/froala/js/emoticons.min.js"></script>
                                     <script type="text/javascript"  src="/assets/froala/js/image.min.js"></script>
+                                    <!--<script type="text/javascript"  src="/assets/froala/js/code_view.min.js"></script>-->
+                                    <script type="text/javascript"  src="/assets/froala/js/code_snippet.min.js"></script>
+
                                     <script>
                                         let editor = new FroalaEditor("#froalaEditor", {
+                                            /*iframe: true,*/
                                             key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                             theme: isDarkMode ? "dark" : "royal",
+                                            zIndex: 1,
+                                            codeViewKeepActive: true,
+                                            codeSnippetLanguage: {
+                                                'JavaScript': 'javascript',
+                                                'PHP' : 'php',
+                                                'TypeScript': 'typescript',
+                                                'Python': 'python',
+                                                'HTML': 'html',
+                                                'CSS': 'css',
+                                                'Java': 'java',
+                                                'C++': 'cpp',
+                                                'SQL': 'sql',
+                                                'JSON': 'json',
+                                            },
+                                            codeSnippetDefaultLanguage: 'JavaScript',
+                                            toolbarButtons: {
+                                                // Key represents the more button from the toolbar.
+                                                moreText: {
+                                                    // List of buttons used in the  group.
+                                                    buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+                                                    // Alignment of the group in the toolbar.
+                                                    align: 'left',
+                                                    // By default, 3 buttons are shown in the main toolbar. The rest of them are available when using the more button.
+                                                    buttonsVisible: 3
+                                                },
+                                                moreParagraph: {
+                                                    buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+                                                    align: 'left',
+                                                    buttonsVisible: 3
+                                                },
+                                                moreRich: {
+                                                    buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'codeSnippet', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
+                                                    align: 'left',
+                                                    buttonsVisible: 3
+                                                },
+                                                moreMisc: {
+                                                    buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+                                                    align: 'right',
+                                                    buttonsVisible: 2
+                                                }
+                                            },
+                                            // Change buttons for XS screen.
+                                            toolbarButtonsXS: [['undo', 'redo'], ['bold', 'italic', 'underline']],
                                             // Image upload parameter.
-                                            imageUploadParam: 'image_param',
+                                            imageUploadParam: "image_param",
                                             // Image upload URL.
                                             imageUploadURL: "/admin/listing/upload_image",
                                             // Additional upload params.
@@ -186,7 +243,6 @@
                                                     else if (error.code == 6) { console.log(error.message); }
                                                     // Image can be uploaded only to same domain in IE 8 and IE 9.
                                                     else if (error.code == 7) { console.log(error.message); }
-                                                    // Response contains the original server response to the request if available.
                                                 },
                                                 'image.removed': function ($img) {
                                                     let xhttp = new XMLHttpRequest();
@@ -200,6 +256,13 @@
                                                         src: $img.attr('src'),
                                                     }));
                                                 }
+                                                /*'codeSnippet.beforeInsert': function (code) {
+                                                    // Add a comment to all code snippets
+                                                    return '// Auto-generated comment\n' + code;
+                                                }*/
+                                                /*'codeSnippet.afterInsert': function (code) {
+                                                    console.log('Code snippet inserted:', code);
+                                                }*/
                                             }
                                         });
                                     </script>
