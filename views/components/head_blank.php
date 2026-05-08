@@ -5,6 +5,7 @@
     <title>My Books</title>
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/froala-editor.css">
     <link rel="stylesheet" href="/assets/css/font-awesome-6.7.2.css">
     <link rel="stylesheet" href="/assets/froala/css/froala_editor.pkgd.min.css">
     <link rel="stylesheet" href="/assets/froala/css/dark.min.css">

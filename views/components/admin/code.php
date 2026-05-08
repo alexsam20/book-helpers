@@ -5,7 +5,7 @@
 <?php if ($i !== 1): ?>
 <hr class="h-1 my-8 mx-4 bg-neutral-quaternary border-0 shadow-lg" />
 <?php endif; ?>
-<div class="mb-4 mt-4">
+<div class="mb-4">
     <div class="grid grid-cols-1 md:grid-cols-2 p-4  mx-3 my-2 dark:bg-gray-950/50 rounded-2xl">
         <!-- # Block Code -->
         <div class="inline-flex items-center gap-1">
@@ -146,7 +146,7 @@
         </div>
     </div>
 </div>
-<div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 p-4 rounded-base">
+<div class="froala-edtr border border-gray-200 dark:border-cyan-900 mx-3 px-3 rounded-base">
     <p class="p-3 text-mauve-500"><?php echo nl2br($code->description()); ?></p>
 </div>
 <div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
