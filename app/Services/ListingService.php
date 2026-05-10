@@ -68,26 +68,15 @@ class ListingService
         $this->db->update($this->table, $data, ['id' => $id]);
     }
 
-    public function getSource(string $mode, string $code): string
-    {
-        if ($mode === 'php') {
-            return '&lt;?php' . PHP_EOL . $code;
-        }
-        if ($mode === 'html') {
-            return htmlspecialchars($code);
-        }
-
-        return $code;
-    }
-
     public function getThemeCode(): array
     {
         $files = scandir(ROOT_PATH . '/assets/ace/');
         $theme = [];
+
         if (!empty($files)) {
             foreach ($files as $file) {
                 if (preg_match('#^theme-(.*)\.js$#m', $file)) {
-                    $key = rtrim(substr($file, 6), '.js');
+                    $key = substr(pathinfo($file, PATHINFO_FILENAME), 6);
                     $value = str_replace('_', ' ', $key);
                     $theme[$key] = ucwords($value);
                 }

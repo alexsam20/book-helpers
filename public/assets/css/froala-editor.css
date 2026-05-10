@@ -6,40 +6,40 @@
     list-style-type: decimal;
 }
 .froala-edtr h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 0.4rem;
+    margin: 0.1rem 0;
 }
 .froala-edtr h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 0.4rem;
+    margin: 0.1rem 0;
 }
 .froala-edtr h3 {
     font-size: 1.3rem;
     font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 0.4rem;
+    margin: 0.1rem 0;
 }
 .froala-edtr h4 {
     font-size: 1rem;
     font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 0.3rem;
+    margin: 0.1rem 0;
 }
 .froala-edtr h5 {
     font-size: 0.9rem;
     font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 0.2rem;
+    margin: 0.1rem 0;
 }
 .froala-edtr h6 {
     font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.5rem;
-    margin: 0;
+    padding: 0.1rem;
+    margin: 0.1rem 0;
 }
 
 .fr-element ul {

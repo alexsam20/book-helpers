@@ -91,26 +91,6 @@
                             <div class="mb-4">
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
-                                    <style>
-
-                                        /*.fr-element ol {
-                                            padding-left: 2rem;
-                                            list-style-type: decimal;
-                                        }
-
-                                        .fr-element ul {
-                                            padding-left: 2rem;
-                                            list-style-type: disc;
-                                        }*/
-
-                                        /*.fr-code-header {
-                                            background-color: #5f6364;
-                                        }*/
-
-                                        /*#codeSnippetLang-1 span {
-                                            color: #fff;
-                                        }*/
-                                    </style>
                                     <script>
                                         if (isDarkMode) {
                                             document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
@@ -119,11 +99,6 @@
                                     <div id="froalaEditor" class="w-full"><?php echo $session->getFlash('description_val'); ?></div>
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
-                                    <script type="text/javascript"  src="/assets/froala/js/emoticons.min.js"></script>
-                                    <!--<script type="text/javascript"  src="/assets/froala/js/image.min.js"></script>-->
-                                    <!--<script type="text/javascript"  src="/assets/froala/js/code_view.min.js"></script>-->
-                                    <!--<script type="text/javascript"  src="/assets/froala/js/code_snippet.min.js"></script>-->
-
                                     <script>
                                         let editor = new FroalaEditor("#froalaEditor", {
                                             /*iframe: true,*/

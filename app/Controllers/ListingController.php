@@ -31,7 +31,6 @@ class ListingController extends Controller
 
     public function store(): void
     {
-//        var_dump($this->request()->post); die();
         $validation = $this->request()->validate([
             'language' => ['required', 'min:3', 'max:20'],
             'theme' => ['required', 'min:3', 'max:23'],
@@ -51,17 +50,14 @@ class ListingController extends Controller
             $this->redirect('/admin/listing/add?id=' . $this->request()->input('part_id'));
         }
 
-        $executable = $this->request()->input('executable') ? 1 : 0;
-        $visible = $this->request()->input('visible') ? 1 : 0;
-
         $code = $this->request()->input('code');
+
         if ($this->request()->input('language') === 'php') {
-            $code = ltrim(ltrim($this->request()->input('code'), "<?php"), "\n\r");
+            $code = ltrim($this->request()->input('code'), "<?php\n\r");
         }
         if ($this->request()->input('language') === 'html') {
             $code = htmlspecialchars_decode($code);
         }
-        /*$code = ltrim($this->request()->input('code'), '&lt;?php'.PHP_EOL);*/
 
         $this->service()->store(
             $this->request()->input('book_id'),
@@ -70,8 +66,8 @@ class ListingController extends Controller
             $this->request()->input('theme'),
             $this->request()->input('description'),
             $code,
-            $executable,
-            $visible,
+            $this->executable(),
+            $this->visible(),
         );
 
         $this->redirect('/admin/parts?id=' . $this->request()->input('book_id'));
@@ -79,7 +75,6 @@ class ListingController extends Controller
 
     public function update(): void
     {
-//        var_dump($this->request()->post); die();
         $part_id = $this->request()->input('part_id');
 
         $validation = $this->request()->validate([
@@ -101,11 +96,10 @@ class ListingController extends Controller
             $this->redirect('/admin/listing/add?id=' . $part_id);
         }
 
-        $executable = $this->request()->input('executable') ? 1 : 0;
-        $visible = $this->request()->input('visible') ? 1 : 0;
         $code = $this->request()->input('code');
+
         if ($this->request()->input('language') === 'php') {
-            $code = ltrim(ltrim($this->request()->input('code'), "<?php"), "\n\r");
+            $code = ltrim($code, "<?php\n\r");
         }
         if ($this->request()->input('language') === 'html') {
             $code = htmlspecialchars_decode($code);
@@ -117,8 +111,8 @@ class ListingController extends Controller
             $this->request()->input('theme'),
             $this->request()->input('description'),
             $code,
-            $executable,
-            $visible,
+            $this->executable(),
+            $this->visible(),
         );
 
         $this->redirect('/admin/listing/add?id=' . $part_id);
@@ -168,9 +162,26 @@ class ListingController extends Controller
         return false;
     }
 
+    private function executable(): int
+    {
+        return $this->request()->input('executable') ? 1 : 0;
+    }
+
+    private function visible(): int
+    {
+        return $this->request()->input('visible') ? 1 : 0;
+    }
+
     public function getCode(string $mode, string $code): string
     {
-        return $this->service()->getSource($mode, $code);
+        if ($mode === 'php') {
+            return '&lt;?php' . PHP_EOL . $code;
+        }
+        if ($mode === 'html') {
+            return htmlspecialchars($code);
+        }
+
+        return $code;
     }
 
     private function service(): ListingService

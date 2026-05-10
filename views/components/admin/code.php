@@ -60,7 +60,7 @@
                                                 }
                                             </script>
                                             <div id="froalaEditor<?php echo $i;?>" class="froala-edtr fr-view w-full rounded-md"><?php // echo $session->getFlash('description_val'); ?><?php echo $code->description(); ?></div>
-                                            <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
+                                            <!--<script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>-->
                                             <textarea name="description" id="hiddenTextareaDescription<?php echo $i;?>" style="display: none"></textarea>
                                             <script>
                                                 let editor<?php echo $i;?> = new FroalaEditor("#froalaEditor<?php echo $i;?>", {
@@ -96,15 +96,6 @@
                                                     },
                                                     // Change buttons for XS screen.
                                                     toolbarButtonsXS: [['undo', 'redo'], ['bold', 'italic', 'underline']],
-                                                    /*imageAltButtons: [
-                                                        'imageBack'
-                                                    ],
-                                                    imageEditButtons: [
-                                                        'imageReplace',
-                                                        'imageAlign',
-                                                        'imageCaption',
-                                                        'imageRemove'
-                                                    ],*/
                                                     imageDefaultMargin: 7,
                                                     // Image upload parameter.
                                                     imageUploadParam: "image_param",
@@ -232,21 +223,22 @@
                                     <!-- Block Code -->
                                     <div class="grid grid-cols-1 sm:col-span-2 border border-gray-200 dark:border-cyan-900 mx-1 my-2 rounded-sm">
                                         <!--<script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>-->
-                                        <div id="aceEditor<?php echo $i;?>"  class="rounded-sm" name="code"><?php echo $object->getCode($code->mode(), $code->source()) // echo $service->getSource($code->mode(), $code->source()); ?></div>
+                                        <div id="aceEditor<?php echo $i;?>"  class="rounded-sm" name="code"><?php echo $object->getCode($code->mode(), $code->source()); ?></div>
                                         <textarea name="code" id="hiddenCodeBlockTextarea<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
                                             let aceEditor<?php echo $i;?> = ace.edit("aceEditor<?php echo $i;?>", {
                                                 theme: "ace/theme/<?php echo $code->theme(); ?>",
                                                 mode: "ace/mode/<?php echo $code->mode(); ?>",
-                                                maxLines: 15,
-                                                autoScrollEditorIntoView: true
+                                                maxLines: 1000
+                                                /*maxLines: 15,
+                                                autoScrollEditorIntoView: true*/
                                             });
                                             aceEditor<?php echo $i;?>.setReadOnly(false);
                                             document.getElementById('aceEditor<?php echo $i;?>').style.lineHeight = "1.3";
                                             document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '14px';
 
                                             const formCodeBlock<?php echo $i;?> = document.getElementById("editCodeBlock<?php echo $i;?>");
-                                            const hiddenModalInput<?php echo $i;?> = document.getElementById("hiddenModalTextarea<?php echo $i;?>");
+                                            /*const hiddenModalInput<?php echo $i;?> = document.getElementById("hiddenModalTextarea<?php echo $i;?>");*/
                                             const selectMode<?php echo $i;?> = document.getElementById("language<?php echo $i;?>");
                                             const selectTheme<?php echo $i;?> = document.getElementById("theme<?php echo $i;?>");
 
@@ -261,7 +253,6 @@
                                             });
 
                                             formCodeBlock<?php echo $i;?>.onsubmit = function () {
-                                                /*hiddenModalInput<?php // echo $i;?>.value = aceEditor<?php // echo $i;?>.getValue();*/
                                                 document.getElementById("hiddenTextareaDescription<?php echo $i;?>").value = editor<?php echo $i;?>.html.get();
                                                 document.getElementById("hiddenCodeBlockTextarea<?php echo $i;?>").value = aceEditor<?php echo $i;?>.getValue();
                                             }
