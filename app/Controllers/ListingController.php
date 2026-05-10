@@ -118,6 +118,13 @@ class ListingController extends Controller
         $this->redirect('/admin/listing/add?id=' . $part_id);
     }
 
+    public function destroy(): void
+    {
+        $this->service()->destroy($this->request()->input('id'));
+
+        $this->redirect('/admin/listing/add?id=' . $this->request()->input('book'));
+    }
+
     /**
      * @throws \JsonException
      */

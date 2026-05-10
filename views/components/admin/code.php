@@ -40,10 +40,16 @@
                                 <h3 class="text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
                                     Edit Block Code
                                 </h3>
-                                <!--<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer" data-modal-toggle="blockCodeModal<?php /*echo $i;*/?>">
-                                    <svg aria-hidden="true" class="w-5 h-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" fill="currentColor" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                    <span class="sr-only">Close modal</span>
-                                </button>-->
+                                <form method="post" action="/admin/parts/destroy">
+                                    <input type="hidden" name="id" value="<?php echo $code->id(); ?>" />
+                                    <input type="hidden" name="book" value="<?php echo $code->bookId(); ?>" />
+                                    <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
+                                        <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </form>
                             </div>
                             <!-- Form -->
                             <form id="editCodeBlock<?php echo $i;?>" method="post" action="/admin/listing/update">
