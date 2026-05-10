@@ -8,7 +8,8 @@ class Listing
         private readonly int $id,
         private readonly int $book_id,
         private readonly int $part_id,
-        private readonly string $type,
+        private readonly string $mode,
+        private readonly string $theme,
         private readonly string $description,
         private readonly string $source,
         private readonly int $is_executable,
@@ -33,9 +34,14 @@ class Listing
         return $this->part_id;
     }
 
-    public function type(): string
+    public function mode(): string
     {
-        return $this->type;
+        return $this->mode;
+    }
+
+    public function theme(): string
+    {
+        return $this->theme;
     }
 
     public function description(): string

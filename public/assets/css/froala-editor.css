@@ -138,7 +138,7 @@
     margin-right:0;
     text-align:right
 }
-.froala-edtr .fr-dii img{
+.froala-edtr .fr-dii img {
     display:inline-block;
     float:none;
     vertical-align:bottom;
@@ -147,22 +147,37 @@
     max-width:calc(100% - (2 * 5px));
     min-width:10px
 }
-.froala-edtr .fr-dii.fr-fil img{
+.froala-edtr .fr-dii.fr-fil img {
     float:left;
     margin:5px 5px 5px 0;
     max-width:calc(100% - 5px);
     min-width:5px
 }
-.froala-edtr .fr-dii.fr-fir img{
+.froala-edtr .fr-dii.fr-fir img {
     float:right;
     margin:5px 0 5px 5px;
     max-width:calc(100% - 5px);
     min-width:5px
 }
-
-
-
-/*.froala-edtr .fr-img-wrap .fr-fr-inner {
+.froala-edtr .fr-dii.fr-fil {
+    float:left;
+    margin:5px 10px 10px 0;
+    max-width:calc(100% - 5px);
+    min-width:5px;
+}
+.froala-edtr .fr-dii.fr-fir {
+    float:right;
+    margin:5px 0 5px 5px;
+    max-width:calc(100% - 5px);
+    min-width:5px
+}
+.froala-edtr .fr-fic.fr-fil.fr-dii.fr-shadow {
+    margin-right: 15px;
+}
+.froala-edtr .fr-fic.fr-fir.fr-dii.fr-shadow {
+    margin-left: 15px;
+}
+.froala-edtr .fr-img-wrap .fr-fr-inner {
     text-align:center
 }
 .froala-edtr .fr-img-caption .fr-img-wrap {
@@ -194,8 +209,4 @@
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     width:100%;
     text-align:center
-}*/
-
-
-/*.froala-edtr .fr-rounded {}
-.froala-edtr .fr-bordered*/
+}

@@ -2,12 +2,14 @@
 <?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php /** @var \App\Models\Part $part */ ?>
 <?php /** @var \App\Models\Listing $languages */ ?>
+<?php /** @var \App\Models\Listing $themes */ ?>
 <?php /** @var \App\Models\Listing $codeListings */ ?>
+<?php /** @var \App\Controllers\ListingController $object */ ?>
 <?php $view->component('start_blank') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
     <?php $view->component('admin/header') ?>
-    <main class="main grow my-2">
+    <article class="main grow my-2">
         <!-- Page Content -->
         <div class="container flex flex-col border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">
             <!-- Breadcrumbs -->
@@ -85,52 +87,6 @@
                         <form id="newCode" method="post" action="/admin/listing/add">
                             <input type="hidden" name="part_id" value="<?php echo $part->id(); ?>" />
                             <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
-                            <!-- Language Button and Checkbox -->
-                            <div class="md:flex w-full items-center gap-2">
-                                <?php $oldLanguage = $session->getFlash('language_val'); ?>
-                                <!-- Language Select -->
-                                <div class="mb-4 relative flex-1">
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2">
-                                        <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"/>
-                                        </svg>
-                                    </div>
-                                    <select id="language" name="language" class="bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
-                                        <option value="">Select Language</option>
-                                        <?php foreach($languages as $key => $value) : ?>
-                                            <option value="<?php echo $key; ?>" <?php if ($key === $oldLanguage) { echo 'selected'; } ?> ><?php echo $value; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <?php if ($session->has('language')) : ?>
-                                        <?php $errorLanguage = $session->getFlash('language')[0]; ?>
-                                        <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $errorLanguage ?></li>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                                <!-- Checkbox Block -->
-                                <div class="mb-4 relative flex-1">
-                                    <div class="flex w-full items-center justify-end gap-2 bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base py-2 px-2">
-                                        <label class="inline-flex items-center cursor-pointer">
-                                            <?php $executable = $session->getFlash('executable_val'); ?>
-                                            <input type="checkbox" name="executable" class="sr-only peer" <?php echo !empty($executable) ? 'checked' : ''; ?>>
-                                            <span class="select-none text-xs font-medium text-heading px-2">Is Executable?</span>
-                                            <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600"></div>
-                                        </label>
-                                        <label class="inline-flex items-center cursor-pointer">
-                                            <?php $oldVisible = $session->getFlash('visible_val'); ?>
-                                            <input type="checkbox" name="visible" class="sr-only peer" <?php echo !empty($oldVisible) ? 'checked' : ''; ?>>
-                                            <span class="select-none text-xs font-medium text-heading px-2">Is Visible?</span>
-                                            <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
-                                        </label>
-                                    </div>
-                                    <?php if (isset($errorLanguage)) : ?>
-                                        <ul>
-                                            <li class="mt-2 ml-2 text-sm">&nbsp;</li>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
                             <!-- Description -->
                             <div class="mb-4">
                                 <div class="flex bg-neutral-primary-soft w-full">
@@ -164,9 +120,9 @@
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script type="text/javascript"  src="/assets/froala/js/emoticons.min.js"></script>
-                                    <script type="text/javascript"  src="/assets/froala/js/image.min.js"></script>
+                                    <!--<script type="text/javascript"  src="/assets/froala/js/image.min.js"></script>-->
                                     <!--<script type="text/javascript"  src="/assets/froala/js/code_view.min.js"></script>-->
-                                    <script type="text/javascript"  src="/assets/froala/js/code_snippet.min.js"></script>
+                                    <!--<script type="text/javascript"  src="/assets/froala/js/code_snippet.min.js"></script>-->
 
                                     <script>
                                         let editor = new FroalaEditor("#froalaEditor", {
@@ -174,20 +130,6 @@
                                             key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                             theme: isDarkMode ? "dark" : "royal",
                                             zIndex: 1,
-                                            codeViewKeepActive: true,
-                                            codeSnippetLanguage: {
-                                                'JavaScript': 'javascript',
-                                                'PHP' : 'php',
-                                                'TypeScript': 'typescript',
-                                                'Python': 'python',
-                                                'HTML': 'html',
-                                                'CSS': 'css',
-                                                'Java': 'java',
-                                                'C++': 'cpp',
-                                                'SQL': 'sql',
-                                                'JSON': 'json',
-                                            },
-                                            codeSnippetDefaultLanguage: 'JavaScript',
                                             toolbarButtons: {
                                                 // Key represents the more button from the toolbar.
                                                 moreText: {
@@ -204,7 +146,7 @@
                                                     buttonsVisible: 3
                                                 },
                                                 moreRich: {
-                                                    buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'codeSnippet', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
+                                                    buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
                                                     align: 'left',
                                                     buttonsVisible: 3
                                                 },
@@ -283,6 +225,83 @@
                                     </ul>
                                 <?php endif; ?>
                             </div>
+                            <!-- Language Button and Checkbox -->
+                            <div class="md:flex w-full items-center gap-2">
+                                <?php $oldLanguage = $session->getFlash('language_val'); ?>
+                                <?php $oldTheme = $session->getFlash('theme_val'); ?>
+                                <!-- Language Select -->
+                                <div class="mb-4 relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2">
+                                        <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"/>
+                                        </svg>
+                                    </div>
+                                    <select id="language" name="language" class="bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <option value="">Select Language</option>
+                                        <?php foreach($languages as $key => $value) : ?>
+                                            <option value="<?php echo $key; ?>" <?php if ($key === $oldLanguage) { echo 'selected'; } ?> ><?php echo $value; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php if (!empty($oldLanguage) && empty($oldTheme)) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm">&nbsp;</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <?php if ($session->has('language')) : ?>
+                                        <?php $errorLanguage = $session->getFlash('language')[0]; ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $errorLanguage ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
+                                <!-- Theme Select -->
+                                <div class="mb-4 relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2">
+                                        <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m7.53316 11.8623.00957-.0029m5.58157 7.1424c-.5.515-.9195.8473-1.0611.8903-.4784.1454-5.42881-1.2797-6.23759-3.3305-.80878-2.0507-1.83058-5.8152-1.88967-6.2192-.0591-.40404 1.5599-1.72424 3.59722-2.61073m1.98839 8.05513c-.22637.262-.38955.5599-.55552.8474M13.4999 12c.5.5 1 1.049 2 1.049s1.5-.549 2-1.049m-4-4h.01m3.99 0h.01m-7.01-2.5c0-.28929 2.5-1.5 5-1.5s5 1.13645 5 1.5V12c0 1.9655-4.291 5-5 5-.7432 0-5-3.0345-5-5V5.5Z"/>
+                                        </svg>
+                                    </div>
+                                    <select id="theme" name="theme" class="bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <option value="">Select Theme</option>
+                                        <?php foreach($themes as $key => $value) : ?>
+                                            <option value="<?php echo $key; ?>" <?php if ($key === $oldTheme) { echo 'selected'; } ?>><?php echo $value; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php if (empty($oldLanguage) && !empty($oldTheme)) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm">&nbsp;</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <?php if ($session->has('theme')) : ?>
+                                        <?php $errorTheme = $session->getFlash('theme')[0]; ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $errorTheme ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <!-- Checkbox Block -->
+                            <div class="mb-4 relative flex-1">
+                                <div class="flex w-full items-center justify-end gap-2 bg-neutral-secondary-medium border border-default-medium dark:border-cyan-900 shadow-sm text-heading text-sm rounded-base py-2 px-2">
+                                    <label class="inline-flex items-center cursor-pointer">
+                                        <?php $executable = $session->getFlash('executable_val'); ?>
+                                        <input type="checkbox" name="executable" class="sr-only peer" <?php echo !empty($executable) ? 'checked' : ''; ?>>
+                                        <span class="select-none text-xs font-medium text-heading px-2">Is Executable?</span>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer">
+                                        <?php $oldVisible = $session->getFlash('visible_val'); ?>
+                                        <input type="checkbox" name="visible" class="sr-only peer" <?php echo !empty($oldVisible) ? 'checked' : ''; ?>>
+                                        <span class="select-none text-xs font-medium text-heading px-2">Is Visible?</span>
+                                        <div class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
+                                    </label>
+                                </div>
+                                <?php if (isset($errorLanguage)) : ?>
+                                    <ul>
+                                        <li class="mt-2 ml-2 text-sm">&nbsp;</li>
+                                    </ul>
+                                <?php endif; ?>
+                            </div>
                             <!-- Code -->
                             <div class="mb-4">
                                 <div class="border border-gray-200 dark:border-cyan-900 rounded-base">
@@ -299,10 +318,16 @@
 
                                         const form = document.getElementById("newCode");
                                         const selectMode = document.getElementById("language");
+                                        const selectTheme = document.getElementById("theme");
 
                                         selectMode.addEventListener('change', (e) => {
                                             const value = e.target.value;
                                             aceEditor.session.setMode(`ace/mode/${value}`);
+                                        });
+
+                                        selectTheme.addEventListener('change', (e) => {
+                                            const value = e.target.value;
+                                            aceEditor.setTheme(`ace/theme/${value}`);
                                         });
 
                                         form.onsubmit = function () {
@@ -335,13 +360,13 @@
             <?php if (count($codeListings) > 0): ?>
             <?php $i = 1; ?>
             <?php foreach ($codeListings as $code): ?>
-                <?php $view->component('admin/code', ['code' => $code, 'languages' => $languages, 'i' => $i]); ?>
-            <?php $i++; ?>
+                <?php $view->component('admin/code', ['code' => $code, 'languages' => $languages, 'themes' => $themes, 'object' => $object, 'i' => $i]); ?>
+                <?php $i++; ?>
             <?php endforeach; ?>
             <?php endif; ?>
             </div>
         </div>
-    </main>
+    </article>
     <?php $view->component('footer') ?>
 </div>
 <?php $view->component('end') ?>
