@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Storage\StorageInterface $storage */ ?>
+<?php /** @var \App\Controllers\AdminController $object */ ?>
 <?php /** @var \App\Models\Book $book */ ?>
 <?php /** @var \App\Models\Book $i */ ?>
 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
@@ -16,6 +17,9 @@
     </td>
     <td class="px-6 py-2 text-left">
         <?php echo $book->author() ?>
+    </td>
+    <td class="px-6 py-2 text-left">
+        <?php echo $object->getIcon($book->media()); ?>
     </td>
     <td class="px-6 py-2 text-left">
         <span class="bg-success-soft border border-success-subtle text-fg-success-strong text-xs font-medium px-1.5 py-0.5 rounded">

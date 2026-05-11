@@ -40,6 +40,7 @@
                                 <h3 class="text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
                                     Edit Block Code
                                 </h3>
+                                <!-- Form Delete -->
                                 <form method="post" action="/admin/parts/destroy">
                                     <input type="hidden" name="id" value="<?php echo $code->id(); ?>" />
                                     <input type="hidden" name="book" value="<?php echo $code->bookId(); ?>" />
@@ -283,13 +284,13 @@
 </div>
 <!--<div class="froala-edtr border border-gray-200 dark:border-cyan-900 mx-3 px-3 rounded-base">
     <p class="p-3 text-mauve-500"><?php /*echo nl2br($code->description()); */?></p>
-</div>-->
-<!--<div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
-    <pre class="language-<?php /*echo $code->type(); */?>"><code id="source"><?php /*echo $code->source(); */?></code></pre>
-</div>-->
+</div>
+<div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-base">
+    <pre class="language-<?php /*echo $code->mode(); */?>"><code id="source"><?php /*echo $code->source(); */?></code></pre>
+</div>
 <div class="border border-gray-200 dark:border-cyan-900 mx-3 my-2 rounded-sm">
     <p class="p-3 text-amber-500">
         Code running ...
     </p>
-</div>
+</div>-->
 

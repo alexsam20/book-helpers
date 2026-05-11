@@ -28,6 +28,7 @@ class BookService
                 $book['user_id'],
                 $book['name'],
                 $book['author'],
+                $book['media'],
                 $book['description'],
                 $book['image'],
                 $book['year'],
@@ -53,7 +54,7 @@ class BookService
         ]);
     }
 
-    public function store(int $id, string $name, string $author, string $description, UploadedFileInterface $image, int $year): false|int
+    public function store(int $id, string $name, string $author, string $media, string $description, UploadedFileInterface $image, int $year): false|int
     {
         $filePath = $image->move('books');
 
@@ -61,6 +62,7 @@ class BookService
             'user_id' => $id,
             'name' => $name,
             'author' => $author,
+            'media' => $media,
             'description' => $description,
             'image' => $filePath,
             'year' => $year,
@@ -80,6 +82,7 @@ class BookService
             $book['user_id'],
             $book['name'],
             $book['author'],
+            $book['media'],
             $book['description'],
             $book['image'],
             $book['year'],
@@ -90,7 +93,7 @@ class BookService
         );
     }
 
-    public function update(int $id, string $name, string $author, string $description, UploadedFileInterface $image, int $year): void
+    public function update(int $id, string $name, string $author, string $media, string $description, ?UploadedFileInterface $image, int $year): void
     {
         $oldFile = ($this->find($id))->image();
 
@@ -102,6 +105,7 @@ class BookService
         $data = [
             'name' => $name,
             'author' => $author,
+            'media' => $media,
             'description' => $description,
             'year' => $year,
         ];

@@ -87,6 +87,25 @@
                                         </ul>
                                     <?php endif; ?>
                                 </div>
+                                <!-- Media -->
+                                <div class="mb-4 relative">
+                                    <?php $media = $session->getFlash('media_val'); ?>
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
+                                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
+                                        </svg>
+                                    </div>
+                                    <select id="media" name="media" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
+                                        <option value="">Book or Video</option>
+                                        <option value="book" <?php if ($media === 'book') {echo ' selected';} ?>>Book</option>
+                                        <option value="video" <?php if ($media === 'video') {echo ' selected';} ?>>Video</option>
+                                    </select>
+                                    <?php if ($session->has('media')) : ?>
+                                        <ul>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('media')[0]; ?></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </div>
                                 <!-- Year -->
                                 <?php $old_year = (int) $session->getFlash('year_val'); ?>
                                 <div class="mb-4 relative">

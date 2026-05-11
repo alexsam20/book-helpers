@@ -9,6 +9,7 @@ class Book
         private readonly int       $user_id,
         private readonly string    $name,
         private readonly string    $author,
+        private readonly string    $media,
         private readonly string    $description,
         private readonly ?string   $image,
         private readonly int       $year,
@@ -71,5 +72,10 @@ class Book
     public function updatedAt(): string
     {
         return $this->updatedAt;
+    }
+
+    public function media(): string
+    {
+        return $this->media;
     }
 }

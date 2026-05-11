@@ -1,6 +1,7 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php /** @var array<\App\Models\Book> $books */ ?>
+<?php /** @var \App\Controllers\AdminController $object */ ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
@@ -73,6 +74,9 @@
                             Author
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
+                            Media
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">
                             Year
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
@@ -92,7 +96,7 @@
                     <tbody>
                     <?php $i = 1; ?>
                     <?php foreach ($books as $book):  ?>
-                    <?php $view->component('admin/book', ['book' => $book, 'i' => $i]); ?>
+                    <?php $view->component('admin/book', ['book' => $book, 'object' => $object, 'i' => $i]); ?>
                     <?php $i++; ?>
                     <?php endforeach; ?>
                     </tbody>
