@@ -54,6 +54,25 @@ class BookService
         ]);
     }
 
+    public function remove(int $id): void
+    {
+        $this->db->remove($this->table, 'deleted_at', ['id' => $id]);
+
+        $partService = new PartService($this->db);
+        $parts = $partService->all($id, 'book_id');
+
+        if (count($parts) > 0) {
+            $this->db->remove('parts', 'deleted_at', ['book_id' => $id]);
+        }
+
+        $listingService = new ListingService($this->db);
+        $codes = $listingService->all($id, 'book_id');
+
+        if (count($codes) > 0) {
+            $this->db->remove('codes', 'deleted_at', ['book_id' => $id]);
+        }
+    }
+
     public function store(int $id, string $name, string $author, string $media, string $description, UploadedFileInterface $image, int $year): false|int
     {
         $filePath = $image->move('books');

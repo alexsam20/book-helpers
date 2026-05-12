@@ -65,7 +65,7 @@ class BookController extends Controller
 
     public function destroy(): void
     {
-        $this->service()->destroy($this->request()->input('id'));
+        $this->service()->remove($this->request()->input('id'));
 
         $this->redirect('/admin');
     }

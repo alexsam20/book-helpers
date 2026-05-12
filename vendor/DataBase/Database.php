@@ -54,6 +54,9 @@ class Database implements DatabaseInterface
 
         if (count($conditions) > 0) {
             $where = "WHERE " . implode(" AND ", array_map(static fn(string $field) => "$field = :$field", array_keys($conditions)));
+            $where .= " AND deleted_at IS NULL";
+        } else {
+            $where = " WHERE deleted_at IS NULL";
         }
 
         //  AND deleted_at IS NULL
@@ -87,6 +90,16 @@ class Database implements DatabaseInterface
         $sql = sprintf("DELETE FROM %s %s", $table, $where);
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);
+    }
+
+
+    public function remove(string $table, string $field, array $conditions = []): void
+    {
+        // $data ['deleted_at' => 'Y-m-d H:i:s']
+        $now = date('Y-m-d H:i:s');
+        $data = [$field => $now];
+
+        $this->update($table, $data, $conditions);
     }
 
     public function update(string $table, array $data, array $conditions = []): void

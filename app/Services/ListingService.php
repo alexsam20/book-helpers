@@ -75,6 +75,11 @@ class ListingService
         ]);
     }
 
+    public function remove(int $id): void
+    {
+        $this->db->remove($this->table, 'deleted_at', ['id' => $id]);
+    }
+
     public function getThemeCode(): array
     {
         $files = scandir(ROOT_PATH . '/assets/ace/');

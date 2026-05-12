@@ -38,7 +38,7 @@ return [
     Route::get('/admin/listing/add', [ListingController::class , 'create']),
     Route::post('/admin/listing/add', [ListingController::class , 'store']),
     Route::post('/admin/listing/update', [ListingController::class , 'update']),
-    Route::post('/admin/parts/destroy', [ListingController::class , 'destroy']),
+    Route::post('/admin/listing/destroy', [ListingController::class , 'destroy']),
     Route::post('/admin/listing/upload_image', [ListingController::class , 'upload']),
     Route::post('/admin/listing/delete_image', [ListingController::class , 'delete']),
 

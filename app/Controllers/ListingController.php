@@ -120,9 +120,9 @@ class ListingController extends Controller
 
     public function destroy(): void
     {
-        $this->service()->destroy($this->request()->input('id'));
+        $this->service()->remove($this->request()->input('id'));
 
-        $this->redirect('/admin/listing/add?id=' . $this->request()->input('book'));
+        $this->redirect('/admin/listing/add?id=' . $this->request()->input('part_id'));
     }
 
     /**
