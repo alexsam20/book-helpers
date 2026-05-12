@@ -50,7 +50,8 @@ class BookController extends Controller
         }
 
         $this->service()->store(
-            $this->session()->get("user_id"),
+            /*$this->session()->get("user_id"),*/
+            $this->auth()->id(),
             $this->request()->input('book'),
             $this->request()->input('author'),
             $this->request()->input('media'),
