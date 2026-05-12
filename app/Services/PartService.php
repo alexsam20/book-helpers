@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Listing;
 use App\Models\Part;
 use Core\DataBase\DatabaseInterface;
 
@@ -20,6 +21,10 @@ class PartService
     {
         $parts = $this->db->get($this->table, [$field => $id]);
 
+        foreach ($parts as $key => $value) {
+            $parts[$key]['code']  = $this->getListing($value['id']);
+        }
+
         return array_map(static function ($part) {
             return new Part(
                 $part['id'],
@@ -31,7 +36,7 @@ class PartService
                 $part['deleted_at'],
                 $part['created_at'],
                 $part['updated_at'],
-
+                $part['code'],
             );
         }, $parts);
     }
@@ -47,6 +52,9 @@ class PartService
     {
         $part = $this->db->first($this->table, [$field => $id]);
 
+        $codeBlocks = $this->db->get('codes', ['part_id' => $id]);
+        /*var_dump($codeBlocks); die();*/
+
         if (!$part) {
             return null;
         }
@@ -61,6 +69,7 @@ class PartService
             $part['deleted_at'],
             $part['created_at'],
             $part['updated_at'],
+            $this->getListing($id)
         );
     }
 
@@ -82,5 +91,28 @@ class PartService
         ];
 
         $this->db->update($this->table, $data, ['id' => $id]);
+    }
+
+    private function getListing(int $id): array
+    {
+        $codeBlocks = $this->db->get('codes', ['part_id' => $id]);
+        /*var_dump($codeBlocks); die();*/
+
+        return array_map(static function ($code) {
+            return new Listing(
+                $code['id'],
+                $code['book_id'],
+                $code['part_id'],
+                $code['mode'],
+                $code['theme'],
+                $code['description'],
+                $code['source'],
+                $code['is_executable'],
+                $code['is_visible'],
+                $code['deleted_at'],
+                $code['created_at'],
+                $code['updated_at'],
+            );
+        }, $codeBlocks);
     }
 }

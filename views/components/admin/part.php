@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \App\Models\Part $part */ ?>
+<?php /** @var \App\Controllers\PartController $object */  ?>
 <?php /** @var \App\Models\Part $i */ ?>
 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
     <!-- Number -->
@@ -9,10 +10,6 @@
     <!-- Title -->
     <td class="px-6 py-2 font-medium text-heading">
         <?php echo $part->title() ?>
-    </td>
-    <!-- CreatedAt Date -->
-    <td class="px-6 py-2 text-right">
-        <?php echo $view->formatDate($part->createdAt());  ?>
     </td>
     <!-- Is Visible -->
     <td class="px-6 py-2 text-center">
@@ -24,28 +21,14 @@
     </td>
     <!-- Count Block Code -->
     <td class="px-6 py-2 text-center">
+        <?php  $amount = count($part->codeBlocks()); ?>
         <div class="inline-flex items-center space-x-1">
-            <span class="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 inset-ring inset-ring-gray-400/20">0</span>
-            <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">4</span>
-            <span class="inline-flex items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-400/30">6</span>
-            <span class="inline-flex items-center rounded-md bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 inset-ring inset-ring-indigo-400/30">8</span>
-            <span class="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 inset-ring inset-ring-purple-400/30">10</span>
-            <span class="inline-flex items-center rounded-md bg-pink-400/10 px-2 py-1 text-xs font-medium text-pink-400 inset-ring inset-ring-pink-400/20">12</span>
-            <span class="inline-flex items-center rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium text-red-400 inset-ring inset-ring-red-400/20">14</span>
-            <span class="inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-500 inset-ring inset-ring-yellow-400/20">16</span>
-            <!--<span class="flex items-center justify-center bg-success-soft border border-success-subtle text-fg-success-strong text-xs font-medium h-6 w-6 rounded-full">
-                8
-            </span>
-            <span class="flex items-center justify-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium h-6 w-6 rounded-full">
-                18
-            </span>
-            <span class="flex items-center justify-center bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium h-6 w-6 rounded-full">
-                24
-            </span>
-            <span class="flex items-center justify-center bg-warning-soft border border-warning text-warning text-xs font-medium h-6 w-6 rounded-full">
-                35
-            </span>-->
+            <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium inset-ring <?php echo $object->getCss($amount) ?>"><?php echo $amount; ?></span>
         </div>
+    </td>
+    <!-- CreatedAt Date -->
+    <td class="px-6 py-2 text-right">
+        <?php echo $view->formatDate($part->createdAt());  ?>
     </td>
     <!-- Actions -->
     <td class="px-6 py-2 text-center">

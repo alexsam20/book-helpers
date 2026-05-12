@@ -3,6 +3,8 @@
 <?php /** @var \Core\Storage\StorageInterface $storage */ ?>
 <?php /** @var \App\Models\Book $book  */ ?>
 <?php /** @var array<\App\Models\Part> $parts */ ?>
+<?php /** @var \App\Controllers\PartController $object */  ?>
+<?php // var_dump($parts); ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
@@ -105,6 +107,7 @@
                     </div>
                 </div>
             </div>
+            <?php if (!empty($parts)): ?>
             <!-- Table Parts -->
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default mt-4 mb-4">
                 <table class="w-full text-sm text-left rtl:text-right text-body">
@@ -117,13 +120,13 @@
                             Title
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Date Created
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
                             Visible
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
                             Source Code
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">
+                            Date Created
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">
                             Actions
@@ -133,7 +136,7 @@
                     <tbody>
                     <?php $i = 1; ?>
                     <?php foreach ($parts as $part):  ?>
-                        <?php $view->component('admin/part', ['part' => $part, 'i' => $i]); ?>
+                        <?php $view->component('admin/part', ['part' => $part, 'object' => $object, 'i' => $i]); ?>
                         <?php $i++; ?>
                     <?php endforeach; ?>
                     </tbody>
@@ -166,6 +169,11 @@
                     </ul>
                 </nav>
             </div>
+            <?php else: ?>
+            <div class="h-20 flex justify-center items-center text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
+                💩 No Records.
+            </div>
+            <?php endif; ?>
         </div>
     </main>
     <?php $view->component('footer') ?>

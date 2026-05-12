@@ -14,6 +14,7 @@ class Part
         private readonly ?string   $deletedAt,
         private readonly string    $createdAt,
         private readonly string    $updatedAt,
+        private readonly array     $codeBlocks,
     ) {}
 
     public function id(): int
@@ -59,5 +60,10 @@ class Part
     public function updatedAt(): string
     {
         return $this->updatedAt;
+    }
+
+    public function codeBlocks(): array
+    {
+        return $this->codeBlocks;
     }
 }
