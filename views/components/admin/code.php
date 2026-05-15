@@ -32,16 +32,16 @@
                 <!-- Main modal -->
                 <!--<div id="blockCodeModal<?php /*echo $i;*/?>" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">-->
                 <div>
-                    <div class="relative p-4 w-full h-full md:h-auto" style="z-index: 99999">
+                    <div class="relative p-4 w-full h-full md:h-auto">
                         <!-- Content -->
                         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                             <!-- Header -->
                             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                                 <h3 class="text-sm md:text-lg font-semibold text-gray-900 dark:text-white">
-                                    Edit Block Code
+                                    Edit Block Code <?php echo $i; ?>
                                 </h3>
                                 <!-- Form Delete -->
-                                <form method="post" action="/admin/listing/destroy">
+                                <form method="post" onclick="return confirm('Delete?')" action="/admin/listing/destroy">
                                     <input type="hidden" name="id" value="<?php echo $code->id(); ?>" />
                                     <input type="hidden" name="part_id" value="<?php echo $code->partId(); ?>" />
                                     <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
@@ -51,6 +51,60 @@
                                         Delete
                                     </button>
                                 </form>
+                                <!--<script src="/assets/js/sweetalert2.js"></script>-->
+                                <style>
+                                    /*.sweet-alert-modal {
+                                        position: fixed;
+                                        z-index: 10000 !important;
+                                    }
+                                    .swal2-popup.swal2-modal.swal2-icon-warning.swal2-show {
+                                        position: fixed;
+                                        z-index: 999999 !important;
+                                    }
+                                    .swal2-container.swal2-center.swal2-backdrop-show {
+                                        position: fixed;
+                                        z-index: 999999 !important;
+                                    }*/
+                                </style>
+                                <!--<input type="hidden" name="id" value="<?php /*echo $code->id(); */?>" />
+                                <input type="hidden" name="part_id" value="<?php /*echo $code->partId(); */?>" />-->
+                                <!--<button class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer"
+                                        hx-post="/admin/listing/destroy"
+                                        hx-trigger='confirmed'
+                                        hx-vals='{"id": <?php /*echo $code->id(); */?>, "part_id": "<?php /*echo $code->partId(); */?>"}'
+                                        onClick="Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: 'You won\'t be able to revert this!',
+                                            icon: 'warning',
+                                            focusConfirm: true,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, delete it!'
+                                        }).then((result) => {
+                                            if(result.isConfirmed){
+                                                htmx.trigger(this, 'confirmed');
+                                                Swal.fire({
+                                                    title: 'Deleted!',
+                                                    text: 'Your file has been deleted.',
+                                                    icon: 'success'
+                                                }).then(() => {
+                                                    location.reload();
+                                                });
+                                            }
+                                        })">
+                                    <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                    </svg>
+                                    Delete
+                                </button>-->
+                                <!--<div role="status">
+                                    <svg aria-hidden="true" class="inline w-8 h-8 text-neutral-tertiary animate-spin fill-pink" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                    <span class="sr-only">Loading...</span>
+                                </div>-->
                             </div>
                             <!-- Form -->
                             <form id="editCodeBlock<?php echo $i;?>" method="post" action="/admin/listing/update">
@@ -229,7 +283,7 @@
                                     </div>
                                     <!-- Block Code -->
                                     <div class="grid grid-cols-1 sm:col-span-2 border border-gray-200 dark:border-cyan-900 mx-1 my-2 rounded-sm">
-                                        <!--<script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>-->
+                                        <script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>
                                         <div id="aceEditor<?php echo $i;?>"  class="rounded-sm" name="code"><?php echo $object->getCode($code->mode(), $code->source()); ?></div>
                                         <textarea name="code" id="hiddenCodeBlockTextarea<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
@@ -266,6 +320,7 @@
                                         </script>
                                     </div>
                                 </div>
+                                <!--<div id="modal-confirmed<?php /*echo $i;*/?>" style="z-index: 10000 !important;"></div>-->
                                 <!-- Save button -->
                                 <div class="sm:col-span-2 flex items-end justify-end gap-2 mt-1">
                                     <button type="submit" class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">

@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Models\Listing;
+use App\Models\Part;
 use Core\DataBase\DatabaseInterface;
 use Core\Storage\Storage;
 use Core\Upload\UploadedFileInterface;
@@ -59,6 +61,7 @@ class BookService
         $this->db->remove($this->table, 'deleted_at', ['id' => $id]);
 
         $partService = new PartService($this->db);
+        /** @var Part $part */
         $parts = $partService->all($id, 'book_id');
 
         if (count($parts) > 0) {
@@ -66,6 +69,7 @@ class BookService
         }
 
         $listingService = new ListingService($this->db);
+        /** @var Listing $codes */
         $codes = $listingService->all($id, 'book_id');
 
         if (count($codes) > 0) {
