@@ -27,6 +27,7 @@ return [
     Route::get('/admin/books/update', [BookController::class , 'edit']),
     Route::post('/admin/books/update', [BookController::class , 'update']),
     Route::post('/admin/books/destroy', [BookController::class , 'destroy']),
+    Route::post('/admin/books/visible', [BookController::class , 'visible']),
 
     Route::get('/admin/parts', [PartController::class , 'index']),
     Route::get('/admin/parts/add', [PartController::class , 'create']),

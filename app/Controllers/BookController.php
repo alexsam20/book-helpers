@@ -121,6 +121,14 @@ class BookController extends Controller
         }
     }
 
+    public function visible()
+    {
+        /*UPDATE my_table SET is_visible = is_visible ^ 1 WHERE id = 5;*/
+        $this->service()->updateVisibility((int) $this->request()->input('id'));
+
+        $this->redirect('/admin');
+    }
+
     private function service(): BookService
     {
         if (! isset($this->service)) {
