@@ -23,7 +23,7 @@ class PartController extends Controller
             'book' => $book->find($id),
             'parts' => $this->service()->all($id, 'book_id'),
             'object' => $this,
-        ]);
+        ], 'Parts');
     }
 
     /*public function list(): void
@@ -47,7 +47,7 @@ class PartController extends Controller
         $this->view('/admin/parts/add', [
             'books' => $books->all(),
             'id' => (int) $this->request()->input('id'),
-        ]);
+        ], 'Create New Part');
     }
 
     public function store(): void
@@ -96,7 +96,7 @@ class PartController extends Controller
         $this->view('/admin/parts/update', [
             'part' => $part,
             'book' => $book,
-        ]);
+        ], 'Edit Part');
     }
 
     public function update(): void

@@ -87,7 +87,7 @@
                 Edit
             </a>
             <!--Form Delete Book-->
-            <form method="post" action="/admin/books/destroy">
+            <form method="post" onclick="return confirm('Delete?')" action="/admin/books/destroy">
                 <input type="hidden" name="id" value="<?php echo $book->id(); ?>" />
                 <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5 cursor-pointer">
                     <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

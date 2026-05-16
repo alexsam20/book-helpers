@@ -22,7 +22,7 @@ class BookController extends Controller
 
     public function create(): void
     {
-        $this->view('admin/books/add');
+        $this->view(name: 'admin/books/add', title:  'Create New');
     }
 
     public function store(): void
@@ -74,7 +74,7 @@ class BookController extends Controller
     {
         $this->view('/admin/books/update', [
             'book' => $this->service()->find($this->request()->input('id'))
-        ]);
+        ], 'Edit');
     }
 
     public function update(): void

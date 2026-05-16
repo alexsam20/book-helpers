@@ -14,7 +14,7 @@ class AdminController extends Controller
         $this->view('/admin/index', [
             'books' => $books->all(),
             'object' => $this,
-        ]);
+        ], 'Dashboard');
     }
 
     public function getIcon(string $icon = 'book'): string

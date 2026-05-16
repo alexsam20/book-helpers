@@ -26,7 +26,7 @@ class ListingController extends Controller
             'themes' => $this->service()->getThemeCode(),
             'languages' => $this->service()->language(),
             'object' => $this,
-        ]);
+        ], 'Action from Block Code');
     }
 
     public function store(): void
