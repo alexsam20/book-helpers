@@ -14,11 +14,39 @@
     </td>
     <!-- Is Visible -->
     <td class="px-6 py-2 text-center">
-        <?php if (1 === $part->isVisible()): ?>
-            <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded">Visible</span>
-        <?php else: ?>
-            <span class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded">Invisible</span>
-        <?php endif; ?>
+        <form method="post" action="/admin/parts/visible">
+            <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
+            <input type="hidden" name="id" value="<?php echo $part->id(); ?>" />
+            <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
+            <?php if (1 === $part->isVisible()): ?>
+                <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
+                    <li>
+                        <button type="submit">
+                        <span class="inline-flex items-center border border-brand-subtle bg-brand-softer text-xs text-fg-brand-strong font-medium px-1.5 py-0.5 rounded cursor-pointer">
+                            <svg class="w-4 h-4 me-1 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                <path fill="none" stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
+                            Visible
+                        </span>
+                        </button>
+                    </li>
+                </ul>
+            <?php else: ?>
+                <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
+                    <li>
+                        <button type="submit">
+                        <span class="inline-flex items-center border border-danger-subtle bg-danger-soft text-xs text-fg-danger-strong font-medium px-1.5 py-0.5 rounded cursor-pointer">
+                            <svg class="w-4 h-4 me-1 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
+                            Invisible
+                        </span>
+                        </button>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </form>
     </td>
     <!-- Count Block Code -->
     <td class="px-6 py-2 text-center">

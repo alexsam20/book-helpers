@@ -149,6 +149,13 @@ class PartController extends Controller
         return 'inset-ring-gray-400/20 bg-gray-400/10 text-gray-400';
     }
 
+    public function visible(): void
+    {
+        $this->service()->updateVisibility((int) $this->request()->input('id'));
+
+        $this->redirect('/admin/parts?id=' . $this->request()->input('book_id'));
+    }
+
     private function service(): PartService
     {
         if (! isset($this->service)) {

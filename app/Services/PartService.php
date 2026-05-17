@@ -127,4 +127,11 @@ class PartService
             );
         }, $codeBlocks);
     }
+
+    public function updateVisibility(int $id): void
+    {
+        $record = $this->db->first($this->table, ['id' => $id])['is_visible'];
+
+        $this->db->update($this->table, ['is_visible' => $record ^ 1], ['id' => $id]);
+    }
 }

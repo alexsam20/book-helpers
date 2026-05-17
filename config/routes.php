@@ -35,6 +35,7 @@ return [
     Route::get('/admin/parts/update', [PartController::class , 'edit']),
     Route::post('/admin/parts/update', [PartController::class , 'update']),
     Route::post('/admin/parts/destroy', [PartController::class , 'destroy']),
+    Route::post('/admin/parts/visible', [PartController::class , 'visible']),
 
     Route::get('/admin/listing/add', [ListingController::class , 'create']),
     Route::post('/admin/listing/add', [ListingController::class , 'store']),
