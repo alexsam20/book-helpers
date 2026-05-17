@@ -5,6 +5,7 @@
 <?php /** @var \App\Models\Listing $themes */ ?>
 <?php /** @var \App\Models\Listing $codeListings */ ?>
 <?php /** @var \App\Controllers\ListingController $object */ ?>
+<?php //var_dump($_SESSION); ?>
 <?php $view->component('start_blank') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
@@ -85,6 +86,7 @@
                 <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                     <div class="w-full bg-neutral-primary-soft px-4 py-3 bw-full shadow-xs rounded-2xl">
                         <form id="newCode" method="post" action="/admin/listing/add">
+                            <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                             <input type="hidden" name="part_id" value="<?php echo $part->id(); ?>" />
                             <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
                             <!-- Description -->

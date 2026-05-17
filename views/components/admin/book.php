@@ -1,5 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Storage\StorageInterface $storage */ ?>
+<?php /** @var \Core\Session\SessionInterface $session */  ?>
 <?php /** @var \App\Controllers\AdminController $object */ ?>
 <?php /** @var \App\Models\Book $book */ ?>
 <?php /** @var \App\Models\Book $i */ ?>
@@ -32,6 +33,7 @@
     <td class="px-6 py-2 text-center">
         <form method="post" action="/admin/books/visible">
             <input type="hidden" name="id" value="<?php echo $book->id(); ?>">
+            <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
         <?php if (1 === $book->isVisible()): ?>
             <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
                 <li>
@@ -92,6 +94,7 @@
             <!--Form Delete Book-->
             <form method="post" onclick="return confirm('Delete?')" action="/admin/books/destroy">
                 <input type="hidden" name="id" value="<?php echo $book->id(); ?>" />
+                <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                 <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5 cursor-pointer">
                     <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>

@@ -72,6 +72,7 @@
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                         <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
                             <form method="post" action="/admin/parts/update">
+                                <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                                 <input type="hidden" name="id" value="<?php echo $part->id(); ?>" />
                                 <input type="hidden" name="book" value="<?php echo $book->id(); ?>" />
                                 <div class="mb-4 relative">

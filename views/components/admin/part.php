@@ -1,3 +1,4 @@
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \App\Models\Part $part */ ?>
 <?php /** @var \App\Controllers\PartController $object */  ?>
@@ -49,6 +50,7 @@
             </a>
             <!--Form Delete Book-->
             <form method="post" onclick="return confirm('Delete?')" action="/admin/parts/destroy">
+                <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                 <input type="hidden" name="id" value="<?php echo $part->id(); ?>" />
                 <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
                 <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5 cursor-pointer">

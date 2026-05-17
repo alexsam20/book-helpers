@@ -15,4 +15,8 @@ interface SessionInterface
     public function remove(string $key): void;
 
     public function destroy(): void;
+
+    public function handle(): void;
+
+    public function csrf_token(): string;
 }

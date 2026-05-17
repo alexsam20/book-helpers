@@ -8,6 +8,7 @@
             <div class="flex justify-center items-center h-full">
                 <div class="bg-neutral-primary-soft flex justify-center items-center p-6 dark:bg-gray-950/50 border border-default rounded-base shadow-xs">
                     <form method="post" action="/register">
+                        <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                         <div class="flex flex-wrap justify-between items-center mb-4">
                             <h5 class="text-xl font-semibold text-cyan-600">Create account</h5>
                             <!--Button Dark/Light -->

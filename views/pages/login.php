@@ -8,6 +8,7 @@
             <div class="flex justify-center items-center h-full">
                 <div class="max-w-sm bg-neutral-primary-soft p-6 border border-default dark:bg-gray-950/50 rounded-base shadow-xs">
                     <form method="post" action="/login">
+                        <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                         <div class="flex flex-wrap justify-between items-center mb-4">
                             <h5 class="text-xl font-semibold text-cyan-600">Sign in</h5>
                             <!--Button Dark/Light -->
