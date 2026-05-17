@@ -20,9 +20,13 @@ class BookService
     /**
      * @return array<Book>
      */
-    public function all(): array
+    public function all(int $visible = 0): array
     {
-        $books = $this->db->get($this->table, [], ['id' => 'DESC']);
+        $conditions = [];
+        if ($visible > 0) {
+            $conditions = ['is_visible' => 1];
+        }
+        $books = $this->db->get($this->table, $conditions, ['id' => 'DESC']);
 
         return array_map(static function ($book) {
             return new Book(
@@ -92,7 +96,7 @@ class BookService
         ]);
     }
 
-    public function find(int $id): ?Book
+    public function find(?int $id): ?Book
     {
         $book = $this->db->first($this->table, ['id' => $id]);
 

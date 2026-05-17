@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\BookService;
+use App\Services\PartService;
 use Core\Controller\Controller;
 
 class BookController extends Controller
@@ -11,14 +12,27 @@ class BookController extends Controller
 
     public function index(): void
     {
+        $this->view('books', [
+            'books' => $this->service()->all(1),
+        ], 'Sources of Information');
+
         $this->view('books');
     }
 
-    // TODO No Need
-    public function list(): void
+    /*public function list(): void
     {
-        $this->view('/admin/books/list');
-    }
+        $id = $this->request()->input('id');
+        $book = $this->service()->find($id);
+        $partService = new PartService();
+
+        var_dump($book); die;
+        $this->view('/admin/books/list', [
+            'id' => $id,
+            'book' => $book->find($id),
+            'parts' => $this->service()->all($id, 'book_id'),
+            'object' => $this,
+        ], 'Parts');
+    }*/
 
     public function create(): void
     {
@@ -121,7 +135,7 @@ class BookController extends Controller
         }
     }
 
-    public function visible()
+    public function visible(): void
     {
         /* UPDATE books SET is_visible = is_visible ^ 1 WHERE id = 5; */
         $this->service()->updateVisibility((int) $this->request()->input('id'));

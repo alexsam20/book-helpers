@@ -29,6 +29,7 @@ $user = $auth->user();
                 </ul>
                 <!--Button Logout-->
                 <form method="post" action="/logout">
+                    <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                     <button type="submit"
                        class="inline-flex items-center text-warning hover:text-white border border-warning hover:bg-warning focus:ring-4 focus:outline-none focus:ring-neutral-tertiary font-medium rounded-sm text-sm px-2 py-1 text-center me-2 dark:border-warning dark:text-warning dark:hover:text-white dark:hover:bg-warning dark:focus:ring-warning mt-1.5 mb-1.5 cursor-pointer">
                         <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true"

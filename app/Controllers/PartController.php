@@ -26,19 +26,23 @@ class PartController extends Controller
         ], 'Parts');
     }
 
-    /*public function list(): void
+    public function list(): void
     {
         $id = $this->request()->input('id');
-        $listing = new ListingService($this->db());
-        $codeListings = $listing->all($id, 'part_id');
-        $themes = $listing->getThemeCode();
 
-        $this->view('/admin/parts/list', [
-            'part' => $this->service()->find($id),
-            'codeListings' => $codeListings,
-            'themes' => $themes,
-        ]);
-    }*/
+        $book = new BookService($this->db());
+
+        $this->view('/list', [
+            'id' => $id,
+            'book' => $book->find($id),
+            'parts' => $this->service()->all($id, 'book_id'),
+            'object' => $this,
+        ], 'Parts of Book');
+    }
+
+    public function show(): void
+    {
+    }
 
     public function create(): void
     {
@@ -132,21 +136,26 @@ class PartController extends Controller
     public function getCss(int $cnt): string
     {
         if ($cnt > 0 && $cnt <= 4) {
-            return 'inset-ring-green-500/20 bg-green-400/10 text-green-400';
+            return $this->style('green');
         } elseif ($cnt > 4 && $cnt <= 6) {
-            return 'inset-ring-blue-400/30 bg-blue-400/10 text-blue-400';
+            return $this->style('blue');
         } elseif ($cnt > 6 && $cnt <= 8) {
-            return 'inset-ring-indigo-400/30 bg-indigo-400/10 text-indigo-400';
+            return $this->style('indigo');
         } elseif ($cnt > 8 && $cnt <= 10) {
-            return 'inset-ring-purple-400/30 bg-purple-400/10 text-purple-400';
+            return $this->style('purple');
         } elseif ($cnt > 10 && $cnt <= 15) {
-            return 'inset-ring-yellow-400/20 bg-yellow-400/10 text-yellow-500';
+            return $this->style('yellow');
         } elseif ($cnt > 15 && $cnt <= 20) {
-            return 'inset-ring-pink-400/20 bg-pink-400/10 text-pink-400';
+            return $this->style('pink');
         } elseif ($cnt > 20) {
-            return 'inset-ring-red-400/20 bg-red-400/10 text-red-400';
+            return $this->style('red');
         }
-        return 'inset-ring-gray-400/20 bg-gray-400/10 text-gray-400';
+        return $this->style('gray');
+    }
+
+    private function style(string $color): string
+    {
+        return "inset-ring-$color-400/30 bg-$color-400/10 text-$color-400";
     }
 
     public function visible(): void

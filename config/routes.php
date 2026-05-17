@@ -19,6 +19,7 @@ return [
     Route::post('/login', [LoginController::class , 'login']),
     Route::post('/logout', [LoginController::class , 'logout']),
     Route::get('/books', [BookController::class , 'index']),
+    Route::get('/list', [PartController::class , 'list']),
 
     Route::get('/admin', [AdminController::class , 'index'], [AuthMiddleware::class]),
     Route::get('/admin/books/list', [BookController::class , 'list'], [AuthMiddleware::class]),
