@@ -35,13 +35,9 @@ class PartController extends Controller
         $this->view('/list', [
             'id' => $id,
             'book' => $book->find($id),
-            'parts' => $this->service()->all($id, 'book_id'),
+            'parts' => $this->service()->all($id, 'book_id', 1),
             'object' => $this,
         ], 'Parts of Book');
-    }
-
-    public function show(): void
-    {
     }
 
     public function create(): void

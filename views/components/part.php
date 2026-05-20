@@ -10,7 +10,9 @@
     </td>
     <!-- Title -->
     <td class="px-6 py-2 font-medium text-heading">
-        <?php echo $part->title() ?>
+        <a href="show?id=<?php echo $part->id(); ?>">
+            <?php echo $part->title(); ?>
+        </a>
     </td>
     <!-- Count Block Code -->
     <td class="px-6 py-2 text-center">
@@ -21,7 +23,7 @@
     </td>
     <!-- CreatedAt Date -->
     <td class="px-6 py-2 text-right">
-        <?php echo $view->formatDate($part->createdAt());  ?>
+        <?php echo $view->formatDate($part->createdAt()); ?>
     </td>
 </tr>
 

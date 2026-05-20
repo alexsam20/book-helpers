@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\BookService;
 use App\Services\ListingService;
 use App\Services\PartService;
 use Core\Controller\Controller;
@@ -12,7 +13,17 @@ class ListingController extends Controller
     private ListingService $service;
     public function index(): void
     {
-        //
+        $id = $this->request()->input('id');
+        $book = new BookService($this->db());
+        $part = new PartService($this->db());
+
+        $this->view('/show', [
+            'part' => $part->find($id),
+            'codeListings' => $this->service()->all($id, 'part_id'),
+            'themes' => $this->service()->getThemeCode(),
+            'languages' => $this->service()->language(),
+            'object' => $this,
+        ], 'Action from Block Code');
     }
 
     public function create(): void
@@ -142,6 +153,7 @@ class ListingController extends Controller
         if (move_uploaded_file($tmpName, $destination)) {
             $response = new stdClass();
             $response->link = URL_PATH . '/storage/block/' . $randomName;
+            $response->new_csrf = $this->session()->csrf_token();
             echo stripcslashes(json_encode($response));
         } else {
             http_response_code(500);
@@ -155,6 +167,7 @@ class ListingController extends Controller
         if (empty($data)) {
             $data = json_decode(file_get_contents('php://input'), true);
         }
+//        file_put_contents(STORAGE_PATH . 'data.txt', $data);
         $src = $data['src'] ?? null;
         if (null !== $src) {
             $image = explode('/', parse_url($src, PHP_URL_PATH)) ;
@@ -162,6 +175,11 @@ class ListingController extends Controller
             $oldFile = APP_PATH . "/storage/block/" . $image;
             $trash = APP_PATH . "/storage/trash/block/" . $image;
             if (rename($oldFile, $trash)) {
+                $response = new stdClass();
+                $response->link = APP_PATH . "/storage/trash/block/" . $image;
+                $response->new_csrf = $this->session()->csrf_token();
+                /*echo '<script>document.write(updateAllCsrfTokens('. $response->new_csrf .'))</script>';*/
+                echo stripcslashes(json_encode($response));
                 return true;
             }
         }

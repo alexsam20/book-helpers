@@ -4,6 +4,7 @@
 <?php /** @var \App\Models\Listing $themes */ ?>
 <?php /** @var \App\Models\Listing $i */ ?>
 <?php /** @var \App\Controllers\ListingController $object */ ?>
+<?php //var_dump($_SESSION); ?>
 <?php if ($i !== 1): ?>
 <hr class="h-1 my-8 mx-4 bg-neutral-quaternary border-0 shadow-lg" />
 <?php endif; ?>
@@ -89,7 +90,10 @@
                                                 // Image upload URL.
                                                 imageUploadURL: "/admin/listing/upload_image",
                                                 // Additional upload params.
-                                                imageUploadParams: {id: 'froalaEditor<?php echo $i;?>'},
+                                                imageUploadParams: {
+                                                    id: 'froalaEditor<?php echo $i;?>',
+                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                },
                                                 // Set request type.
                                                 imageUploadMethod: 'POST',
                                                 // Set max image size to 5MB.
@@ -101,7 +105,15 @@
                                                     'image.beforeUpload': function (images) {
                                                     },
                                                     // Image was uploaded to the server.
-                                                    'image.uploaded': function (response) {},
+                                                    'image.uploaded': function (response) {
+                                                        const data = JSON.parse(response);
+                                                        if (data && data.new_csrf) {
+                                                            const newToken = data.new_csrf;
+                                                            document.querySelectorAll('input[name="_csrf"]').forEach(input => {
+                                                                input.value = newToken;
+                                                            });
+                                                        }
+                                                    },
                                                     // Image was inserted in the editor.
                                                     'image.inserted': function ($img, response) {},
                                                     // Image was replaced in the editor.

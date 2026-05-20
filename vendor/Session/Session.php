@@ -53,10 +53,14 @@ class Session implements SessionInterface
     public function handle(): void
     {
         if ($this->request->method() === 'POST') {
+            $inputToken = $this->request->input(self::CSRF_INPUT_TOKEN);
+            if (null === $inputToken) {
+                $inputToken = json_decode(file_get_contents('php://input'), true)['_csrf'];
+            }
             if (
-                !empty($this->request->input(self::CSRF_INPUT_TOKEN)) &&
+                !empty($inputToken) &&
                 !empty($this->get(self::CSRF_SESSION_TOKEN)) &&
-                $this->request->input(self::CSRF_INPUT_TOKEN) === $this->get(self::CSRF_SESSION_TOKEN)
+                $inputToken === $this->get(self::CSRF_SESSION_TOKEN)
             )
             {
                 $this->remove(self::CSRF_SESSION_TOKEN);

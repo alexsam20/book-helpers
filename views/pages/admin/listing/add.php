@@ -91,6 +91,7 @@
                             <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
                             <!-- Description -->
                             <div class="mb-4">
+                                <?php // var_dump($_SESSION); ?>
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
                                     <script>
@@ -102,7 +103,13 @@
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script>
-                                        let editor = new FroalaEditor("#froalaEditor", {
+                                        function updateAllCsrfTokens(newToken) {
+                                            document.querySelectorAll('input[name="_csrf"]').forEach(input => {
+                                                input.value = newToken;
+                                            });
+                                        }
+                                        let editor;
+                                        editor = new FroalaEditor("#froalaEditor", {
                                             /*iframe: true,*/
                                             key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                             theme: isDarkMode ? "dark" : "royal",
@@ -139,8 +146,16 @@
                                             imageUploadParam: "image_param",
                                             // Image upload URL.
                                             imageUploadURL: "/admin/listing/upload_image",
+                                            imageDeleteURL: "/admin/listing/delete_image",
                                             // Additional upload params.
-                                            imageUploadParams: {id: 'froalaEditor'},
+                                            imageUploadParams: {
+                                                id: 'froalaEditor',
+                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                            },
+                                            imageDeleteParams: {
+                                                id: 'froalaEditor',
+                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                            },
                                             // Set request type.
                                             imageUploadMethod: 'POST',
                                             // Set max image size to 5MB.
@@ -152,12 +167,25 @@
                                                 'image.beforeUpload': function (images) {
                                                 },
                                                 // Image was uploaded to the server.
-                                                'image.uploaded': function (response) {},
+                                                'image.uploaded': function (response) {
+                                                    const data = JSON.parse(response);
+                                                    if (data && data.new_csrf) {
+                                                        updateAllCsrfTokens(data.new_csrf)
+                                                    }
+                                                },
                                                 // Image was inserted in the editor.
                                                 'image.inserted': function ($img, response) {},
                                                 // Image was replaced in the editor.
                                                 'image.replaced': function ($img, response) {},
                                                 'image.error': function (error, response) {
+                                                    /*console.log(error);
+                                                    console.log(response);
+                                                    if (!response) return;
+                                                    const data = JSON.parse(response);
+                                                    console.log(data);
+                                                    if (data && data.action === 'deleteImage' && data.new_csrf) {
+                                                        updateAllCsrfTokens(data.new_csrf);
+                                                    }*/
                                                     // Bad link.
                                                     if (error.code == 1) { console.log(error.message); }
                                                     // No link in upload response.
@@ -178,20 +206,17 @@
                                                     xhttp.onreadystatechange = function () {
                                                         if (this.readyState == 4 && this.status == 200) {
                                                             console.log('Image was deleted');
+                                                            let data = JSON.parse(this.responseText);
+                                                            console.log(data.new_csrf);
+                                                            updateAllCsrfTokens(data.new_csrf);
                                                         }
                                                     };
                                                     xhttp.open("POST", '/admin/listing/delete_image', true);
                                                     xhttp.send(JSON.stringify({
                                                         src: $img.attr('src'),
+                                                        _csrf: document.querySelector('input[name="_csrf"]').value
                                                     }));
-                                                }
-                                                /*'codeSnippet.beforeInsert': function (code) {
-                                                    // Add a comment to all code snippets
-                                                    return '// Auto-generated comment\n' + code;
-                                                }*/
-                                                /*'codeSnippet.afterInsert': function (code) {
-                                                    console.log('Code snippet inserted:', code);
-                                                }*/
+                                                },
                                             }
                                         });
                                     </script>

@@ -17,9 +17,13 @@ class PartService
     /**
      * @return array<Part>
      */
-    public function all(int $id, string $field = 'id'): array
+    public function all(int $id, string $field = 'id', int $visible = 0): array
     {
-        $parts = $this->db->get($this->table, [$field => $id]);
+        $conditions = [$field => $id];
+        if ($visible > 0) {
+            $conditions = [$field => $id, 'is_visible' => 1];
+        }
+        $parts = $this->db->get($this->table, $conditions);
 
         foreach ($parts as $key => $value) {
             $parts[$key]['code']  = $this->getListing($value['id']);
