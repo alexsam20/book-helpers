@@ -51,7 +51,13 @@
                                         <div id="froalaEditor<?php echo $i;?>" class="froala-edtr fr-view w-full rounded-md"><?php // echo $session->getFlash('description_val'); ?><?php echo $code->description(); ?></div>
                                         <textarea name="description" id="hiddenTextareaDescription<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
-                                            let editor<?php echo $i;?> = new FroalaEditor("#froalaEditor<?php echo $i;?>", {
+                                            function updateAllCsrfTokens<?php echo $i;?>(newToken) {
+                                                document.querySelectorAll('input[name="_csrf"]').forEach(input => {
+                                                    input.value = newToken;
+                                                });
+                                            }
+                                            let editor<?php echo $i;?>;
+                                            editor<?php echo $i;?> = new FroalaEditor("#froalaEditor<?php echo $i;?>", {
                                                 /*iframe: true,*/
                                                 key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                                 theme: isDarkMode ? "dark" : "royal",
@@ -89,9 +95,14 @@
                                                 imageUploadParam: "image_param",
                                                 // Image upload URL.
                                                 imageUploadURL: "/admin/listing/upload_image",
+                                                imageDeleteURL: "/admin/listing/delete_image",
                                                 // Additional upload params.
                                                 imageUploadParams: {
                                                     id: 'froalaEditor<?php echo $i;?>',
+                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                },
+                                                imageDeleteParams: {
+                                                    id: 'froalaEditor',
                                                     _csrf: "<?php echo $session->csrf_token(); ?>"
                                                 },
                                                 // Set request type.
@@ -109,9 +120,7 @@
                                                         const data = JSON.parse(response);
                                                         if (data && data.new_csrf) {
                                                             const newToken = data.new_csrf;
-                                                            document.querySelectorAll('input[name="_csrf"]').forEach(input => {
-                                                                input.value = newToken;
-                                                            });
+                                                            updateAllCsrfTokens<?php echo $i;?>(data.new_csrf)
                                                         }
                                                     },
                                                     // Image was inserted in the editor.
@@ -145,7 +154,23 @@
                                                         xhttp<?php echo $i;?>.send(JSON.stringify({
                                                             src: $img.attr('src'),
                                                         }));
-                                                    }
+                                                    },
+                                                    'image.removed': function ($img) {
+                                                        let xhttp<?php echo $i;?> = new XMLHttpRequest();
+                                                        xhttp<?php echo $i;?>.onreadystatechange = function () {
+                                                            if (this.readyState == 4 && this.status == 200) {
+                                                                console.log('Image was deleted');
+                                                                let data<?php echo $i;?> = JSON.parse(this.responseText);
+                                                                console.log(data<?php echo $i;?>.new_csrf);
+                                                                updateAllCsrfTokens(data<?php echo $i;?>.new_csrf);
+                                                            }
+                                                        };
+                                                        xhttp<?php echo $i;?>.open("POST", '/admin/listing/delete_image', true);
+                                                        xhttp<?php echo $i;?>.send(JSON.stringify({
+                                                            src: $img.attr('src'),
+                                                            _csrf: document.querySelector('input[name="_csrf"]').value
+                                                        }));
+                                                    },
                                                 }
                                             });
                                         </script>
