@@ -48,17 +48,16 @@
                                                 document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
                                             }
                                         </script>
-                                        <div id="froalaEditor<?php echo $i;?>" class="froala-edtr fr-view w-full rounded-md"><?php // echo $session->getFlash('description_val'); ?><?php echo $code->description(); ?></div>
+                                        <div id="froalaEditor<?php echo $i;?>" class="froala-edtr fr-view w-full rounded-md"><?php echo $code->description(); ?></div>
                                         <textarea name="description" id="hiddenTextareaDescription<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
-                                            function updateAllCsrfTokens<?php echo $i;?>(newToken) {
+                                            /*function updateAllCsrfTokens<?php echo $i;?>(newToken) {
                                                 document.querySelectorAll('input[name="_csrf"]').forEach(input => {
                                                     input.value = newToken;
                                                 });
-                                            }
+                                            }*/
                                             let editor<?php echo $i;?>;
                                             editor<?php echo $i;?> = new FroalaEditor("#froalaEditor<?php echo $i;?>", {
-                                                /*iframe: true,*/
                                                 key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                                 theme: isDarkMode ? "dark" : "royal",
                                                 zIndex: 99999,
@@ -113,14 +112,12 @@
                                                 imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'svg'],
                                                 events: {
                                                     // Return false if you want to stop the image upload.
-                                                    'image.beforeUpload': function (images) {
-                                                    },
+                                                    'image.beforeUpload': function (images) {},
                                                     // Image was uploaded to the server.
                                                     'image.uploaded': function (response) {
                                                         const data = JSON.parse(response);
                                                         if (data && data.new_csrf) {
-                                                            const newToken = data.new_csrf;
-                                                            updateAllCsrfTokens<?php echo $i;?>(data.new_csrf)
+                                                            updateAllCsrfTokens(data.new_csrf)
                                                         }
                                                     },
                                                     // Image was inserted in the editor.
@@ -148,21 +145,10 @@
                                                         xhttp<?php echo $i;?>.onreadystatechange = function () {
                                                             if (this.readyState == 4 && this.status == 200) {
                                                                 console.log('Image was deleted');
-                                                            }
-                                                        };
-                                                        xhttp<?php echo $i;?>.open("POST", '/admin/listing/delete_image', true);
-                                                        xhttp<?php echo $i;?>.send(JSON.stringify({
-                                                            src: $img.attr('src'),
-                                                        }));
-                                                    },
-                                                    'image.removed': function ($img) {
-                                                        let xhttp<?php echo $i;?> = new XMLHttpRequest();
-                                                        xhttp<?php echo $i;?>.onreadystatechange = function () {
-                                                            if (this.readyState == 4 && this.status == 200) {
-                                                                console.log('Image was deleted');
-                                                                let data<?php echo $i;?> = JSON.parse(this.responseText);
-                                                                console.log(data<?php echo $i;?>.new_csrf);
-                                                                updateAllCsrfTokens(data<?php echo $i;?>.new_csrf);
+                                                                let dataRem = JSON.parse(this.responseText);
+                                                                if (dataRem && dataRem.new_csrf) {
+                                                                    updateAllCsrfTokens(dataRem.new_csrf)
+                                                                }
                                                             }
                                                         };
                                                         xhttp<?php echo $i;?>.open("POST", '/admin/listing/delete_image', true);

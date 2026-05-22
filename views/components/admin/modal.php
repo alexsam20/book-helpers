@@ -112,11 +112,11 @@
                             <!--<span class="p-2 text-white" for="ascript">Block code #1</span>-->
                             <div id="aeditor" name="code">const personalCard = {
                                 id: 8,
-                                name: 'Alexandr Sam',
+                                name: 'Ale Sam',
                                 email: 'alexserss@gmail.com',
-                                phone: "+1 631 542 6481",
+                                phone: "+1 111 111 1111",
                                 gender: 'm',
-                                birthDay: '2970-07-20',
+                                birthDay: '2970-02-20',
                                 danate: false,
                                 createdAt: Date()
                                 };

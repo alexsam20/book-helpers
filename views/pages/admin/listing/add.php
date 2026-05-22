@@ -178,14 +178,6 @@
                                                 // Image was replaced in the editor.
                                                 'image.replaced': function ($img, response) {},
                                                 'image.error': function (error, response) {
-                                                    /*console.log(error);
-                                                    console.log(response);
-                                                    if (!response) return;
-                                                    const data = JSON.parse(response);
-                                                    console.log(data);
-                                                    if (data && data.action === 'deleteImage' && data.new_csrf) {
-                                                        updateAllCsrfTokens(data.new_csrf);
-                                                    }*/
                                                     // Bad link.
                                                     if (error.code == 1) { console.log(error.message); }
                                                     // No link in upload response.
