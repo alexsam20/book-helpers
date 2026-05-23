@@ -7,16 +7,16 @@
 <?php if ($i !== 1): ?>
     <hr class="h-1 my-1 mx-1 bg-neutral-quaternary border-0 shadow-lg" />
 <?php endif; ?>
-    <div class="p-1 dark:bg-gray-950/50 rounded-2xl">
+    <div class="p-0.5 dark:bg-gray-950/50 rounded-2xl">
         <!-- Code Block-->
         <div class="p-1 w-full h-full md:h-auto">
             <!-- Content -->
             <div class="p-2 bg-white rounded-lg shadow dark:bg-gray-800">
                 <!-- Header -->
                 <!--<div class="items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">-->
-                <div class="flex justify-end items-center opacity-50 p-1 text-sm text-gray-900 dark:text-white">
-                    bc: <?php echo $i; ?>
-                </div>
+                <!--<div class="flex justify-end items-center opacity-50 p-1 text-sm text-gray-900 dark:text-white">
+                    bc: <?php /*echo $i; */?>
+                </div>-->
                 <!--</div>-->
                 <div class="mb-4 rounded-lg">
                     <!-- Description -->
@@ -27,8 +27,11 @@
                                 document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
                             }
                         </script>
-                        <div class="flex-col bg-neutral-primary-soft w-full rounded-lg p-3 froala-edtr">
-                            <?php echo $code->description(); ?>
+                        <div class="description">
+                            <button class="copy-btn">bc# <?php echo $i; ?></button>
+                            <div class="flex-col bg-neutral-primary-soft w-full rounded-lg p-3 froala-edtr">
+                                <?php echo $code->description(); ?>
+                            </div>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -43,17 +46,18 @@
                             let aceEditor<?php echo $i;?> = ace.edit("aceEditor<?php echo $i;?>", {
                                 theme: "ace/theme/<?php echo $code->theme(); ?>",
                                 mode: "ace/mode/<?php echo $code->mode(); ?>",
+                                highlightActiveLine: false,
+                                highlightGutterLine: false,
+                                showCursor: "none",
                                 maxLines: 1000
                             });
                             aceEditor<?php echo $i;?>.setReadOnly(true);
-                            /*aceEditor<?php echo $i;?>.renderer.setOption('cursorStyle', 'none');
-                            aceEditor<?php echo $i;?>.container.style.pointerEvents = 'none';*/
+                            aceEditor<?php echo $i;?>.container.style.pointerEvents = 'none';
                             document.getElementById('aceEditor<?php echo $i;?>').style.lineHeight = "1.3";
                             document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '14px';
                             let copyBtn<?php echo $i;?> = document.getElementById('copy-btn<?php echo $i;?>');
                             copyBtn<?php echo $i;?>.addEventListener('click', () => {
                                 let code = aceEditor<?php echo $i;?>.getValue();
-
                                 navigator.clipboard.writeText(code).then(function () {
                                     copyBtn<?php echo $i;?>.innerText = 'Copied!';
                                     setTimeout(function () {

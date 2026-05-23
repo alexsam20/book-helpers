@@ -26,6 +26,7 @@
             <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-t-2xl mt-3">
                 <div class="grid grid-cols-1 p-4 dark:bg-gray-950/50 rounded-t-2xl">
                     <h1 class="py-6">Home Page</h1>
+                    <?php var_dump($books); ?>
                 </div>
             </div>
 

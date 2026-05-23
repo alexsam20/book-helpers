@@ -9,7 +9,7 @@
 <?php $view->component('start_blank') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
-    <?php $view->component('admin/header') ?>
+    <?php $view->component('header') ?>
     <article class="main grow my-2">
         <!-- Page Content -->
         <div class="container border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">

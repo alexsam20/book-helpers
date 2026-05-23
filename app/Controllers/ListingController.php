@@ -19,7 +19,7 @@ class ListingController extends Controller
 
         $this->view('/show', [
             'part' => $part->find($id),
-            'codeListings' => $this->service()->all($id, 'part_id'),
+            'codeListings' => $this->service()->all($id, 'part_id', 1),
             'themes' => $this->service()->getThemeCode(),
             'languages' => $this->service()->language(),
             'object' => $this,

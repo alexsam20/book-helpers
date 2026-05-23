@@ -18,26 +18,31 @@ class ListingService
     /**
      * @return array<Listing>
      */
-    public function all(int $id, string $field = 'id'): array
+    public function all(int $id, string $field = 'id', int $visible = 0): array
     {
-        $books = $this->db->get($this->table, [$field => $id]);
+        $conditions = [$field => $id];
+        if ($visible > 0) {
+            $conditions = [$field => $id, 'is_visible' => 1];
+        }
 
-        return array_map(static function ($book) {
+        $codes = $this->db->get($this->table, $conditions);
+
+        return array_map(static function ($code) {
             return new Listing(
-                $book['id'],
-                $book['book_id'],
-                $book['part_id'],
-                $book['mode'],
-                $book['theme'],
-                $book['description'],
-                $book['source'],
-                $book['is_executable'],
-                $book['is_visible'],
-                $book['deleted_at'],
-                $book['created_at'],
-                $book['updated_at'],
+                $code['id'],
+                $code['book_id'],
+                $code['part_id'],
+                $code['mode'],
+                $code['theme'],
+                $code['description'],
+                $code['source'],
+                $code['is_executable'],
+                $code['is_visible'],
+                $code['deleted_at'],
+                $code['created_at'],
+                $code['updated_at'],
             );
-        }, $books);
+        }, $codes);
     }
 
     public function store(int $book, int $part, string $type, string $theme, ?string $description, string $source, int $run = 0, int $visible = 1): false|int
