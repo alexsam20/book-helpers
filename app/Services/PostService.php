@@ -35,7 +35,7 @@ class PostService
     {
         return $this->db->insert($this->table, [
             'user_id' => $id,
-            'name' => $title,
+            'title' => $title,
             'body' => $body,
         ]);
     }

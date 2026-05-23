@@ -68,7 +68,7 @@
                 </div>
                 <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
                     <div class="w-full bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                        <form method="post" action="/admin/parts/add">
+                        <form id="newPost" method="post" action="/admin/posts/add">
                             <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
                             <div class="mb-4 relative">
                                 <input type="text" id="title" name="title" value="<?php echo $session->getFlash('title_val'); ?>"
@@ -96,7 +96,7 @@
                                         }
                                     </script>
                                     <div id="froalaEditor" class="w-full"><?php echo $session->getFlash('body_val'); ?></div>
-                                    <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
+                                    <textarea name="body" id="hiddenTextarea" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script>
                                         function updateAllCsrfTokens(newToken) {
@@ -208,11 +208,15 @@
                                                 },
                                             }
                                         });
+                                        const form = document.getElementById("newPost");
+                                        form.onsubmit = function () {
+                                            document.getElementById("hiddenTextarea").value = editor.html.get();
+                                        }
                                     </script>
                                 </div>
-                                <?php if ($session->has('description')) : ?>
+                                <?php if ($session->has('body')) : ?>
                                     <ul>
-                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
+                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('body')[0]; ?></li>
                                     </ul>
                                 <?php endif; ?>
                             </div>

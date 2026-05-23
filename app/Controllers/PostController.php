@@ -12,6 +12,7 @@ class PostController extends Controller
     {
         $this->view('/admin/posts/list', [
             'posts' => $this->service()->all(),
+            'object' => $this,
         ], 'Posts');
     }
 
@@ -45,7 +46,7 @@ class PostController extends Controller
             $this->request()->input('body'),
         );
 
-        $this->redirect('/admin');
+        $this->redirect('/admin/posts');
     }
 
     private function service(): PostService

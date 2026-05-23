@@ -1,7 +1,6 @@
 <?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \App\Models\Post $post */ ?>
-<?php /** @var \App\Controllers\PostController $object */  ?>
 <?php /** @var \App\Models\Post $i */ ?>
 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
     <!-- Number -->
@@ -49,7 +48,7 @@
     </td>
     <!-- CreatedAt Date -->
     <td class="px-6 py-2 text-right">
-        <?php echo $view->formatDate($post->createdAt());  ?>
+        <?php echo $view->formatDate($post->createdAt(), 'l, F j, Y H:i');  ?>
     </td>
     <!-- Actions -->
     <td class="px-6 py-2 text-center">

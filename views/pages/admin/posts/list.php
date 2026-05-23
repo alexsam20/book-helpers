@@ -1,7 +1,7 @@
 <?php /** @var \Core\View\ViewInterface $view */ ?>
 <?php /** @var \Core\Session\SessionInterface $session */ ?>
 <?php /** @var \App\Models\Post $posts */ ?>
-<?php // var_dump($posts);  ?>
+<?php // var_dump($object);  ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
@@ -92,7 +92,7 @@
                                         <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach ($posts as $post):  ?>
-                                            <?php $view->component('admin/post', ['part' => $post, 'object' => $object, 'i' => $i]); ?>
+                                            <?php $view->component('admin/post', ['post' => $post, 'i' => $i]); ?>
                                             <?php $i++; ?>
                                         <?php endforeach; ?>
                                         </tbody>
