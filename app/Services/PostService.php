@@ -23,6 +23,7 @@ class PostService
                 $post['user_id'],
                 $post['title'],
                 $post['body'],
+                $post['is_visible'],
                 $post['deleted_at'],
                 $post['created_at'],
                 $post['updated_at'],

@@ -15,24 +15,7 @@ class BookController extends Controller
         $this->view('books', [
             'books' => $this->service()->all(1),
         ], 'Sources of Information');
-
-        $this->view('books');
     }
-
-    /*public function list(): void
-    {
-        $id = $this->request()->input('id');
-        $book = $this->service()->find($id);
-        $partService = new PartService();
-
-        var_dump($book); die;
-        $this->view('/admin/books/list', [
-            'id' => $id,
-            'book' => $book->find($id),
-            'parts' => $this->service()->all($id, 'book_id'),
-            'object' => $this,
-        ], 'Parts');
-    }*/
 
     public function create(): void
     {

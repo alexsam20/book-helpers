@@ -9,6 +9,7 @@ class Post
         private readonly int $user_id,
         private readonly string $title,
         private readonly string $body,
+        private readonly int $is_visible,
         private readonly ?string $deletedAt,
         private readonly string $createdAt,
         private readonly string $updatedAt,
@@ -32,6 +33,11 @@ class Post
     public function body(): string
     {
         return $this->body;
+    }
+
+    public function isVisible(): int
+    {
+        return $this->is_visible;
     }
 
     public function deletedAt(): string

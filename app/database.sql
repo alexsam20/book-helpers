@@ -61,7 +61,8 @@ CREATE TABLE `posts` (
     `user_id` int NOT NULL,
     `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
     `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `is_deleted` timestamp DEFAULT NULL,
+    `is_visible` TINYINT(1) DEFAULT '1',
+    `deleted_at` timestamp DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)

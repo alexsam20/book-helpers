@@ -10,20 +10,9 @@ class PostController extends Controller
     private PostService $service;
     public function index(): void
     {
-        $this->view('posts', [
-            'books' => $this->service()->all(),
-        ], 'Sources of Information');
-
-        $this->view('posts');
-    }
-
-    private function service(): PostService
-    {
-        if (! isset($this->service)) {
-            $this->service = new PostService($this->db());
-        }
-
-        return $this->service;
+        $this->view('/admin/posts/list', [
+            'posts' => $this->service()->all(),
+        ], 'Posts');
     }
 
     public function create(): void
@@ -57,5 +46,14 @@ class PostController extends Controller
         );
 
         $this->redirect('/admin');
+    }
+
+    private function service(): PostService
+    {
+        if (! isset($this->service)) {
+            $this->service = new PostService($this->db());
+        }
+
+        return $this->service;
     }
 }

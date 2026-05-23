@@ -102,6 +102,8 @@
                                     <div id="froalaEditor" class="w-full"><?php echo $session->getFlash('description_val'); ?></div>
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
+                                    <!--<script type="text/javascript" src="/assets/froala/js/filerobot-image-editor.min.js"></script>
+                                    <script type="text/javascript" src="/assets/froala/js/imageFileRobot.min.js"></script>-->
                                     <script>
                                         function updateAllCsrfTokens(newToken) {
                                             document.querySelectorAll('input[name="_csrf"]').forEach(input => {
@@ -113,6 +115,7 @@
                                             /*iframe: true,*/
                                             key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
                                             theme: isDarkMode ? "dark" : "royal",
+                                            /*pluginsEnabled: ['image', 'imageFilerobot'],*/
                                             zIndex: 1,
                                             toolbarButtons: {
                                                 // Key represents the more button from the toolbar.

@@ -6,6 +6,7 @@ use App\Controllers\HomeController;
 use App\Controllers\ListingController;
 use App\Controllers\LoginController;
 use App\Controllers\PartController;
+use App\Controllers\PostController;
 use App\Controllers\RegisterController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
@@ -45,6 +46,10 @@ return [
     Route::post('/admin/listing/destroy', [ListingController::class , 'destroy'], [AuthMiddleware::class]),
     Route::post('/admin/listing/upload_image', [ListingController::class , 'upload'], [AuthMiddleware::class]),
     Route::post('/admin/listing/delete_image', [ListingController::class , 'delete'], [AuthMiddleware::class]),
+
+    Route::get('/admin/posts', [PostController::class , 'index'], [AuthMiddleware::class]),
+    Route::get('/admin/posts/add', [PostController::class , 'create'], [AuthMiddleware::class]),
+    Route::post('/admin/posts/add', [PostController::class , 'store'], [AuthMiddleware::class]),
 
     Route::get('/test' , static function() {
         echo 'Test';

@@ -1,260 +1,139 @@
-<?php /** @var \Core\View\ViewInterface $view */  ?>
-<?php /** @var \Core\Session\SessionInterface $session */  ?>
+<?php /** @var \Core\View\ViewInterface $view */ ?>
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
+<?php /** @var \App\Models\Post $posts */ ?>
+<?php // var_dump($posts);  ?>
 <?php $view->component('start') ?>
 <!-- Content -->
 <div class="flex flex-col h-full">
     <?php $view->component('admin/header') ?>
     <main class="main grow my-2">
         <div class="container flex flex-col border border-gray-200 dark:border-gray-800 dark:bg-gray-950/10 rounded-2xl">
-
-            <div class="inline-flex items-center justify-between mt-4">
-                <h1 class="text-xl font-semibold text-cyan-600">Books and Video</h1>
-                <div>
-                    <!--Button Add-->
-                    <a type="button" href="/admin/books/add" class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
-                        <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"/>
+            <!-- Breadcrumbs -->
+            <nav class="flex m-2 pt-2" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="flex items-center">
+                        <a href="/admin" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-5-4v4h4V3h-4Z"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
+                            </svg>
+                            <a href="/admin/parts?id=<?php // echo $part->bookId(); ?>" class="inline-flex items-center ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                <svg class="w-4 h-4 me-2" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+                                </svg>
+                                Posts
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <!-- Page Content -->
+            <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
+                <div class="flex justify-between p-4 bg-gray-100 dark:bg-gray-950/50 rounded-t-2xl">
+                    <h1 class="flex items-center text-xl font-semibold tracking-tight text-cyan-600">
+                        <svg class="w-7 h-7 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
                         </svg>
-                        Add
-                    </a>
+                        All Posts
+                    </h1>
+                    <div class="">
+                        <!-- Button Add Block Code -->
+                        <a type="button" href="/admin/posts/add" id="blockCodeActionButton" data-modal-target="blockCodeModal" data-modal-toggle="blockCodeModal" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
+                            <svg class="w-5 h-5 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            Add Post
+                        </a>
+                        <!-- Button Back -->
+                        <!--<a type="button" href="/admin/parts?id=<?php /*// echo $part->bookId() */?>" class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
+                            <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 8.046H11V6.119c0-.921-.9-1.446-1.524-.894l-5.108 4.49a1.2 1.2 0 0 0 0 1.739l5.108 4.49c.624.556 1.524.027 1.524-.893v-1.928h2a3.023 3.023 0 0 1 3 3.046V19a5.593 5.593 0 0 0-1.5-10.954Z"></path>
+                            </svg>
+                            Back
+                        </a>-->
+                    </div>
+                </div>
+                <!-- Part Card -->
+                <div class="grid grid-cols-1 p-4 dark:bg-neutral-primary-soft rounded-2xl">
+                    <div class="flex flex-col p-2 items-center text-gray-800 bg-gray-100 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl shadow-xs md:flex-row">
+                        <div class="flex flex-col text-left md:p-4 leading-normal w-full">
+                            <?php if (!empty($posts)): ?>
+                                <!-- Table Parts -->
+                                <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default mt-4 mb-4">
+                                    <table class="w-full text-sm text-left rtl:text-right text-body">
+                                        <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
+                                        <tr>
+                                            <th scope="col" class="px-2 py-3 font-medium text-center">
+                                                #
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 font-medium text-center">
+                                                Title
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 font-medium text-center">
+                                                Visible
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 font-medium text-center">
+                                                Date Created
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 font-medium text-center">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($posts as $post):  ?>
+                                            <?php $view->component('admin/post', ['part' => $post, 'object' => $object, 'i' => $i]); ?>
+                                            <?php $i++; ?>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                    <!-- Pagination -->
+                                    <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4" aria-label="Table navigation">
+                                        <span class="text-sm font-normal text-body mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-heading">1-10</span> of <span class="font-semibold text-heading">1000</span></span>
+                                        <ul class="flex -space-x-px text-sm">
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-s-base text-sm px-3 h-9 focus:outline-none">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" aria-current="page" class="flex items-center justify-center text-fg-brand bg-brand-softer box-border border border-default-medium hover:bg-brand-soft hover:text-fg-brand font-medium text-sm w-9 h-9 focus:outline-none">3</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">...</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">5</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-e-base text-sm px-3 h-9 focus:outline-none">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            <?php else: ?>
+                                <div class="h-20 flex justify-center items-center text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
+                                    💩 No Records.
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default mt-4 mb-4">
-                <table class="w-full text-sm text-left rtl:text-right text-body">
-                    <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
-                    <tr>
-                        <th scope="col" class="px-2 py-3 font-medium text-center">
-                            #
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Book
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Name
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Author
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Date Created
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Visible
-                        </th>
-                        <th scope="col" class="px-6 py-3 font-medium text-center">
-                            Actions
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                        <td class="px-6 py-2 text-center">
-                            1
-                        </td>
-                        <td class="px-6 py-2 text-center">
-                            <img src="/storage/books/stashchuk-bogdan.jpg" class="w-10" alt="">
-                        </td>
-                        <td class="px-6 py-2 font-medium text-heading">
-                            Создаем динамические веб-сайты с помощью PHP, MySQL, JаvaScript, CSS и HTML5
-                        </td>
-                        <td class="px-6 py-2 text-left">
-                            Shmocik
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            Saturday, Mar 14, 2026 19:47
-                        </td>
-                        <td class="px-6 py-2 text-center">
-                            <span class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded">Invisible</span>
-                            <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded">Visible</span>
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            <div class="inline-flex items-center">
-                                <a href="#"
-                                   class="flex gap-1 py-2 px-3 rounded-sm text-right text-teal-600 hover:text-teal-800 dark:text-teal-500 dark:hover:text-teal-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                    </svg>
-                                    <span>Edit</span>
-                                </a>
-                                <a href="#"
-                                   class="flex gap-1 py-2 px-3 rounded-sm text-right text-rose-500 hover:text-rose-700 dark:text-rose-700 dark:hover:text-rose-500 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                    </svg>
-                                    <span>Delete</span>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                        <th scope="row" class="px-6 py-2 font-medium text-heading text-center whitespace-nowrap">
-                            2
-                        </th>
-                        <th scope="row" class="px-6 py-2 font-medium text-heading whitespace-nowrap">
-                            <img src="/storage/books/Patterns-JavaScript.jpg" class="w-10" alt="">
-                        </th>
-                        <td class="px-6 py-2 font-medium text-heading">
-                            Создаем динамические веб-сайты с помощью PHP, MySQL, JаvaScript, CSS и HTML5
-                        </td>
-                        <td class="px-6 py-2 text-left">
-                            Никсон Робин
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            Wednesday, May 14, 2025 17:18
-                        </td>
-                        <td class="px-6 py-2 text-center">
-                            <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded">Visible</span>
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            <div class="flex inline-flex items-center">
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-teal-600 hover:text-teal-800 dark:text-teal-500 dark:hover:text-teal-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                    </svg>
-                                    <span>Edit</span>
-                                </a>
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 dark:text-rose-700 dark:hover:text-rose-500 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                    </svg>
-                                    <span>Delete</span>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                        <th scope="row" class="px-6 py-4 font-medium text-heading text-center whitespace-nowrap">
-                            3
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img src="/storage/books/stashchuk-bogdan.jpg" class="w-10" alt="">
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            Infinite Scrolling Prevent Multiple Requests
-                        </th>
-                        <td class="px-6 py-2 text-right">
-                            John Doe
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            Wednesday, May 14, 2025 17:18
-                        </td>
-                        <td class="px-6 py-2 text-center">
-                            ON
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            <div class="flex inline-flex items-center">
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-teal-600 hover:text-teal-800 dark:text-teal-500 dark:hover:text-teal-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                    </svg>
-                                    <span>Edit</span>
-                                </a>
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 dark:text-rose-700 dark:hover:text-rose-500 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                    </svg>
-                                    <span>Delete</span>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                        <th scope="row" class="px-6 py-4 font-medium text-heading text-center whitespace-nowrap">
-                            4
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            <img src="/storage/books/stashchuk-bogdan.jpg" class="w-10" alt="">
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            Form Allow Fallback to HTML
-                        </th>
-                        <td class="px-6 py-2 text-right">
-                            Balalaika
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            Saturday, Mar 14, 2026 19:47
-                        </td>
-                        <td class="px-6 py-2 text-center">
-                            ON
-                        </td>
-                        <td class="px-6 py-2 text-right">
-                            <div class="flex inline-flex items-center">
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-teal-600 hover:text-teal-800 dark:text-teal-500 dark:hover:text-teal-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                    </svg>
-                                    <span>Edit</span>
-                                </a>
-                                <a href="#"
-                                   class="flex gap-1 block py-2 px-3 rounded-sm text-right text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 dark:text-rose-700 dark:hover:text-rose-500 hover:bg-gray-200 dark:hover:bg-gray-700 dark:border-gray-700">
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                    </svg>
-                                    <span>Delete</span>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- Pagination -->
-                <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4" aria-label="Table navigation">
-                    <span class="text-sm font-normal text-body mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-heading">1-10</span> of <span class="font-semibold text-heading">1000</span></span>
-                    <ul class="flex -space-x-px text-sm">
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-s-base text-sm px-3 h-9 focus:outline-none">Previous</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">1</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page" class="flex items-center justify-center text-fg-brand bg-brand-softer box-border border border-default-medium hover:bg-brand-soft hover:text-fg-brand font-medium text-sm w-9 h-9 focus:outline-none">3</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">...</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">5</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-e-base text-sm px-3 h-9 focus:outline-none">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
         </div>
     </main>
     <?php $view->component('footer') ?>

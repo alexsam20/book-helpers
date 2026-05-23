@@ -92,7 +92,7 @@ $user = $auth->user();
                         </a>
                     </li>
                     <li>
-                        <a href="/books" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
+                        <a href="/admin" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
                             <svg class="w-5 h-5" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
                                  viewBox="0 0 24 24">
@@ -103,7 +103,7 @@ $user = $auth->user();
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
+                        <a href="/admin/posts" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
                             <svg class="w-5 h-5" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  stroke="currentColor" stroke-width="2"  fill="none"
                                  viewBox="0 0 24 24">

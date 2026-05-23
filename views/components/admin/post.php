@@ -1,0 +1,85 @@
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
+<?php /** @var \Core\View\ViewInterface $view */  ?>
+<?php /** @var \App\Models\Post $post */ ?>
+<?php /** @var \App\Controllers\PostController $object */  ?>
+<?php /** @var \App\Models\Post $i */ ?>
+<tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+    <!-- Number -->
+    <td class="px-6 py-2 text-center">
+        <?php echo $i; ?>
+    </td>
+    <!-- Title -->
+    <td class="px-6 py-2 font-medium text-heading">
+        <?php echo $post->title() ?>
+    </td>
+    <!-- Is Visible -->
+    <td class="px-6 py-2 text-center">
+        <form method="post" action="/admin/post/visible">
+            <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
+            <input type="hidden" name="id" value="<?php echo $post->id(); ?>" />
+            <?php if (1 === $post->isVisible()): ?>
+                <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
+                    <li>
+                        <button type="submit">
+                        <span class="inline-flex items-center border border-brand-subtle bg-brand-softer text-xs text-fg-brand-strong font-medium px-1.5 py-0.5 rounded cursor-pointer">
+                            <svg class="w-4 h-4 me-1 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                <path fill="none" stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
+                            Visible
+                        </span>
+                        </button>
+                    </li>
+                </ul>
+            <?php else: ?>
+                <ul class="inline-flex items-center mt-0 text-sm font-medium mr-2">
+                    <li>
+                        <button type="submit">
+                        <span class="inline-flex items-center border border-danger-subtle bg-danger-soft text-xs text-fg-danger-strong font-medium px-1.5 py-0.5 rounded cursor-pointer">
+                            <svg class="w-4 h-4 me-1 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
+                            Invisible
+                        </span>
+                        </button>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </form>
+    </td>
+    <!-- CreatedAt Date -->
+    <td class="px-6 py-2 text-right">
+        <?php echo $view->formatDate($post->createdAt());  ?>
+    </td>
+    <!-- Actions -->
+    <td class="px-6 py-2 text-center">
+        <div class="inline-flex rounded-base space-x-1" role="group">
+            <!--Button Edit-->
+            <a type="button" href="/admin/parts/update?id=<?php echo $post->id(); ?>" class="inline-flex items-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5">
+                <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                </svg>
+                Edit
+            </a>
+            <!--Button View-->
+            <a type="button" href="/admin/listing/add?id=<?php echo $post->id(); ?>" class="inline-flex items-center text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5">
+                <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
+                </svg>
+                View
+            </a>
+            <!--Form Delete Book-->
+            <form method="post" onclick="return confirm('Delete?')" action="/admin/parts/destroy">
+                <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
+                <input type="hidden" name="id" value="<?php echo $post->id(); ?>" />
+                <button type="submit" class="inline-flex items-center text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5 cursor-pointer">
+                    <svg class="w-4 h-4 mr-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                    </svg>
+                    Delete
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>
+
