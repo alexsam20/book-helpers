@@ -112,7 +112,6 @@ class PartService
     private function getListing(int $id): array
     {
         $codeBlocks = $this->db->get('codes', ['part_id' => $id]);
-        /*var_dump($codeBlocks); die();*/
 
         return array_map(static function ($code) {
             return new Listing(

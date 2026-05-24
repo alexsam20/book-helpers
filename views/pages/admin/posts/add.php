@@ -23,13 +23,13 @@
                             <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
                             </svg>
-                            <a href="/admin/parts?id=<?php // echo $id; ?>" class="inline-flex items-center ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                            <a href="/admin/posts" class="inline-flex items-center ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                 <svg class="w-4 h-4 me-2" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
                                      viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
                                 </svg>
-                                Parts of Book
+                                Posts
                             </a>
                         </div>
                     </li>
@@ -44,7 +44,7 @@
                                      viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"></path>
                                 </svg>
-                                Add Part
+                                Add Post
                             </span>
                         </div>
                     </li>
@@ -147,11 +147,11 @@
                                             // Additional upload params.
                                             imageUploadParams: {
                                                 id: 'froalaEditor',
-                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                _csrf: document.querySelector('input[name="_csrf"]').value
                                             },
                                             imageDeleteParams: {
                                                 id: 'froalaEditor',
-                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                _csrf: document.querySelector('input[name="_csrf"]').value
                                             },
                                             // Set request type.
                                             imageUploadMethod: 'POST',
@@ -162,6 +162,8 @@
                                             events: {
                                                 // Return false if you want to stop the image upload.
                                                 'image.beforeUpload': function (images) {
+                                                    const freshToken = document.querySelector('input[name="_csrf"]').value;
+                                                    this.opts.imageUploadParams._csrf = freshToken;
                                                 },
                                                 // Image was uploaded to the server.
                                                 'image.uploaded': function (response) {
@@ -196,7 +198,6 @@
                                                         if (this.readyState == 4 && this.status == 200) {
                                                             console.log('Image was deleted');
                                                             let data = JSON.parse(this.responseText);
-                                                            console.log(data.new_csrf);
                                                             updateAllCsrfTokens(data.new_csrf);
                                                         }
                                                     };

@@ -98,11 +98,11 @@
                                                 // Additional upload params.
                                                 imageUploadParams: {
                                                     id: 'froalaEditor<?php echo $i;?>',
-                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                    _csrf: document.querySelector('input[name="_csrf"]').value
                                                 },
                                                 imageDeleteParams: {
                                                     id: 'froalaEditor',
-                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                    _csrf: document.querySelector('input[name="_csrf"]').value
                                                 },
                                                 // Set request type.
                                                 imageUploadMethod: 'POST',
@@ -112,7 +112,10 @@
                                                 imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'svg'],
                                                 events: {
                                                     // Return false if you want to stop the image upload.
-                                                    'image.beforeUpload': function (images) {},
+                                                    'image.beforeUpload': function (images) {
+                                                        const freshToken<?php echo $i;?> = document.querySelector('input[name="_csrf"]').value;
+                                                        this.opts.imageUploadParams._csrf = freshToken<?php echo $i;?>;
+                                                    },
                                                     // Image was uploaded to the server.
                                                     'image.uploaded': function (response) {
                                                         const data = JSON.parse(response);

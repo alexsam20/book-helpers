@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use Core\Auth\User;
 use Core\DataBase\DatabaseInterface;
 
 class PostService
@@ -13,9 +14,17 @@ class PostService
         private readonly DatabaseInterface $db,
     ) { }
 
-    public function all(): array
+    public function all(int $visible = 0): array
     {
-        $posts = $this->db->get($this->table, [], ['id' => 'DESC']);
+        $conditions = [];
+        if ($visible > 0) {
+            $conditions = ['is_visible' => 1];
+        }
+        $posts = $this->db->get($this->table, $conditions, ['id' => 'DESC']);
+
+        foreach ($posts as $key => $value) {
+            $posts[$key]['user'] = $this->getUser($value['user_id']);
+        }
 
         return array_map(static function ($post) {
             return new Post(
@@ -27,17 +36,9 @@ class PostService
                 $post['deleted_at'],
                 $post['created_at'],
                 $post['updated_at'],
+                $post['user'],
             );
         }, $posts);
-    }
-
-    public function store(int $id, string $title, string $body): false|int
-    {
-        return $this->db->insert($this->table, [
-            'user_id' => $id,
-            'title' => $title,
-            'body' => $body,
-        ]);
     }
 
     public function find(?int $id): ?Post
@@ -48,6 +49,8 @@ class PostService
             return null;
         }
 
+        $post['user'] = $this->getUser($post['user_id']);
+
         return new Post(
             $post['id'],
             $post['user_id'],
@@ -57,6 +60,7 @@ class PostService
             $post['deleted_at'],
             $post['created_at'],
             $post['updated_at'],
+            $post['user'],
         );
     }
 
@@ -80,5 +84,19 @@ class PostService
         $record = $this->db->first($this->table, ['id' => $id])['is_visible'];
 
         $this->db->update($this->table, ['is_visible' => $record ^ 1], ['id' => $id]);
+    }
+
+    private function getUser(int $id): array
+    {
+        return $this->db->first('users', ['id' => $id]);
+    }
+
+    public function store(int $id, string $title, string $body): false|int
+    {
+        return $this->db->insert($this->table, [
+            'user_id' => $id,
+            'title' => $title,
+            'body' => $body,
+        ]);
     }
 }

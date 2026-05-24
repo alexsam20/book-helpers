@@ -13,6 +13,7 @@ class Post
         private readonly ?string $deletedAt,
         private readonly string $createdAt,
         private readonly string $updatedAt,
+        private readonly array $user,
     ){}
 
     public function id(): int
@@ -53,5 +54,10 @@ class Post
     public function updatedAt(): string
     {
         return $this->updatedAt;
+    }
+
+    public function user(): array
+    {
+        return $this->user;
     }
 }

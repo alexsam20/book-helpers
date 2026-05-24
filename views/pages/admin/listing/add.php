@@ -153,11 +153,11 @@
                                             // Additional upload params.
                                             imageUploadParams: {
                                                 id: 'froalaEditor',
-                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                _csrf: document.querySelector('input[name="_csrf"]').value
                                             },
                                             imageDeleteParams: {
                                                 id: 'froalaEditor',
-                                                _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                _csrf: document.querySelector('input[name="_csrf"]').value
                                             },
                                             // Set request type.
                                             imageUploadMethod: 'POST',
@@ -168,6 +168,8 @@
                                             events: {
                                                 // Return false if you want to stop the image upload.
                                                 'image.beforeUpload': function (images) {
+                                                    const freshToken = document.querySelector('input[name="_csrf"]').value;
+                                                    this.opts.imageUploadParams._csrf = freshToken;
                                                 },
                                                 // Image was uploaded to the server.
                                                 'image.uploaded': function (response) {

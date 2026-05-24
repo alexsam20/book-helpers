@@ -90,11 +90,10 @@ $user = $auth->user();
                                 <path fill="none" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
                             </svg>
                             <span>Books</span>
-
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
+                        <a href="/posts" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
                             <svg class="w-5 h-5" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="none"  stroke="currentColor" stroke-width="2" d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"/>
