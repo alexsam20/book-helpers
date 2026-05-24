@@ -51,7 +51,7 @@ class View implements ViewInterface
         include $componentPath;
     }
 
-    public function formatDate($date, $format = 'F j, Y H:i'): string
+    public function formatDate(string $date, string $format = 'F j, Y H:i'): string
     {
         return date($format, strtotime($date));
     }

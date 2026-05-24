@@ -49,6 +49,13 @@ class PostController extends Controller
         $this->redirect('/admin/posts');
     }
 
+    public function visible(): void
+    {
+        $this->service()->updateVisibility((int) $this->request()->input('id'));
+
+        $this->redirect('/admin/posts');
+    }
+
     private function service(): PostService
     {
         if (! isset($this->service)) {

@@ -13,7 +13,7 @@
     </td>
     <!-- Is Visible -->
     <td class="px-6 py-2 text-center">
-        <form method="post" action="/admin/post/visible">
+        <form method="post" action="/admin/posts/visible">
             <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
             <input type="hidden" name="id" value="<?php echo $post->id(); ?>" />
             <?php if (1 === $post->isVisible()): ?>
