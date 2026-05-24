@@ -73,13 +73,6 @@ class PostService
     public function remove(int $id): void
     {
         $this->db->remove($this->table, 'deleted_at', ['id' => $id]);
-
-        /*$listingService = new ListingService($this->db);
-        $codes = $listingService->all($id, 'part_id');
-
-        if (count($codes) > 0) {
-            $this->db->remove('codes', 'deleted_at', ['part_id' => $id]);
-        }*/
     }
 
     public function updateVisibility(int $id): void

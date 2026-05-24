@@ -133,7 +133,6 @@ class PostController extends Controller
         if (empty($data)) {
             $data = json_decode(file_get_contents('php://input'), true);
         }
-//        file_put_contents(STORAGE_PATH . 'data.txt', $data);
         $src = $data['src'] ?? null;
         if (null !== $src) {
             $image = explode('/', parse_url($src, PHP_URL_PATH)) ;
