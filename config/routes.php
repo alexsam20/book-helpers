@@ -51,6 +51,8 @@ return [
     Route::get('/admin/posts/add', [PostController::class , 'create'], [AuthMiddleware::class]),
     Route::post('/admin/posts/add', [PostController::class , 'store'], [AuthMiddleware::class]),
     Route::post('/admin/posts/visible', [PostController::class , 'visible'], [AuthMiddleware::class]),
+    Route::post('/admin/posts/upload_image', [PostController::class , 'upload'], [AuthMiddleware::class]),
+    Route::post('/admin/posts/delete_image', [PostController::class , 'delete'], [AuthMiddleware::class]),
 
     Route::get('/test' , static function() {
         echo 'Test';

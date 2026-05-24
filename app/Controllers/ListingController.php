@@ -141,14 +141,14 @@ class ListingController extends Controller
      */
     public function upload(): void
     {
-        is_dir(STORAGE_PATH) || mkdir(STORAGE_PATH, 0777, true);
-        is_dir(ROOT_PATH . '/storage/trash/block/') || mkdir(ROOT_PATH . '/storage/trash/block/', 0777, true);
+        is_dir(STORAGE_BLOCK) || mkdir(STORAGE_BLOCK, 0777, true);
+        is_dir(TRASH_BLOCK) || mkdir(TRASH_BLOCK, 0777, true);
 
         $name = $_FILES['image_param']['name'];
         $extension = pathinfo($name, PATHINFO_EXTENSION);
         $randomName = md5(uniqid(mt_rand(), true)) . '.' . $extension;
         $tmpName = $_FILES['image_param']['tmp_name'];
-        $destination = STORAGE_PATH . $randomName;
+        $destination = STORAGE_BLOCK . $randomName;
 
         if (move_uploaded_file($tmpName, $destination)) {
             $response = new stdClass();
@@ -178,7 +178,6 @@ class ListingController extends Controller
                 $response = new stdClass();
                 $response->link = APP_PATH . "/storage/trash/block/" . $image;
                 $response->new_csrf = $this->session()->csrf_token();
-                /*echo '<script>document.write(updateAllCsrfTokens('. $response->new_csrf .'))</script>';*/
                 echo stripcslashes(json_encode($response));
                 return true;
             }

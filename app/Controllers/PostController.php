@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\PostService;
 use Core\Controller\Controller;
+use stdClass;
 
 class PostController extends Controller
 {
@@ -54,6 +55,56 @@ class PostController extends Controller
         $this->service()->updateVisibility((int) $this->request()->input('id'));
 
         $this->redirect('/admin/posts');
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    public function upload(): void
+    {
+        is_dir(STORAGE_POST) || mkdir(STORAGE_POST, 0777, true);
+        is_dir(TRASH_POST) || mkdir(TRASH_POST, 0777, true);
+
+        $name = $_FILES['image_param']['name'];
+        $extension = pathinfo($name, PATHINFO_EXTENSION);
+        $randomName = md5(uniqid(mt_rand(), true)) . '.' . $extension;
+        $tmpName = $_FILES['image_param']['tmp_name'];
+        $destination = STORAGE_POST . $randomName;
+
+        if (move_uploaded_file($tmpName, $destination)) {
+            $response = new stdClass();
+            $response->link = URL_PATH . '/storage/post/' . $randomName;
+            $response->new_csrf = $this->session()->csrf_token();
+            echo stripcslashes(json_encode($response));
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Could not save file.'], JSON_THROW_ON_ERROR);
+        }
+    }
+
+    public function delete(): bool
+    {
+        $data = $_POST;
+        if (empty($data)) {
+            $data = json_decode(file_get_contents('php://input'), true);
+        }
+//        file_put_contents(STORAGE_PATH . 'data.txt', $data);
+        $src = $data['src'] ?? null;
+        if (null !== $src) {
+            $image = explode('/', parse_url($src, PHP_URL_PATH)) ;
+            $image = end($image);
+            $oldFile = APP_PATH . "/storage/post/" . $image;
+            $trash = APP_PATH . "/storage/trash/post/" . $image;
+            if (rename($oldFile, $trash)) {
+                $response = new stdClass();
+                $response->link = APP_PATH . "/storage/trash/block/" . $image;
+                $response->new_csrf = $this->session()->csrf_token();
+                echo stripcslashes(json_encode($response));
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function service(): PostService

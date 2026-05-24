@@ -11,7 +11,14 @@ define('URL_PATH',
     mb_strtolower(
         explode('/', $_SERVER['SERVER_PROTOCOL'])[0]
     ) . '://' . $_SERVER['HTTP_HOST']);
-const STORAGE_PATH = ROOT_PATH . '/storage/block/';
+const STORAGE_PATH = ROOT_PATH . '/storage/';
+const STORAGE_BOOK = STORAGE_PATH . 'books/';
+const STORAGE_BLOCK = STORAGE_PATH . 'block/';
+const STORAGE_POST = STORAGE_PATH . 'post/';
+const TRASH_PATH = STORAGE_PATH . 'trash/';
+const TRASH_BOOK = TRASH_PATH . 'books/';
+const TRASH_BLOCK = TRASH_PATH . 'block/';
+const TRASH_POST = TRASH_PATH . 'post/';
 /*var_dump($_SERVER['DOCUMENT_ROOT']);
 var_dump(ROOT_PATH);
 var_dump(APP_PATH);
