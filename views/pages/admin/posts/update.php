@@ -1,7 +1,6 @@
 <?php /** @var \Core\View\ViewInterface $view */  ?>
 <?php /** @var \Core\Session\SessionInterface $session */  ?>
-<?php /** @var \Core\Storage\StorageInterface $storage */  ?>
-<?php /** @var \App\Models\Book $book */  ?>
+<?php /** @var \App\Models\Post $post */  ?>
 <?php $view->component('start') ?>
     <!-- Content -->
     <div class="flex flex-col h-full">
@@ -32,7 +31,7 @@
                                               stroke-width="2"
                                               d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
                                     </svg>
-                                    Edit Book
+                                    Edit Post
                                 </span>
                             </div>
                         </li>
@@ -47,7 +46,7 @@
                                          viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
                                     </svg>
-                                    <?php echo $book->name(); ?>
+                                    <?php echo $post->title(); ?>
                                 </span>
                             </div>
                         </li>
@@ -57,16 +56,12 @@
                 <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mt-3 mb-3">
                     <div class="flex justify-between p-4 bg-gray-100 dark:bg-gray-950/50 rounded-t-2xl">
                         <h1 class="flex items-center text-xl font-semibold tracking-tight text-cyan-600">
-                            <svg class="w-6 h-6 me-2" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                            <svg class="w-7 h-7 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9M9 7h6m-7 3h8"/>
                             </svg>
-                            Edit Book
+                            Add Post
                         </h1>
-                        <a type="button" href="/admin" class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
+                        <a type="button" href="/admin/posts" class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5">
                             <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 8.046H11V6.119c0-.921-.9-1.446-1.524-.894l-5.108 4.49a1.2 1.2 0 0 0 0 1.739l5.108 4.49c.624.556 1.524.027 1.524-.893v-1.928h2a3.023 3.023 0 0 1 3 3.046V19a5.593 5.593 0 0 0-1.5-10.954Z"></path>
                             </svg>
@@ -74,110 +69,169 @@
                         </a>
                     </div>
                     <div class="flex bg-neutral-primary-soft w-full rounded-2xl">
-                        <div class="w-full lg:w-2/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <form method="post" action="/admin/books/update" enctype="multipart/form-data">
+                        <div class="w-full bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
+                            <form id="newPost" method="post" action="/admin/posts/update">
                                 <input type="hidden" name="_csrf" value="<?php echo $session->csrf_token(); ?>" />
-                                <input type="hidden" name="id" value="<?php echo $book->id(); ?>" />
-                                <!-- Book Name -->
+                                <input type="hidden" name="id" value="<?php echo $post->id(); ?>" />
                                 <div class="mb-4 relative">
-                                    <input type="text" id="book" name="book" value="<?php echo $book->name(); ?>"
+                                    <input type="text" id="title" name="title" value="<?php echo $post->title(); ?>"
                                            class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
-                                           placeholder="Book Name" />
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
+                                           placeholder="Title" />
+                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2">
                                         <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9" />
                                         </svg>
                                     </div>
-                                    <?php if ($session->has('book')) : ?>
-                                    <ul>
-                                        <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('book')[0]; ?></li>
-                                    </ul>
-                                    <?php endif; ?>
-                                </div>
-                                <!-- Author -->
-                                <div class="mb-4 relative">
-                                    <input type="text" id="author" name="author" value="<?php echo $book->author(); ?>"
-                                           class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body"
-                                           placeholder="Author" />
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
-                                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4.988 19.012 5.41-5.41m2.366-6.424 4.058 4.058-2.03 5.41L5.3 20 4 18.701l3.355-9.494 5.41-2.029Zm4.626 4.625L12.197 6.61 14.807 4 20 9.194l-2.61 2.61Z"/>
-                                        </svg>
-                                    </div>
-                                    <?php if ($session->has('author')) : ?>
+                                    <?php if ($session->has('title')) : ?>
                                         <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('author')[0]; ?></li>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('title')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
-                                <!-- Media -->
-                                <div class="mb-4 relative">
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
-                                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
-                                        </svg>
-                                    </div>
-                                    <select id="media" name="media" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
-                                        <option value="book" <?php if ($book->media() === 'book') { echo ' selected';} ?>>Book</option>
-                                        <option value="video" <?php if ($book->media() === 'video') { echo 'selected';} ?>>Video</option>
-                                    </select>
-                                    <?php if ($session->has('media')) : ?>
-                                        <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php //echo $session->getFlash('year')[0]; ?></li>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                                <!-- Year -->
-                                <div class="mb-4 relative">
-                                    <div class="absolute inset-y-0 left-0 pl-2 pt-2.5">
-                                        <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
-                                        </svg>
-                                    </div>
-                                    <select id="year" name="year" class="bg-neutral-secondary-medium border border-default-medium shadow-sm text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full px-2.5 py-2 pl-9 placeholder:text-body">
-                                        <?php for($i = date('Y'); $i >= 1990; $i--) : ?>
-                                            <option value="<?php echo $i; ?>" <?php if ($book->year() === $i) { echo 'selected';} ?>><?php echo $i; ?></option>
-                                        <?php endfor; ?>
-                                    </select>
-                                    <?php if ($session->has('year')) : ?>
-                                        <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php //echo $session->getFlash('year')[0]; ?></li>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                                <!-- Description -->
+                                <!--Body-->
                                 <div class="mb-4">
-                                    <textarea id="description" name="description" rows="4"
-                                              class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block w-full p-3.5 shadow-xs placeholder:text-body"
-                                              placeholder="Write description"><?php echo $book->description(); ?></textarea>
-                                    <?php if ($session->has('description')) : ?>
+                                    <div class="flex bg-neutral-primary-soft w-full">
+                                        <!--Text Editor-->
+                                        <script>
+                                            if (isDarkMode) {
+                                                document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
+                                            }
+                                        </script>
+                                        <div id="froalaEditor" class="w-full"><?php echo $post->body(); ?></div>
+                                        <textarea name="body" id="hiddenTextarea" style="display: none"></textarea>
+                                        <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
+                                        <script>
+                                            function updateAllCsrfTokens(newToken) {
+                                                document.querySelectorAll('input[name="_csrf"]').forEach(input => {
+                                                    input.value = newToken;
+                                                });
+                                            }
+                                            let editor;
+                                            editor = new FroalaEditor("#froalaEditor", {
+                                                /*iframe: true,*/
+                                                key: 'Ne2C1sA4A3C3B15C11B8C6A5G4F3C3B2B10C8C5A5F3E3E2C2D2C2C4D-17d1F1FOOLb2KOPQGe1CWCQVTDWXGcTSKBHE2F2G2H1B10B2C1E6E1G1==',
+                                                theme: isDarkMode ? "dark" : "royal",
+                                                /*pluginsEnabled: ['image', 'imageFilerobot'],*/
+                                                zIndex: 1,
+                                                toolbarButtons: {
+                                                    // Key represents the more button from the toolbar.
+                                                    moreText: {
+                                                        // List of buttons used in the  group.
+                                                        buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+                                                        // Alignment of the group in the toolbar.
+                                                        align: 'left',
+                                                        // By default, 3 buttons are shown in the main toolbar. The rest of them are available when using the more button.
+                                                        buttonsVisible: 3
+                                                    },
+                                                    moreParagraph: {
+                                                        buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+                                                        align: 'left',
+                                                        buttonsVisible: 3
+                                                    },
+                                                    moreRich: {
+                                                        buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
+                                                        align: 'left',
+                                                        buttonsVisible: 3
+                                                    },
+                                                    moreMisc: {
+                                                        buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+                                                        align: 'right',
+                                                        buttonsVisible: 2
+                                                    }
+                                                },
+                                                // Change buttons for XS screen.
+                                                toolbarButtonsXS: [['undo', 'redo'], ['bold', 'italic', 'underline']],
+                                                // Image upload parameter.
+                                                imageUploadParam: "image_param",
+                                                // Image upload URL.
+                                                imageUploadURL: "/admin/posts/upload_image",
+                                                imageDeleteURL: "/admin/posts/delete_image",
+                                                // Additional upload params.
+                                                imageUploadParams: {
+                                                    id: 'froalaEditor',
+                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                },
+                                                imageDeleteParams: {
+                                                    id: 'froalaEditor',
+                                                    _csrf: "<?php echo $session->csrf_token(); ?>"
+                                                },
+                                                // Set request type.
+                                                imageUploadMethod: 'POST',
+                                                // Set max image size to 5MB.
+                                                imageMaxSize: 5 * 1024 * 1024,
+                                                // Allow to upload PNG and JPG.
+                                                imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+                                                events: {
+                                                    // Return false if you want to stop the image upload.
+                                                    'image.beforeUpload': function (images) {
+                                                    },
+                                                    // Image was uploaded to the server.
+                                                    'image.uploaded': function (response) {
+                                                        const data = JSON.parse(response);
+                                                        if (data && data.new_csrf) {
+                                                            updateAllCsrfTokens(data.new_csrf)
+                                                        }
+                                                    },
+                                                    // Image was inserted in the editor.
+                                                    'image.inserted': function ($img, response) {},
+                                                    // Image was replaced in the editor.
+                                                    'image.replaced': function ($img, response) {},
+                                                    'image.error': function (error, response) {
+                                                        // Bad link.
+                                                        if (error.code == 1) { console.log(error.message); }
+                                                        // No link in upload response.
+                                                        else if (error.code == 2) { console.log(error.message); }
+                                                        // Error during image upload.
+                                                        else if (error.code == 3) { console.log(error.message); }
+                                                        // Parsing response failed.
+                                                        else if (error.code == 4) { console.log(error.message); }
+                                                        // Image too text-large.
+                                                        else if (error.code == 5) { console.log(error.message); }
+                                                        // Invalid image type.
+                                                        else if (error.code == 6) { console.log(error.message); }
+                                                        // Image can be uploaded only to same domain in IE 8 and IE 9.
+                                                        else if (error.code == 7) { console.log(error.message); }
+                                                    },
+                                                    'image.removed': function ($img) {
+                                                        let xhttp = new XMLHttpRequest();
+                                                        xhttp.onreadystatechange = function () {
+                                                            if (this.readyState == 4 && this.status == 200) {
+                                                                console.log('Image was deleted');
+                                                                let data = JSON.parse(this.responseText);
+                                                                console.log(data.new_csrf);
+                                                                updateAllCsrfTokens(data.new_csrf);
+                                                            }
+                                                        };
+                                                        xhttp.open("POST", '/admin/posts/delete_image', true);
+                                                        xhttp.send(JSON.stringify({
+                                                            src: $img.attr('src'),
+                                                            _csrf: document.querySelector('input[name="_csrf"]').value
+                                                        }));
+                                                    },
+                                                }
+                                            });
+                                            const form = document.getElementById("newPost");
+                                            form.onsubmit = function () {
+                                                document.getElementById("hiddenTextarea").value = editor.html.get();
+                                            }
+                                        </script>
+                                    </div>
+                                    <?php if ($session->has('body')) : ?>
                                         <ul>
-                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('description')[0]; ?></li>
+                                            <li class="mt-2 ml-2 text-sm text-pink-600"><?php echo $session->getFlash('body')[0]; ?></li>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
-                                <!-- Image -->
-                                <div class="mb-4">
-                                    <input type="file" name="image" id="image"
-                                       class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-cyan-500 focus:outline focus:outline-cyan-200 block file:pl-6 file:text-[12px] file:px-2.5 file:py-2 w-full shadow-xs placeholder:text-body"/>
-                                </div>
-                                <!--<ul>
-                                    <li class="mt-2 text-sm text-pink-600">Error</li>
-                                </ul>-->
-                                <p class="mt-1 text-[10px] text-gray-500 dark:text-gray-300" id="file_input_help">JPG, PNG or GIF (MAX. 300x450px).</p>
-                                <!-- Update button -->
+                                <!-- Save button -->
                                 <div class="flex items-end justify-end gap-2">
                                     <button type="submit" class="inline-flex items-center text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
-                                        <svg class="w-5 h-5 mb-0.5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01"/>
+                                        <svg class="w-5 h-5 mr-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
                                         </svg>
-                                        Update
+                                        Save
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="w-full lg:w-1/3 bg-neutral-primary-soft p-6 bw-full shadow-xs rounded-2xl">
-                            <img class="mx-auto" src="<?php echo $storage->url($book->image()); ?>" alt="">
                         </div>
                     </div>
                 </div>

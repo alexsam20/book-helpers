@@ -95,7 +95,7 @@ class Database implements DatabaseInterface
 
     public function remove(string $table, string $field, array $conditions = []): void
     {
-        // $data ['deleted_at' => 'Y-m-d H:i:s']
+        // $date ['deleted_at' => 'Y-m-d H:i:s'] 2026-05-23 23:14:29
         $now = date('Y-m-d H:i:s');
         $data = [$field => $now];
 

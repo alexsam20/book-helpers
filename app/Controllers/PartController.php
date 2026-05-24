@@ -126,7 +126,7 @@ class PartController extends Controller
             $this->request()->input('body')
         );
 
-        $this->redirect('/admin/parts?id=' . $id = $this->request()->input('book'));
+        $this->redirect('/admin/parts?id=' . $id);
     }
 
     public function getCss(int $cnt): string

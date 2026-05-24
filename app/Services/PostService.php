@@ -40,6 +40,48 @@ class PostService
         ]);
     }
 
+    public function find(?int $id): ?Post
+    {
+        $post = $this->db->first($this->table, ['id' => $id]);
+
+        if (!$post) {
+            return null;
+        }
+
+        return new Post(
+            $post['id'],
+            $post['user_id'],
+            $post['title'],
+            $post['body'],
+            $post['is_visible'],
+            $post['deleted_at'],
+            $post['created_at'],
+            $post['updated_at'],
+        );
+    }
+
+    public function update(int $id, string $title, string $body): void
+    {
+        $data = [
+            'title' => $title,
+            'body' => $body,
+        ];
+
+        $this->db->update($this->table, $data, ['id' => $id]);
+    }
+
+    public function remove(int $id): void
+    {
+        $this->db->remove($this->table, 'deleted_at', ['id' => $id]);
+
+        /*$listingService = new ListingService($this->db);
+        $codes = $listingService->all($id, 'part_id');
+
+        if (count($codes) > 0) {
+            $this->db->remove('codes', 'deleted_at', ['part_id' => $id]);
+        }*/
+    }
+
     public function updateVisibility(int $id): void
     {
         $record = $this->db->first($this->table, ['id' => $id])['is_visible'];

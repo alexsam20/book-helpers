@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use App\Services\PostService;
 use Core\Controller\Controller;
 use stdClass;
@@ -48,6 +49,50 @@ class PostController extends Controller
         );
 
         $this->redirect('/admin/posts');
+    }
+
+    public function edit(): void
+    {
+        /** @var Post $post */
+        $post = $this->service()->find($this->request()->input('id'));
+        $this->view('/admin/posts/update', [
+            'post' => $this->service()->find($this->request()->input('id')),
+        ], 'Edit Post');
+    }
+
+    public function update(): void
+    {
+        $validation = $this->request()->validate([
+            'title' => ['required', 'min:3', 'max:100'],
+            'body' => ['required', 'min:10', 'max:50000'],
+        ]);
+
+        if (! $validation) {
+            foreach ($this->request()->errors() as $field => $value) {
+                $this->session()->set($field, $value);
+            }
+
+            foreach ($this->request()->post as $old_field => $value) {
+                $this->session()->set("{$old_field}_val", $value);
+            }
+
+            $this->redirect('/admin/posts/update?id=' . $this->request()->input('id'));
+        }
+
+        $this->service()->update(
+            (int) $this->request()->input('id'),
+            $this->request()->input('title'),
+            $this->request()->input('body')
+        );
+
+        $this->redirect('/admin/posts?id=' . $this->request()->input('id'));
+    }
+
+    public function destroy(): void
+    {
+        $this->service()->remove($this->request()->input('id'));
+
+        $this->redirect('/admin/posts?id=' . $this->request()->input('book_id'));
     }
 
     public function visible(): void
