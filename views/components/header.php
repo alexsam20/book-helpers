@@ -109,6 +109,16 @@ $user = $auth->user();
                             <span>About</span>
                         </a>
                     </li>
+                    <?php if ($auth->check()): ?>
+                        <li>
+                            <a href="/admin" class="flex gap-1 py-2 px-3 rounded-sm text-cyan-600 hover:text-cyan-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-700 md:p-0 md:dark:hover:text-teal-300 dark:text-cyan-500 dark:hover:bg-gray-700 dark:hover:text-teal-300 md:dark:hover:bg-transparent dark:border-gray-700">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.35709 16V5.78571c0-.43393.34822-.78571.77777-.78571H18.5793c.4296 0 .7778.35178.7778.78571V16M5.35709 16h-1c-.55229 0-1 .4477-1 1v1c0 .5523.44771 1 1 1H20.3571c.5523 0 1-.4477 1-1v-1c0-.5523-.4477-1-1-1h-1M5.35709 16H19.3571M9.35709 8l2.62501 2.5L9.35709 13m4.00001 0h2"/>
+                                </svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

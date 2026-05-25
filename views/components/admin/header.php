@@ -1,5 +1,6 @@
 <?php
 /** @var \Core\Auth\AuthInterface $auth */
+/** @var \Core\Session\SessionInterface $session */
 $user = $auth->user();
 ?>
 <header class="header">

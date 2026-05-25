@@ -47,11 +47,11 @@
         </form>
     </td>
     <!-- CreatedAt Date -->
-    <td class="px-6 py-2 text-right">
+    <td class="px-6 py-2 text-center">
         <?php echo $view->formatDate($post->createdAt(), 'l, F j, Y H:i');  ?>
     </td>
     <!-- Actions -->
-    <td class="px-6 py-2 text-right">
+    <td class="px-6 py-2 text-center">
         <div class="inline-flex rounded-base space-x-1" role="group">
             <!--Button Edit-->
             <a type="button" href="/admin/posts/update?id=<?php echo $post->id(); ?>" class="inline-flex items-center text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-sm text-sm px-1.5 py-0.5 text-center leading-5">

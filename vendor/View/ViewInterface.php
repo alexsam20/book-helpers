@@ -10,5 +10,7 @@ interface ViewInterface
 
     public function formatDate(string $date): string;
 
+    public function shortText(string $text, int $limit = 100): string;
+
     public function title(): string;
 }

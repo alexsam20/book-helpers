@@ -14,7 +14,7 @@ class HomeController extends Controller
 
         $this->view('home', [
             'books' => $books->all(1),
-        ]);
+        ], 'Books and Videos');
     }
 
     public function posts(): void
@@ -23,6 +23,15 @@ class HomeController extends Controller
 
         $this->view('posts', [
             'posts' => $posts->all(1),
-        ]);
+        ], 'All Posts');
+    }
+
+    public function post(): void
+    {
+        $posts = new PostService($this->db());
+
+        $this->view('post', [
+            'post' => $posts->find($this->request()->input('id')),
+        ], 'Post');
     }
 }

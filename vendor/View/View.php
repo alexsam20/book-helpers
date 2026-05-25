@@ -66,6 +66,15 @@ class View implements ViewInterface
         ];
     }
 
+    public function shortText(string $text, int $limit = 100): string
+    {
+        if (mb_strlen($text) > $limit) {
+            return mb_substr($text, 0, $limit) . "...";
+        }
+
+        return $text;
+    }
+
     public function title(): string
     {
         return $this->title;
