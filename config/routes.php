@@ -16,6 +16,7 @@ return [
     Route::get('/' , [HomeController::class , 'index']),
     Route::get('/posts' , [HomeController::class , 'posts']),
     Route::get('/post' , [HomeController::class , 'post']),
+    Route::get('/about' , [HomeController::class , 'about']),
     Route::get('/register', [RegisterController::class , 'index'], [GuestMiddleware::class]),
     Route::post('/register', [RegisterController::class , 'register']),
     Route::get('/login', [LoginController::class , 'index'], [GuestMiddleware::class]),

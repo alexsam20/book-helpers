@@ -34,4 +34,9 @@ class HomeController extends Controller
             'post' => $posts->find($this->request()->input('id')),
         ], 'Post');
     }
+
+    public function about(): void
+    {
+        $this->view('about', [], 'About Us');
+    }
 }

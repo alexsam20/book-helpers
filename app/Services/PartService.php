@@ -111,7 +111,7 @@ class PartService
 
     private function getListing(int $id): array
     {
-        $codeBlocks = $this->db->get('codes', ['part_id' => $id]);
+        $codeBlocks = $this->db->get('codes', ['part_id' => $id, 'is_visible' => 1]);
 
         return array_map(static function ($code) {
             return new Listing(
