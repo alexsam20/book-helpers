@@ -27,6 +27,7 @@
         --color-orange-800: oklch(47% 0.157 37.304);
         --color-orange-900: oklch(40.8% 0.123 38.172);
         --color-orange-950: oklch(26.6% 0.079 36.259);
+        --color-amber-200: oklch(92.4% 0.12 95.746);
         --color-amber-400: oklch(82.8% 0.189 84.429);
         --color-amber-500: oklch(76.9% 0.188 70.08);
         --color-amber-600: oklch(66.6% 0.179 58.318);
@@ -2713,6 +2714,15 @@
     .py-4 {
         padding-block: calc(var(--spacing) * 4);
     }
+    .ps-0 {
+        padding-inline-start: calc(var(--spacing) * 0);
+    }
+    .ps-0\.5 {
+        padding-inline-start: calc(var(--spacing) * 0.5);
+    }
+    .ps-1 {
+        padding-inline-start: calc(var(--spacing) * 1);
+    }
     .ps-3 {
         padding-inline-start: calc(var(--spacing) * 3);
     }
@@ -2767,9 +2777,6 @@
         .dark .apexcharts-canvas &:not(.apexcharts-inactive-legend):hover {
             color: heading !important;
         }
-    }
-    .pb-2 {
-        padding-bottom: calc(var(--spacing) * 2);
     }
     .pb-4 {
         padding-bottom: calc(var(--spacing) * 4);
@@ -2952,6 +2959,9 @@
         .datatable-wrapper .datatable-table thead th& .datatable-sorter {
             color: var(--color-heading);
         }
+    }
+    .text-amber-200 {
+        color: var(--color-amber-200);
     }
     .text-amber-500 {
         color: var(--color-amber-500);
@@ -4676,11 +4686,6 @@
             border-width: 1px;
         }
     }
-    .dark\:border-blue-400 {
-        &:where(.dark, .dark *) {
-            border-color: var(--color-blue-400);
-        }
-    }
     .dark\:border-blue-500 {
         &:where(.dark, .dark *) {
             border-color: var(--color-blue-500);
@@ -4704,16 +4709,6 @@
     .dark\:border-default {
         &:where(.dark, .dark *) {
             border-color: var(--color-default);
-        }
-    }
-    .dark\:border-gray-200 {
-        &:where(.dark, .dark *) {
-            border-color: var(--color-gray-200);
-        }
-    }
-    .dark\:border-gray-400 {
-        &:where(.dark, .dark *) {
-            border-color: var(--color-gray-400);
         }
     }
     .dark\:border-gray-500 {

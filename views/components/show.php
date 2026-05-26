@@ -12,13 +12,7 @@
         <div class="p-1 w-full h-full md:h-auto">
             <!-- Content -->
             <div class="p-2 bg-white rounded-lg shadow dark:bg-gray-800">
-                <!-- Header -->
-                <!--<div class="items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">-->
-                <!--<div class="flex justify-end items-center opacity-50 p-1 text-sm text-gray-900 dark:text-white">
-                    bc: <?php /*echo $i; */?>
-                </div>-->
-                <!--</div>-->
-                <div class="mb-4 rounded-lg">
+                <div class="mb-2 rounded-lg">
                     <!-- Description -->
                     <?php if ($code->description()): ?>
                     <div class="mb-1 rounded-lg">
@@ -48,7 +42,6 @@
                                 mode: "ace/mode/<?php echo $code->mode(); ?>",
                                 highlightActiveLine: false,
                                 highlightGutterLine: false,
-                                showCursor: "none",
                                 maxLines: 1000
                             });
                             aceEditor<?php echo $i;?>.setReadOnly(true);
@@ -69,6 +62,19 @@
                             })
                         </script>
                     </div>
+                    <?php if ($code->isExecutable() === 1): ?>
+                        <div class="flex justify-end mx-1 my-2 rounded-sm">
+                            <?php if ($code->mode() === 'javascript'): ?>
+                            <script type="text/plain" id="raw-code-<?php echo $i; ?>"><?php echo $code->source(); ?></script>
+                            <!--Button Run-->
+                            <button onclick="executeCode('raw-code-<?php echo $i; ?>', 'output-<?php echo $i; ?>')"
+                                class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
+                                💥 <span class="text-amber-200 ps-1">Run</span>
+                            </button>
+                            <?php endif; ?>
+                        </div>
+                        <div id="output-<?php echo $i; ?>" class="hidden flex border border-gray-200 dark:border-cyan-900 mx-1 mt-2 p-2 rounded-sm">asdafsdaf</div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

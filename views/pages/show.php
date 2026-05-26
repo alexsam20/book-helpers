@@ -75,7 +75,6 @@
             </div>
             <!-- Blocks Code -->
             <div class="flex-col text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-2xl mb-4">
-                <!--<link rel="stylesheet" href="/assets/css/simple.css">-->
                 <?php if (count($codeListings) > 0): ?>
                     <?php $i = 1; ?>
                     <?php foreach ($codeListings as $code): ?>
