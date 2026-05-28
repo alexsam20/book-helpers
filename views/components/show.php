@@ -64,16 +64,24 @@
                     </div>
                     <?php if ($code->isExecutable() === 1): ?>
                         <div class="flex justify-end mx-1 my-2 rounded-sm">
+                            <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo $session->csrf_token(); ?>">
                             <?php if ($code->mode() === 'javascript'): ?>
                             <script type="text/plain" id="raw-code-<?php echo $i; ?>"><?php echo $code->source(); ?></script>
                             <!--Button Run-->
-                            <button onclick="executeCode('raw-code-<?php echo $i; ?>', 'output-<?php echo $i; ?>')"
+                            <button onclick="runJavaScriptCode('raw-code-<?php echo $i; ?>', 'output-<?php echo $i; ?>')"
+                                class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
+                                💥 <span class="text-amber-200 ps-1">Run</span>
+                            </button>
+                            <?php endif; ?>
+                            <?php if ($code->mode() === 'php'): ?>
+                            <!--Button Run-->
+                            <button onclick="runPhpCode(<?php echo $code->id(); ?>, 'output-<?php echo $i; ?>')"
                                 class="inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-base text-sm px-2.5 py-1 text-center leading-5 cursor-pointer">
                                 💥 <span class="text-amber-200 ps-1">Run</span>
                             </button>
                             <?php endif; ?>
                         </div>
-                        <div id="output-<?php echo $i; ?>" class="hidden flex border border-gray-200 dark:border-cyan-900 mx-1 mt-2 p-2 rounded-sm">asdafsdaf</div>
+                        <div id="output-<?php echo $i; ?>" class="hidden flex border border-gray-200 dark:border-cyan-900 mx-1 mt-2 p-2 rounded-sm"></div>
                     <?php endif; ?>
                 </div>
             </div>

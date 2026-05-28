@@ -45,6 +45,32 @@ class ListingService
         }, $codes);
     }
 
+    public function find(int $id, string $field = 'id'): ?Listing
+    {
+        $code = $this->db->first($this->table, [$field => $id]);
+
+        /*var_dump($code); die();*/
+
+        if (!$code) {
+            return null;
+        }
+
+        return new Listing(
+            $code['id'],
+            $code['book_id'],
+            $code['part_id'],
+            $code['mode'],
+            $code['theme'],
+            $code['description'],
+            $code['source'],
+            $code['is_executable'],
+            $code['is_visible'],
+            $code['deleted_at'],
+            $code['created_at'],
+            $code['updated_at'],
+        );
+    }
+
     public function store(int $book, int $part, string $type, string $theme, ?string $description, string $source, int $run = 0, int $visible = 1): false|int
     {
         return $this->db->insert($this->table, [

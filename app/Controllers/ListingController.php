@@ -13,6 +13,7 @@ class ListingController extends Controller
     private ListingService $service;
     public function index(): void
     {
+        /*var_dump($this->session()->csrf_token());*/
         $id = $this->request()->input('id');
         $book = new BookService($this->db());
         $part = new PartService($this->db());
@@ -64,7 +65,7 @@ class ListingController extends Controller
         $code = $this->request()->input('code');
 
         if ($this->request()->input('language') === 'php') {
-            $code = ltrim($this->request()->input('code'), "<?php\n\r");
+            $code = rtrim(ltrim($this->request()->input('code'), "<?php\n\r"), "\r\n");
         }
         if ($this->request()->input('language') === 'html') {
             $code = htmlspecialchars_decode($code);

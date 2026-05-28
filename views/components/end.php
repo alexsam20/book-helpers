@@ -1,8 +1,9 @@
+<?php /** @var \Core\Session\SessionInterface $session */ ?>
         <script src="/assets/js/flowbite.min.js"></script>
         <script src="/assets/js/dark.js"></script>
         <script src="/assets/js/htmx.min.js"></script>
         <script>
-            function executeCode(codeId, outputId) {
+            function runJavaScriptCode(codeId, outputId) {
                 const codeContainer = document.getElementById(codeId);
                 const outputContainer = document.getElementById(outputId);
                 if (!codeContainer || !outputContainer) return;
@@ -28,11 +29,48 @@
                     runner({ log: customLog, error: customLog, warn: customLog });
 
                     if (outputContainer.innerHTML === '') {
-                        outputContainer.innerHTML = '<span style="color: #0c562d;">// The code run successfully, but didn\'t output anything</span>';
+                        outputContainer.innerHTML = '<span style="color: #0c562d;">// The code run successfully, but did\'t output anything</span>';
                     }
                 } catch (error) {
                     outputContainer.innerHTML = `<span style="color: #ff6b6b;">Error: ${error.message}</span>`;
                 }
+            }
+            function runPhpCode(codeId, outputId) {
+                const output = document.getElementById(outputId);
+                const csrfInput = document.querySelector('input[name="csrf_token"]');
+
+                output.style.display = 'block';
+                output.innerHTML = 'Running php code to the server...';
+
+                /*const currentToken = csrfInput.value;*/
+
+                const params = new URLSearchParams();
+                params.append('id', codeId);
+                params.append('_csrf', csrfInput.value);
+
+                fetch('/post', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Error server: ' + response.status);
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.nextToken) {
+                            csrfInput.value = data.nextToken
+                        }
+
+                        if (data.success) {
+                            output.innerHTML = data.output;
+                        } else {
+                            output.innerHTML = `Error Security: ${data.message}`;
+                        }
+                    })
+                    .catch(error => {
+                        output.innerHTML = `Error Request:  ${error.message}`
+                    });
             }
         </script>
         <!--<script src="/assets/js/sweetalert2.js"></script>-->
