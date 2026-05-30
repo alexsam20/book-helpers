@@ -210,34 +210,3 @@
     width:100%;
     text-align:center
 }
-/* ----------  AceEditor Button Copy  --------- */
-.aceEditor-container {
-    position:relative;
-    width:100%;
-    height:100%;
-}
-#aceEditor {
-    width: 100%;
-    height: 100%;
-}
-.copy-btn {
-    position: absolute;
-    font-family: monospace;
-    top: 5px;
-    right: 5px;
-    z-index: 10;
-    padding: 2px 4px;
-    background: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-}
-.copy-btn:hover {
-    background: #555;
-}
-.description {
-    position:relative;
-    width:100%;
-    height:100%;
-}

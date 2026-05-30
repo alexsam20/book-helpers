@@ -13,18 +13,19 @@ class ListingController extends Controller
     private ListingService $service;
     public function index(): void
     {
-        /*var_dump($this->session()->csrf_token());*/
         $id = $this->request()->input('id');
         $book = new BookService($this->db());
         $part = new PartService($this->db());
+        $part = $part->find($id);
 
         $this->view('/show', [
-            'part' => $part->find($id),
+            'part' => $part,
             'codeListings' => $this->service()->all($id, 'part_id', 1),
+            'book' => $book->find($part->bookId()),
             'themes' => $this->service()->getThemeCode(),
             'languages' => $this->service()->language(),
             'object' => $this,
-        ], 'Action from Block Code');
+        ], 'Part of Book');
     }
 
     public function create(): void
@@ -111,7 +112,9 @@ class ListingController extends Controller
         $code = $this->request()->input('code');
 
         if ($this->request()->input('language') === 'php') {
-            $code = ltrim($code, "<?php\n\r");
+            $code = htmlspecialchars_decode($code);
+            $code = rtrim(ltrim($code, "<?php\n\r"), "\r\n");
+            /*$code = ltrim($code, "<?php\n\r");*/
         }
         if ($this->request()->input('language') === 'html') {
             $code = htmlspecialchars_decode($code);
@@ -200,7 +203,7 @@ class ListingController extends Controller
     public function getCode(string $mode, string $code): string
     {
         if ($mode === 'php') {
-            return '&lt;?php' . PHP_EOL . $code;
+            return '&lt;?php' . PHP_EOL . htmlspecialchars($code);
         }
         if ($mode === 'html') {
             return htmlspecialchars($code);

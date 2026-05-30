@@ -230,7 +230,6 @@
                                 </div>
                                 <!-- Block Code -->
                                 <div class="grid grid-cols-1 sm:col-span-2 border border-gray-200 dark:border-cyan-900 mx-1 my-2 rounded-sm">
-                                    <script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>
                                     <div id="aceEditor<?php echo $i;?>"  class="rounded-sm" name="code"><?php echo $object->getCode($code->mode(), $code->source()); ?></div>
                                     <textarea name="code" id="hiddenCodeBlockTextarea<?php echo $i;?>" style="display: none"></textarea>
                                     <script>
@@ -246,7 +245,6 @@
                                         document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '14px';
 
                                         const formCodeBlock<?php echo $i;?> = document.getElementById("editCodeBlock<?php echo $i;?>");
-                                        /*const hiddenModalInput<?php echo $i;?> = document.getElementById("hiddenModalTextarea<?php echo $i;?>");*/
                                         const selectMode<?php echo $i;?> = document.getElementById("language<?php echo $i;?>");
                                         const selectTheme<?php echo $i;?> = document.getElementById("theme<?php echo $i;?>");
 

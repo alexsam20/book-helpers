@@ -31,7 +31,6 @@
                     <?php endif; ?>
                     <!-- Block Code Ace Editor -->
                     <div class="border border-gray-200 dark:border-cyan-900 mx-1 my-2 rounded-sm">
-                        <script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>
                         <div class="aceEditor-container">
                             <button class="copy-btn" id="copy-btn<?php echo $i;?>">Copy</button>
                             <div id="aceEditor<?php echo $i;?>"  class="rounded-sm" name="code"><?php echo $object->getCode($code->mode(), $code->source()); ?></div>

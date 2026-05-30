@@ -5,10 +5,8 @@
     <title><?php echo $view->title(); ?></title>
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
-    <link rel="stylesheet" href="/assets/css/froala-editor.css">
     <link rel="stylesheet" href="/assets/css/font-awesome-6.7.2.css">
     <link rel="stylesheet" href="/assets/froala/css/froala_editor.pkgd.min.css">
-    <link rel="stylesheet" href="/assets/froala/css/imageFileRobot.min.css">
     <link rel="stylesheet" href="/assets/froala/css/dark.min.css">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">-->
     <script>
