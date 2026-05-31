@@ -91,7 +91,7 @@
                             <!-- Body -->
                             <div class="px-2 py-2">
                                 <p class="indent-8 p-2 text-mauve-500 text-justify text-sm">
-                                    <?php echo $book->description() ?>
+                                    <?php echo nl2br($book->description()); ?>
                                 </p>
                             </div>
                             <!-- Date created -->
