@@ -16,11 +16,6 @@
                     <!-- Description -->
                     <?php if ($code->description()): ?>
                     <div class="mb-1 rounded-lg">
-                        <script>
-                            if (isDarkMode) {
-                                document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
-                            }
-                        </script>
                         <div class="description">
                             <button class="copy-btn">bc# <?php echo $i; ?></button>
                             <div class="flex-col bg-neutral-primary-soft w-full rounded-lg p-3 froala-edtr">

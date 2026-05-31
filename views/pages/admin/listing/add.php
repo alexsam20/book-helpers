@@ -91,7 +91,6 @@
                             <input type="hidden" name="book_id" value="<?php echo $part->bookId(); ?>" />
                             <!-- Description -->
                             <div class="mb-4">
-                                <?php // var_dump($_SESSION); ?>
                                 <div class="flex bg-neutral-primary-soft w-full">
                                     <!--Text Editor-->
                                     <script>
@@ -103,11 +102,11 @@
                                     <textarea name="description" id="hiddenTextareaDescription" style="display: none"></textarea>
                                     <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
                                     <script>
-                                        function updateAllCsrfTokens(newToken) {
+                                        /*function updateAllCsrfTokens(newToken) {
                                             document.querySelectorAll('input[name="_csrf"]').forEach(input => {
                                                 input.value = newToken;
                                             });
-                                        }
+                                        }*/
                                         let editor;
                                         editor = new FroalaEditor("#froalaEditor", {
                                             /*iframe: true,*/
@@ -355,6 +354,7 @@
             <!-- Blocks Code -->
             <div class="text-gray-800 dark:text-gray-400 border border-gray-200 dark:border-blue-900 dark:bg-gray-950/10 rounded-t-2xl mb-4">
             <?php if (count($codeListings) > 0): ?>
+            <link rel="stylesheet" href="/assets/css/froala-editor.css">
             <?php $i = 1; ?>
             <?php foreach ($codeListings as $code): ?>
                 <?php $view->component('admin/code', ['code' => $code, 'languages' => $languages, 'themes' => $themes, 'object' => $object, 'i' => $i]); ?>

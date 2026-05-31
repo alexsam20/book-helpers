@@ -42,12 +42,6 @@
                                 <!-- Description -->
                                 <div class="grid grid-cols-1 sm:col-span-2 mb-4 rounded-md">
                                     <div class="flex bg-neutral-primary-soft w-full rounded-md">
-                                        <!--Text Editor-->
-                                        <script>
-                                            if (isDarkMode) {
-                                                document.write('<style>.fr-box.fr-basic .fr-element {background:#4e4d4d;color:#f0efef!important;} .fr-second-toolbar {background:#353535!important;}.dark-theme .fr-second-toolbar,.dark-theme.fr-box.fr-basic .fr-wrapper,.dark-theme.fr-toolbar.fr-top {border: 1px solid #104e64;} .fr-modal .fr-modal-head, #codeSnippetLang-1 span {color: #fff;} .fr-modal .fr-modal-body {padding: 10px;} .fr-code-snippet-lang {background-color: #333;color: #fff;} .froala-edtr .fr-class-code {background:#2d2d2d;} .froala-edtr .fr-class-highlighted {color: #111111}</style>');
-                                            }
-                                        </script>
                                         <div id="froalaEditor<?php echo $i;?>" class="froala-edtr fr-view w-full rounded-md"><?php echo $code->description(); ?></div>
                                         <textarea name="description" id="hiddenTextareaDescription<?php echo $i;?>" style="display: none"></textarea>
                                         <script>
@@ -242,7 +236,7 @@
                                         });
                                         aceEditor<?php echo $i;?>.setReadOnly(false);
                                         document.getElementById('aceEditor<?php echo $i;?>').style.lineHeight = "1.3";
-                                        document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '14px';
+                                        document.getElementById('aceEditor<?php echo $i;?>').style.fontSize = '.83rem';
 
                                         const formCodeBlock<?php echo $i;?> = document.getElementById("editCodeBlock<?php echo $i;?>");
                                         const selectMode<?php echo $i;?> = document.getElementById("language<?php echo $i;?>");
